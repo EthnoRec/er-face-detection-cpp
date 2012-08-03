@@ -47,6 +47,8 @@ static inline double max(double x, double y) { return (x <= y ? y : x); }
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 
+static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+
 /* 
  * entry point, 
  * takes a double color image and a bin size 
@@ -57,8 +59,8 @@ mat3d_ptr eHhog(const image_ptr img, int sbin) {
   /* memory for caching orientation histograms & their norms */
   int dims[2] = {img->sizy, img->sizx};
   int blocks[2];
-  blocks[0] = (int)round((double)dims[0]/(double)sbin);
-  blocks[1] = (int)round((double)dims[1]/(double)sbin);
+  blocks[0] = (int)round2int((double)dims[0]/(double)sbin);
+  blocks[1] = (int)round2int((double)dims[1]/(double)sbin);
   double *hist = new double[blocks[0]*blocks[1]*18];
   double *norm = new double[blocks[0]*blocks[1], sizeof(double)];
 

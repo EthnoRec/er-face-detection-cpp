@@ -8,6 +8,8 @@
 #include <assert.h>
 #include <string.h>
 
+static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+
 image_ptr image_alloc(size_t sizy, size_t sizx){
 	image_ptr img = new struct eHimage;
 	img->sizy = sizy;
@@ -97,8 +99,8 @@ void resize1dtran(image_ptr src, size_t sheight,
  * This is used to construct the feature pyramid
  */
 image_ptr image_resize(const image_ptr img, double scale) {
-	size_t dst_sizy = (unsigned int)round(img->sizy*scale);
-	size_t dst_sizx = (unsigned int)round(img->sizx*scale);
+	size_t dst_sizy = (unsigned int)round2int(img->sizy*scale);
+	size_t dst_sizx = (unsigned int)round2int(img->sizx*scale);
 	image_ptr scaled = image_alloc(dst_sizy, dst_sizx);
 	image_ptr tmp = image_alloc(img->sizx,dst_sizy);
 
@@ -155,8 +157,8 @@ void reduce1dtran(image_ptr src, size_t sheight,
  * (see Burt & Adelson's Laplacian Pyramid paper for details)
  */
 image_ptr image_reduce(const image_ptr img) {
-	size_t dst_sizy = (unsigned int)round(img->sizy*.5);
-	size_t dst_sizx = (unsigned int)round(img->sizx*.5);
+	size_t dst_sizy = (unsigned int)round2int(img->sizy*.5);
+	size_t dst_sizx = (unsigned int)round2int(img->sizx*.5);
 	image_ptr scaled = image_alloc(dst_sizy, dst_sizx);
 	image_ptr tmp = image_alloc(img->sizx,dst_sizy);
 

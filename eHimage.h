@@ -11,8 +11,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define round(x) ((x-floor(x))>0.5 ? ceil(x) : floor(x))
-
 /* Basic color image data structure
  * default 3 channels: ch[0]=b ch[1]=g ch[2]=r
  * pixel values encoded in vectors, with column major (Fortran) style

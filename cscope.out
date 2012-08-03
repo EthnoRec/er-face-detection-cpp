@@ -1,4 +1,4 @@
-cscope 15 $HOME/Dropbox/Projects/cpp               0000158491
+cscope 15 $HOME/Dropbox/Projects/facecpp               0000158562
 	@eHbbox.cpp
 
 1 
@@ -1251,7 +1251,7 @@ y
 	}
 }
 
-31 
+38 
 çûmod–_t
 * 
 	$çûmod–_·r£Xml
@@ -1259,7 +1259,7 @@ y
 xml¡r
 ) {
 
-32 
+39 
 usšg
  
 Çme¥aû
@@ -1267,7 +1267,7 @@ usšg
 ¿pidxml
 ;
 
-33 
+40 
 çûmod–_t
 * 
 mod–
@@ -1275,13 +1275,13 @@ mod–
 Ãw
  facemodel_t;
 
-34 
+41 
 xml_docum’t
 <> 
 doc
 ;
 
-35 
+42 
 doc
 .
 ·r£
@@ -1289,7 +1289,7 @@ doc
 xml¡r
 );
 
-36 
+43 
 xml_node
 <>* 
 roÙ
@@ -1299,7 +1299,7 @@ doc
 	`fœ¡_node
 ();
 
-39 
+46 
 xml_node
 <>* 
 fž‹rs
@@ -1309,7 +1309,7 @@ roÙ
 	`fœ¡_node
 ("filters");
 
-40 
+47 
 xml_node
 <>* 
 defs
@@ -1319,7 +1319,7 @@ roÙ
 	`fœ¡_node
 ("defs");
 
-41 
+48 
 xml_node
 <>* 
 compÚ’ts
@@ -1329,7 +1329,7 @@ roÙ
 	`fœ¡_node
 ("components");
 
-42 
+49 
 xml_node
 <>* 
 maxsize
@@ -1339,7 +1339,7 @@ roÙ
 	`fœ¡_node
 ("maxsize");
 
-43 
+50 
 xml_node
 <>* 
 Ën
@@ -1349,7 +1349,7 @@ roÙ
 	`fœ¡_node
 ("len");
 
-44 
+51 
 xml_node
 <>* 
 š‹rv®
@@ -1359,7 +1359,7 @@ roÙ
 	`fœ¡_node
 ("interval");
 
-45 
+52 
 xml_node
 <>* 
 sbš
@@ -1369,7 +1369,7 @@ roÙ
 	`fœ¡_node
 ("sbin");
 
-46 
+53 
 xml_node
 <>* 
 d–
@@ -1379,7 +1379,7 @@ roÙ
 	`fœ¡_node
 ("delta");
 
-47 
+54 
 xml_node
 <>* 
 th»sh
@@ -1389,7 +1389,7 @@ roÙ
 	`fœ¡_node
 ("thresh");
 
-48 
+55 
 xml_node
 <>* 
 obj
@@ -1399,19 +1399,19 @@ roÙ
 	`fœ¡_node
 ("obj");
 
-50 
+57 
 f›ld_width
 =-1;
 
-51 * 
+58 * 
 tmp_št_±r
 ;
 
-52 * 
+59 * 
 tmp_doubË_±r
 ;
 
-55 
+62 
 num_fž‹rs
  = 
 	`¡¹Þ
@@ -1425,7 +1425,7 @@ fž‹rs
 NULL
 ,10);
 
-56 
+63 
 xml_node
 <>* 
 fž‹r
@@ -1435,7 +1435,7 @@ fž‹rs
 	`fœ¡_node
 ("filter");
 
-57 
+64 
 xml_node
 <>* 
 fž‹r_i
@@ -1445,7 +1445,7 @@ fž‹r
 	`fœ¡_node
 ("i");
 
-58 
+65 
 xml_node
 <>* 
 fž‹r_w
@@ -1455,13 +1455,13 @@ fž‹r
 	`fœ¡_node
 ("w");
 
-59 
+66 
 çûfž‹r_t
  
 tmp_çûfž‹r
 ;
 
-61 
+68 
 tmp_çûfž‹r
 .
 i
@@ -1475,11 +1475,11 @@ fž‹r_i
 NULL
 ,10);
 
-62 
+69 
 f›ld_width
  = -1;
 
-63 
+70 
 tmp_št_±r
  = 
 	`·r£CSV¡r2št
@@ -1493,13 +1493,13 @@ fž‹r_w
 f›ld_width
 );
 
-64 
+71 
 	`as£¹
 (
 f›ld_width
 ==3);
 
-65 
+72 
 tmp_çûfž‹r
 .
 w
@@ -1509,7 +1509,7 @@ sizy
 tmp_št_±r
 [0];
 
-66 
+73 
 tmp_çûfž‹r
 .
 w
@@ -1519,7 +1519,7 @@ sizx
 tmp_št_±r
 [1];
 
-67 
+74 
 tmp_çûfž‹r
 .
 w
@@ -1529,11 +1529,11 @@ sizz
 tmp_št_±r
 [2];
 
-68 
+75 
 f›ld_width
  = -1;
 
-69 
+76 
 tmp_çûfž‹r
 .
 w
@@ -1549,7 +1549,7 @@ fž‹r_w
 f›ld_width
 );
 
-70 
+77 
 	`as£¹
 (
 f›ld_width
@@ -1557,13 +1557,13 @@ f›ld_width
 tmp_št_±r
 [0]*tmp_int_ptr[1]*tmp_int_ptr[2]);
 
-71 
+78 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-72 
+79 
 mod–
 ->
 fž‹rs
@@ -1573,19 +1573,19 @@ fž‹rs
 tmp_çûfž‹r
 );
 
-74 
+81 
 i
  = 1; i<
 num_fž‹rs
 ; i++){
 
-75 
+82 
 fž‹r
  = fž‹r->
 	`Ãxt_siblšg
 ();
 
-76 
+83 
 fž‹r_i
  = 
 fž‹r
@@ -1593,7 +1593,7 @@ fž‹r
 	`fœ¡_node
 ("i");
 
-77 
+84 
 fž‹r_w
  = 
 fž‹r
@@ -1601,7 +1601,7 @@ fž‹r
 	`fœ¡_node
 ("w");
 
-78 
+85 
 tmp_çûfž‹r
 .
 i
@@ -1615,11 +1615,11 @@ fž‹r_i
 NULL
 ,10);
 
-79 
+86 
 f›ld_width
  = -1;
 
-80 
+87 
 tmp_št_±r
  = 
 	`·r£CSV¡r2št
@@ -1633,13 +1633,13 @@ fž‹r_w
 f›ld_width
 );
 
-81 
+88 
 	`as£¹
 (
 f›ld_width
 ==3);
 
-82 
+89 
 tmp_çûfž‹r
 .
 w
@@ -1649,7 +1649,7 @@ sizy
 tmp_št_±r
 [0];
 
-83 
+90 
 tmp_çûfž‹r
 .
 w
@@ -1659,7 +1659,7 @@ sizx
 tmp_št_±r
 [1];
 
-84 
+91 
 tmp_çûfž‹r
 .
 w
@@ -1669,11 +1669,11 @@ sizz
 tmp_št_±r
 [2];
 
-85 
+92 
 f›ld_width
  = -1;
 
-86 
+93 
 tmp_çûfž‹r
 .
 w
@@ -1689,7 +1689,7 @@ fž‹r_w
 f›ld_width
 );
 
-87 
+94 
 	`as£¹
 (
 f›ld_width
@@ -1697,13 +1697,13 @@ f›ld_width
 tmp_št_±r
 [0]*tmp_int_ptr[1]*tmp_int_ptr[2]);
 
-88 
+95 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-89 
+96 
 mod–
 ->
 fž‹rs
@@ -1713,7 +1713,7 @@ fž‹rs
 tmp_çûfž‹r
 );
 
-93 
+100 
 num_defs
  = 
 	`¡¹Þ
@@ -1727,7 +1727,7 @@ defs
 NULL
 ,10);
 
-94 
+101 
 xml_node
 <>* 
 def
@@ -1737,7 +1737,7 @@ defs
 	`fœ¡_node
 ("def");
 
-95 
+102 
 xml_node
 <>* 
 def_i
@@ -1747,7 +1747,7 @@ def
 	`fœ¡_node
 ("i");
 
-96 
+103 
 xml_node
 <>* 
 def_w
@@ -1757,7 +1757,7 @@ def
 	`fœ¡_node
 ("w");
 
-97 
+104 
 xml_node
 <>* 
 def_ªchÜ
@@ -1767,13 +1767,13 @@ def
 	`fœ¡_node
 ("anchor");
 
-98 
+105 
 çûdef_t
  
 tmp_çûdef
 ;
 
-100 
+107 
 tmp_çûdef
 .
 i
@@ -1787,11 +1787,11 @@ def_i
 NULL
 ,10);
 
-101 
+108 
 f›ld_width
  = -1;
 
-102 
+109 
 tmp_št_±r
  = 
 	`·r£CSV¡r2št
@@ -1805,17 +1805,17 @@ def_w
 f›ld_width
 );
 
-103 
+110 
 	`as£¹
 (
 f›ld_width
 ==1);
 
-104 
+111 
 f›ld_width
  = -1;
 
-105 
+112 
 tmp_doubË_±r
  = 
 	`·r£CSV¡r2doubË
@@ -1827,7 +1827,7 @@ def_w
 f›ld_width
 );
 
-106 
+113 
 	`as£¹
 (
 f›ld_width
@@ -1835,7 +1835,7 @@ f›ld_width
 tmp_št_±r
 [0]);
 
-107 
+114 
 ii
 =0;ii<
 f›ld_width
@@ -1847,23 +1847,23 @@ w
 tmp_doubË_±r
 [ii];
 
-108 
+115 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-109 
+116 
 d–‘e
 [] 
 tmp_doubË_±r
 ;
 
-110 
+117 
 f›ld_width
  = -1;
 
-111 
+118 
 tmp_št_±r
  = 
 	`·r£CSV¡r2št
@@ -1875,29 +1875,29 @@ def_ªchÜ
 f›ld_width
 );
 
-112 
+119 
 	`as£¹
 (
 f›ld_width
 ==3);
 
-113 
+120 
 tmp_çûdef
 .
 ªchÜ
 [0]=
 tmp_št_±r
-[0];
+[0]-1;
 
-114 
+121 
 tmp_çûdef
 .
 ªchÜ
 [1]=
 tmp_št_±r
-[1];
+[1]-1;
 
-115 
+122 
 tmp_çûdef
 .
 ªchÜ
@@ -1905,13 +1905,13 @@ tmp_çûdef
 tmp_št_±r
 [2];
 
-116 
+123 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-117 
+124 
 mod–
 ->
 defs
@@ -1921,19 +1921,19 @@ defs
 tmp_çûdef
 );
 
-119 
+126 
 i
 =1;i<
 num_defs
 ;i++){
 
-120 
+127 
 def
  = def->
 	`Ãxt_siblšg
 ();
 
-121 
+128 
 def_i
  = 
 def
@@ -1941,7 +1941,7 @@ def
 	`fœ¡_node
 ("i");
 
-122 
+129 
 def_w
  = 
 def
@@ -1949,7 +1949,7 @@ def
 	`fœ¡_node
 ("w");
 
-123 
+130 
 def_ªchÜ
  = 
 def
@@ -1957,7 +1957,7 @@ def
 	`fœ¡_node
 ("anchor");
 
-124 
+131 
 tmp_çûdef
 .
 i
@@ -1971,11 +1971,11 @@ def_i
 NULL
 ,10);
 
-125 
+132 
 f›ld_width
  = -1;
 
-126 
+133 
 tmp_št_±r
  = 
 	`·r£CSV¡r2št
@@ -1989,17 +1989,17 @@ def_w
 f›ld_width
 );
 
-127 
+134 
 	`as£¹
 (
 f›ld_width
 ==1);
 
-128 
+135 
 f›ld_width
  = -1;
 
-129 
+136 
 tmp_doubË_±r
  = 
 	`·r£CSV¡r2doubË
@@ -2011,7 +2011,7 @@ def_w
 f›ld_width
 );
 
-130 
+137 
 	`as£¹
 (
 f›ld_width
@@ -2019,7 +2019,7 @@ f›ld_width
 tmp_št_±r
 [0]);
 
-131 
+138 
 ii
 =0;ii<
 f›ld_width
@@ -2031,23 +2031,23 @@ w
 tmp_doubË_±r
 [ii];
 
-132 
+139 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-133 
+140 
 d–‘e
 [] 
 tmp_doubË_±r
 ;
 
-134 
+141 
 f›ld_width
  = -1;
 
-135 
+142 
 tmp_št_±r
  = 
 	`·r£CSV¡r2št
@@ -2059,29 +2059,29 @@ def_ªchÜ
 f›ld_width
 );
 
-136 
+143 
 	`as£¹
 (
 f›ld_width
 ==3);
 
-137 
+144 
 tmp_çûdef
 .
 ªchÜ
 [0]=
 tmp_št_±r
-[0];
+[0]-1;
 
-138 
+145 
 tmp_çûdef
 .
 ªchÜ
 [1]=
 tmp_št_±r
-[1];
+[1]-1;
 
-139 
+146 
 tmp_çûdef
 .
 ªchÜ
@@ -2089,13 +2089,13 @@ tmp_çûdef
 tmp_št_±r
 [2];
 
-140 
+147 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-141 
+148 
 mod–
 ->
 defs
@@ -2105,7 +2105,7 @@ defs
 tmp_çûdef
 );
 
-145 
+152 
 num_compÚ’ts
  = 
 	`¡¹Þ
@@ -2119,11 +2119,11 @@ compÚ’ts
 NULL
 ,10);
 
-146 
+153 
 num_·¹s
 ;
 
-147 
+154 
 xml_node
 <>* 
 compÚ’t
@@ -2133,19 +2133,19 @@ compÚ’ts
 	`fœ¡_node
 ("component");
 
-148 
+155 
 xml_node
 <>* 
 ·¹
 ;
 
-149 
+156 
 çû·¹_t
  
 tmp_çû·¹
 ;
 
-150 
+157 
 veùÜ
 <
 çû·¹_t
@@ -2153,7 +2153,7 @@ veùÜ
 tmp_veùÜ_çû·¹
 ;
 
-152 
+159 
 num_·¹s
  = 
 	`¡¹Þ
@@ -2167,87 +2167,13 @@ compÚ’t
 NULL
 ,10);
 
-153 
+160 
 ·¹
  = 
 compÚ’t
 ->
 	`fœ¡_node
 ("part");
-
-154 
-tmp_çû·¹
-.
-defid
- = 
-	`¡¹Þ
-(
-·¹
-->
-	`fœ¡_©Œibu‹
-("defid")->
-	`v®ue
-(),
-NULL
-,10)-1;
-
-155 
-tmp_çû·¹
-.
-fž‹rid
- = 
-	`¡¹Þ
-(
-·¹
-->
-	`fœ¡_©Œibu‹
-("fž‹rid")->
-	`v®ue
-(),
-NULL
-,10)-1;
-
-156 
-tmp_çû·¹
-.
-·»Á
- = 
-	`¡¹Þ
-(
-·¹
-->
-	`fœ¡_©Œibu‹
-("·»Á")->
-	`v®ue
-(),
-NULL
-,10)-1;
-
-157 
-tmp_veùÜ_çû·¹
-.
-	`þ—r
-();
-
-158 
-tmp_veùÜ_çû·¹
-.
-	`push_back
-(
-tmp_çû·¹
-);
-
-159 
-j
-=1;j<
-num_·¹s
-;j++){
-
-160 
-·¹
- =…¬t->
-	`Ãxt_siblšg
-();
 
 161 
 tmp_çû·¹
@@ -2300,56 +2226,30 @@ NULL
 164 
 tmp_veùÜ_çû·¹
 .
+	`þ—r
+();
+
+165 
+tmp_veùÜ_çû·¹
+.
 	`push_back
 (
 tmp_çû·¹
 );
 
-166 
-mod–
-->
-compÚ’ts
-.
-	`push_back
-(
-tmp_veùÜ_çû·¹
-);
+166 
+j
+=1;j<
+num_·¹s
+;j++){
 
-168 
-i
- =1;i<
-num_compÚ’ts
-; i++) {
-
-169 
-compÚ’t
- = compÚ’t->
+167 
+·¹
+ =…¬t->
 	`Ãxt_siblšg
 ();
 
-170 
-num_·¹s
- = 
-	`¡¹Þ
-(
-compÚ’t
-->
-	`fœ¡_©Œibu‹
-("num")->
-	`v®ue
-(),
-NULL
-,10);
-
-171 
-·¹
- = 
-compÚ’t
-->
-	`fœ¡_node
-("part");
-
-172 
+168 
 tmp_çû·¹
 .
 defid
@@ -2365,7 +2265,7 @@ defid
 NULL
 ,10)-1;
 
-173 
+169 
 tmp_çû·¹
 .
 fž‹rid
@@ -2381,7 +2281,7 @@ fž‹rid
 NULL
 ,10)-1;
 
-174 
+170 
 tmp_çû·¹
 .
 ·»Á
@@ -2397,13 +2297,7 @@ tmp_çû·¹
 NULL
 ,10)-1;
 
-175 
-tmp_veùÜ_çû·¹
-.
-	`þ—r
-();
-
-176 
+171 
 tmp_veùÜ_çû·¹
 .
 	`push_back
@@ -2411,17 +2305,49 @@ tmp_veùÜ_çû·¹
 tmp_çû·¹
 );
 
-177 
-j
-=1;j<
+173 
+mod–
+->
+compÚ’ts
+.
+	`push_back
+(
+tmp_veùÜ_çû·¹
+);
+
+175 
+i
+ =1;i<
+num_compÚ’ts
+; i++) {
+
+176 
+compÚ’t
+ = compÚ’t->
+	`Ãxt_siblšg
+();
+
+177 
 num_·¹s
-;j++){
+ = 
+	`¡¹Þ
+(
+compÚ’t
+->
+	`fœ¡_©Œibu‹
+("num")->
+	`v®ue
+(),
+NULL
+,10);
 
 178 
 ·¹
- =…¬t->
-	`Ãxt_siblšg
-();
+ = 
+compÚ’t
+->
+	`fœ¡_node
+("part");
 
 179 
 tmp_çû·¹
@@ -2474,12 +2400,86 @@ NULL
 182 
 tmp_veùÜ_çû·¹
 .
+	`þ—r
+();
+
+183 
+tmp_veùÜ_çû·¹
+.
 	`push_back
 (
 tmp_çû·¹
 );
 
-184 
+184 
+j
+=1;j<
+num_·¹s
+;j++){
+
+185 
+·¹
+ =…¬t->
+	`Ãxt_siblšg
+();
+
+186 
+tmp_çû·¹
+.
+defid
+ = 
+	`¡¹Þ
+(
+·¹
+->
+	`fœ¡_©Œibu‹
+("defid")->
+	`v®ue
+(),
+NULL
+,10)-1;
+
+187 
+tmp_çû·¹
+.
+fž‹rid
+ = 
+	`¡¹Þ
+(
+·¹
+->
+	`fœ¡_©Œibu‹
+("fž‹rid")->
+	`v®ue
+(),
+NULL
+,10)-1;
+
+188 
+tmp_çû·¹
+.
+·»Á
+ = 
+	`¡¹Þ
+(
+·¹
+->
+	`fœ¡_©Œibu‹
+("·»Á")->
+	`v®ue
+(),
+NULL
+,10)-1;
+
+189 
+tmp_veùÜ_çû·¹
+.
+	`push_back
+(
+tmp_çû·¹
+);
+
+191 
 mod–
 ->
 compÚ’ts
@@ -2489,11 +2489,11 @@ compÚ’ts
 tmp_veùÜ_çû·¹
 );
 
-189 
+196 
 f›ld_width
  = -1;
 
-190 
+197 
 tmp_št_±r
 =
 	`·r£CSV¡r2št
@@ -2507,13 +2507,13 @@ maxsize
 f›ld_width
 );
 
-191 
+198 
 	`as£¹
 (
 f›ld_width
 ==2);
 
-192 
+199 
 mod–
 ->
 maxsize
@@ -2521,7 +2521,7 @@ maxsize
 tmp_št_±r
 [0];
 
-193 
+200 
 mod–
 ->
 maxsize
@@ -2529,13 +2529,13 @@ maxsize
 tmp_št_±r
 [1];
 
-194 
+201 
 d–‘e
 [] 
 tmp_št_±r
 ;
 
-197 
+204 
 mod–
 ->
 Ën
@@ -2549,7 +2549,7 @@ mod–
 NULL
 ,10);
 
-200 
+207 
 mod–
 ->
 š‹rv®
@@ -2563,7 +2563,7 @@ mod–
 NULL
 ,10);
 
-203 
+210 
 mod–
 ->
 sbš
@@ -2577,7 +2577,7 @@ sbš
 NULL
 ,10);
 
-206 
+213 
 mod–
 ->
 d–
@@ -2591,7 +2591,7 @@ d–
 NULL
 );
 
-209 
+216 
 mod–
 ->
 th»sh
@@ -2605,7 +2605,7 @@ th»sh
 NULL
 );
 
-212 
+219 
 mod–
 ->
 obj
@@ -2619,13 +2619,13 @@ obj
 NULL
 );
 
-215 
+222 
 çû·¹_t
 * 
 ·¹_±r
 ;
 
-216 
+223 
 ·r
 , 
 ax
@@ -2641,7 +2641,7 @@ vœady
 vœadx
 ;
 
-217 
+224 
 i
 =0;i<
 mod–
@@ -2651,7 +2651,7 @@ compÚ’ts
 	`size
 ();i++){
 
-218 
+225 
 j
 =0; j<
 mod–
@@ -2663,7 +2663,7 @@ i
 	`size
 ();j++) {
 
-219 
+226 
 ·¹_±r
  = &(
 mod–
@@ -2675,7 +2675,7 @@ i
 j
 ]);
 
-220 
+227 
 ·¹_±r
 ->
 sizy
@@ -2689,7 +2689,7 @@ fž‹rid
 w
 .sizy;
 
-221 
+228 
 ·¹_±r
 ->
 sizx
@@ -2703,7 +2703,7 @@ fž‹rid
 w
 .sizx;
 
-223 
+230 
 ax
  = 
 mod–
@@ -2717,7 +2717,7 @@ defid
 ªchÜ
 [0];
 
-224 
+231 
 ay
  = 
 mod–
@@ -2731,7 +2731,7 @@ defid
 ªchÜ
 [1];
 
-225 
+232 
 ds
  = 
 mod–
@@ -2745,7 +2745,7 @@ defid
 ªchÜ
 [2];
 
-226 ià((
+233 ià((
 ·r
  = 
 ·¹_±r
@@ -2753,7 +2753,7 @@ defid
 ·»Á
 )>=0) {
 
-227 
+234 
 ·¹_±r
 ->
 sÿË
@@ -2769,19 +2769,19 @@ i
 ·r
 ].scale;
 
-229 
+236 
 	`as£¹
 (
 j
 ==0);
 
-230 
+237 
 ·¹_±r
 ->
 sÿË
  = 0;
 
-232 
+239 
 	`as£¹
 (
 ·r
@@ -2789,13 +2789,13 @@ sÿË
 j
 );
 
-234 ià(
+241 ià(
 ds
 ==0è
 ¡•
  = 1;
 
-235 
+242 
 ¡•
  = (
 	`pow
@@ -2803,7 +2803,7 @@ ds
 ds
 )+0.1);
 
-236 
+243 
 vœady
  = (
 ¡•
@@ -2815,7 +2815,7 @@ mod–
 maxsize
 [0]-1-1,0);
 
-237 
+244 
 vœadx
  = (
 ¡•
@@ -2827,7 +2827,7 @@ mod–
 maxsize
 [1]-1-1,0);
 
-239 
+246 
 ·¹_±r
 ->
 ¡¬ty
@@ -2837,7 +2837,7 @@ ay
 vœady
 ;
 
-240 
+247 
 ·¹_±r
 ->
 ¡¬tx
@@ -2847,21 +2847,21 @@ ax
 vœadx
 ;
 
-241 
+248 
 ·¹_±r
 ->
 ¡•
  = step;
 
-245  
+252  
 mod–
 ;
 
-246 
+253 
 	}
 }
 
-248 
+255 
 çûmod–_t
 * 
 	$çûmod–_»adFromFže
@@ -2869,7 +2869,7 @@ mod–
 fž•©h
 ) {
 
-249 
+256 
 if¡»am
  
 	`fš
@@ -2877,7 +2877,7 @@ if¡»am
 fž•©h
 );
 
-250 ià(
+257 ià(
 fš
 .
 	`çž
@@ -2885,7 +2885,7 @@ fš
 NULL
 ;
 
-251 
+258 
 fš
 .
 	`£ekg
@@ -2895,7 +2895,7 @@ ios
 ’d
 );
 
-252 
+259 
 size_t
  
 Ëngth
@@ -2905,7 +2905,7 @@ fš
 	`‹Îg
 ();
 
-253 * 
+260 * 
 xml¡r
  = 
 Ãw
@@ -2913,7 +2913,7 @@ xml¡r
 Ëngth
 +1];
 
-254 
+261 
 fš
 .
 	`£ekg
@@ -2923,7 +2923,7 @@ ios
 beg
 );
 
-255 
+262 
 fš
 .
 	`»ad
@@ -2933,19 +2933,19 @@ xml¡r
 Ëngth
 );
 
-256 
+263 
 xml¡r
 [
 Ëngth
 ] = '\0';
 
-257 
+264 
 fš
 .
 	`þo£
 ();
 
-258 
+265 
 çûmod–_t
 * 
 mod–
@@ -2955,21 +2955,21 @@ mod–
 xml¡r
 );
 
-259 
+266 
 d–‘e
 [] 
 xml¡r
 ;
 
-260  
+267  
 mod–
 ;
 
-261 
+268 
 	}
 }
 
-263 
+270 
 	$çûmod–_d–‘e
 (
 çûmod–_t
@@ -2977,7 +2977,7 @@ mod–
 mod–
 ) {
 
-266 
+273 
 i
 =0;i<
 mod–
@@ -2987,7 +2987,7 @@ fž‹rs
 	`size
 ();i++)
 
-267 
+274 
 d–‘e
 [] 
 mod–
@@ -3001,13 +3001,13 @@ w
 v®s
 ;
 
-268 
+275 
 d–‘e
  
 mod–
 ;
 
-269 
+276 
 	}
 }
 
@@ -3203,6 +3203,226 @@ fž•©h
 çûmod–_t
 * 
 mod–
+);
+
+	@eHfeatpyramid.cpp
+
+7 
+	~"eHã©py¿mid.h
+"
+
+8 
+	~<m©h.h
+>
+
+10 
+šlše
+ 
+	$mš
+(
+x
+, 
+y
+è{  (x <ðy ? x : y); 
+	}
+}
+
+11 
+šlše
+ 
+	$max
+(
+x
+, 
+y
+è{  (x <ðy ? y : x); 
+	}
+}
+
+13 
+çûpy¿_t
+* 
+	$çûpy¿_ü—‹
+(
+image_t
+* 
+im
+, 
+çûmod–_t
+* 
+mod–
+) {
+
+14 
+çûpy¿_t
+* 
+py¿
+ = 
+Ãw
+ facepyra_t;
+
+15 
+š‹rv®
+ = 
+mod–
+->interval;
+
+16 
+sbš
+ = 
+mod–
+->sbin;
+
+20 
+·dy
+ = 
+	`max
+(
+mod–
+->
+maxsize
+[0]-1-1,0);
+
+21 
+·dx
+ = 
+	`max
+(
+mod–
+->
+maxsize
+[1]-1-1,0);
+
+22 
+sc
+ = 
+	`pow
+(2.0, 1.0/()
+š‹rv®
+);
+
+24  
+py¿
+;
+
+25 
+	}
+}
+
+27 
+	$çûpy¿_d–‘e
+(
+çûpy¿_t
+* 
+py¿
+) {
+
+28 
+d–‘e
+[] 
+py¿
+->
+sÿË
+;
+
+29 
+d–‘e
+ 
+py¿
+;
+
+30 
+	}
+}
+
+	@eHfeatpyramid.h
+
+8 #iâdeà
+EHFEATPYRAMID_H
+
+
+9 
+	#EHFEATPYRAMID_H
+
+
+	)
+
+11 
+	~"eHm©rix.h
+"
+
+12 
+	~"eHimage.h
+"
+
+13 
+	~"eHçûmod–.h
+"
+
+14 
+	~<veùÜ
+>
+
+16 
+usšg
+ 
+	g¡d
+::
+veùÜ
+;
+
+18 
+	seHã©py¿mid
+ {
+
+19 
+	mveùÜ
+<
+	mm©3d_t
+> 
+	mã©
+;
+
+20 * 
+	msÿË
+;
+
+21 
+	mš‹rv®
+;
+
+22 
+	mimy
+;
+
+23 
+	mimx
+;
+
+24 } 
+	tçûpy¿_t
+;
+
+26 
+çûpy¿_t
+* 
+çûpy¿_ü—‹
+(
+image_t
+* 
+im
+, 
+çûmod–_t
+* 
+mod–
+);
+
+28 
+çûpy¿_d–‘e
+(
+çûpy¿_t
+* 
+py¿
 );
 
 	@eHhog.cpp
@@ -5705,13 +5925,13 @@ sizy
 sizx
 );
 
-37 
+38 
 m©2d_d–‘e
 (
 m©2d_±r
 );
 
-39 
+40 
 m©3d_±r
  
 m©3d_®loc
@@ -5725,13 +5945,13 @@ sizx
 sizz
 );
 
-41 
+43 
 m©3d_d–‘e
 (
 m©3d_±r
 );
 
-43 
+45 
 m©kd_±r
  
 m©kd_®loc
@@ -5743,7 +5963,7 @@ k
 sizs
 );
 
-45 
+48 
 m©kd_d–‘e
 (
 m©kd_±r
@@ -16309,11 +16529,21 @@ __USE_GNU
 
 	)
 
-66 
+66 #iâdeà
+_ASSERT_H_DECLS
+
+
+67 
+	#_ASSERT_H_DECLS
+
+
+	)
+
+68 
 __BEGIN_DECLS
 
 
-69 
+71 
 	$__as£¹_çž
  (
 __cÚ¡
@@ -16323,7 +16553,7 @@ __as£¹iÚ
 __fže
 ,
 
-70 
+72 
 __lše
 , 
 __cÚ¡
@@ -16331,7 +16561,7 @@ __cÚ¡
 __funùiÚ
 )
 
-71 
+73 
 __THROW
  
 	`__©Œibu‹__
@@ -16339,7 +16569,7 @@ __THROW
 __nÜ‘uº__
 ));
 
-74 
+76 
 	$__as£¹_³¼Ü_çž
  (
 __”ºum
@@ -16349,17 +16579,17 @@ __cÚ¡
 __fže
 ,
 
-75 
+77 
 __lše
 ,
 
-76 
+78 
 __cÚ¡
  *
 __funùiÚ
 )
 
-77 
+79 
 __THROW
  
 	`__©Œibu‹__
@@ -16367,7 +16597,7 @@ __THROW
 __nÜ‘uº__
 ));
 
-82 
+84 
 	$__as£¹
  (cÚ¡ *
 __as£¹iÚ
@@ -16377,7 +16607,7 @@ __fže
 __lše
 )
 
-83 
+85 
 __THROW
  
 	`__©Œibu‹__
@@ -16385,25 +16615,25 @@ __THROW
 __nÜ‘uº__
 ));
 
-86 
+88 
 __END_DECLS
 
 
-88 
+91 
 	#as£¹
 (
 ex´
 ) \
 
-89 ((
+92 ((
 ex´
 ) \
 
-90 ? 
+93 ? 
 	`__ASSERT_VOID_CAST
  (0) \
 
-91 : 
+94 : 
 	`__as£¹_çž
  (
 	`__STRING
@@ -16419,25 +16649,25 @@ __ASSERT_FUNCTION
 
 	)
 
-93 #ifdef 
+96 #ifdef 
 __USE_GNU
 
 
-94 
+97 
 	#as£¹_³¼Ü
 (
 ”ºum
 ) \
 
-95 (!(
+98 (!(
 ”ºum
 ) \
 
-96 ? 
+99 ? 
 	`__ASSERT_VOID_CAST
  (0) \
 
-97 : 
+100 : 
 	`__as£¹_³¼Ü_çž
  ((
 ”ºum
@@ -16451,7 +16681,7 @@ __ASSERT_FUNCTION
 
 	)
 
-105 #ià
+108 #ià
 defšed
  
 __ýlu¥lus
@@ -16459,7 +16689,7 @@ __ýlu¥lus
 	`__GNUC_PREREQ
  (2, 6) : __GNUC_PREREQ (2, 4)
 
-106 
+109 
 	#__ASSERT_FUNCTION
  
 __PRETTY_FUNCTION__
@@ -16467,13 +16697,13 @@ __PRETTY_FUNCTION__
 
 	)
 
-108 #ià
+111 #ià
 defšed
  
 __STDC_VERSION__
  && __STDC_VERSION__ >= 199901L
 
-109 
+112 
 	#__ASSERT_FUNCTION
  
 __func__
@@ -16481,7 +16711,7 @@ __func__
 
 	)
 
-111 
+114 
 	#__ASSERT_FUNCTION
  ((
 __cÚ¡
@@ -16495,89 +16725,71 @@ __cÚ¡
 CBLAS_H
 
 
-3 #iâdeà
-CBLAS_ENUM_DEFINED_H
-
-
-4 
-	#CBLAS_ENUM_DEFINED_H
-
-
-	)
-
-5 
-	eCBLAS_ORDER
- {
-	mCbÏsRowMajÜ
-=101, 
-	mCbÏsCÞMajÜ
-=102 };
-
-6 
-	eCBLAS_TRANSPOSE
- {
-	mCbÏsNoT¿ns
-=111, 
-	mCbÏsT¿ns
-=112, 
-	mCbÏsCÚjT¿ns
-=113,
-
-7 
-	mAŽasCÚj
-=114};
-
-8 
-	eCBLAS_UPLO
- {
-	mCbÏsUµ”
-=121, 
-	mCbÏsLow”
-=122};
-
-9 
-	eCBLAS_DIAG
- {
-	mCbÏsNÚUn™
-=131, 
-	mCbÏsUn™
-=132};
-
-10 
-	eCBLAS_SIDE
- {
-	mCbÏsLeá
-=141, 
-	mCbÏsRight
-=142};
-
-13 #iâdeà
-CBLAS_ENUM_ONLY
-
-
-14 
+2 
 	#CBLAS_H
 
 
 	)
 
-15 
+3 
+	~<¡ddef.h
+>
+
+6 #ifdeà
+__ýlu¥lus
+
+
+14 
 	#CBLAS_INDEX
- 
+ 
+size_t
+
 
 	)
 
-17 
-cbÏs_”½º
-(
-›¼
-, 
-šfo
-, *
-fÜm
-, ...);
+16 
+	eCBLAS_ORDER
+ {
+CbÏsRowMajÜ
+=101, 
+CbÏsCÞMajÜ
+=102};
 
-24 
+17 
+	eCBLAS_TRANSPOSE
+ {
+CbÏsNoT¿ns
+=111, 
+CbÏsT¿ns
+=112, 
+CbÏsCÚjT¿ns
+=113};
+
+18 
+	eCBLAS_UPLO
+ {
+CbÏsUµ”
+=121, 
+CbÏsLow”
+=122};
+
+19 
+	eCBLAS_DIAG
+ {
+CbÏsNÚUn™
+=131, 
+CbÏsUn™
+=132};
+
+20 
+	eCBLAS_SIDE
+ {
+CbÏsLeá
+=141, 
+CbÏsRight
+=142};
+
+27 
 cbÏs_sdsdÙ
 (cÚ¡ 
 N
@@ -16587,7 +16799,7 @@ N
 X
 ,
 
-25 cÚ¡ 
+28 cÚ¡ 
 šcX
 , cÚ¡ *
 Y
@@ -16595,7 +16807,7 @@ Y
 šcY
 );
 
-26 
+29 
 cbÏs_dsdÙ
 (cÚ¡ 
 N
@@ -16607,11 +16819,11 @@ X
 Y
 ,
 
-27 cÚ¡ 
+30 cÚ¡ 
 šcY
 );
 
-28 
+31 
 cbÏs_sdÙ
 (cÚ¡ 
 N
@@ -16621,13 +16833,13 @@ X
 šcX
 ,
 
-29 cÚ¡ *
+32 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
 );
 
-30 
+33 
 cbÏs_ddÙ
 (cÚ¡ 
 N
@@ -16637,13 +16849,13 @@ X
 šcX
 ,
 
-31 cÚ¡ *
+34 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
 );
 
-35 
+39 
 cbÏs_cdÙu_sub
 (cÚ¡ 
 N
@@ -16653,7 +16865,7 @@ X
 šcX
 ,
 
-36 cÚ¡ *
+40 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
@@ -16661,7 +16873,7 @@ Y
 dÙu
 );
 
-37 
+41 
 cbÏs_cdÙc_sub
 (cÚ¡ 
 N
@@ -16671,7 +16883,7 @@ X
 šcX
 ,
 
-38 cÚ¡ *
+42 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
@@ -16679,7 +16891,7 @@ Y
 dÙc
 );
 
-40 
+44 
 cbÏs_zdÙu_sub
 (cÚ¡ 
 N
@@ -16689,7 +16901,7 @@ X
 šcX
 ,
 
-41 cÚ¡ *
+45 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
@@ -16697,7 +16909,7 @@ Y
 dÙu
 );
 
-42 
+46 
 cbÏs_zdÙc_sub
 (cÚ¡ 
 N
@@ -16707,7 +16919,7 @@ X
 šcX
 ,
 
-43 cÚ¡ *
+47 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
@@ -16715,7 +16927,7 @@ Y
 dÙc
 );
 
-49 
+53 
 cbÏs_¢rm2
 (cÚ¡ 
 N
@@ -16725,7 +16937,7 @@ X
 šcX
 );
 
-50 
+54 
 cbÏs_§sum
 (cÚ¡ 
 N
@@ -16735,7 +16947,7 @@ X
 šcX
 );
 
-52 
+56 
 cbÏs_dÄm2
 (cÚ¡ 
 N
@@ -16745,7 +16957,7 @@ X
 šcX
 );
 
-53 
+57 
 cbÏs_dasum
 (cÚ¡ 
 N
@@ -16755,7 +16967,7 @@ X
 šcX
 );
 
-55 
+59 
 cbÏs_súrm2
 (cÚ¡ 
 N
@@ -16765,7 +16977,7 @@ X
 šcX
 );
 
-56 
+60 
 cbÏs_sÿsum
 (cÚ¡ 
 N
@@ -16775,7 +16987,7 @@ X
 šcX
 );
 
-58 
+62 
 cbÏs_dzÄm2
 (cÚ¡ 
 N
@@ -16785,7 +16997,7 @@ X
 šcX
 );
 
-59 
+63 
 cbÏs_dzasum
 (cÚ¡ 
 N
@@ -16795,7 +17007,7 @@ X
 šcX
 );
 
-65 
+69 
 CBLAS_INDEX
  
 cbÏs_i§max
@@ -16807,7 +17019,7 @@ X
 šcX
 );
 
-66 
+70 
 CBLAS_INDEX
  
 cbÏs_idamax
@@ -16819,7 +17031,7 @@ X
 šcX
 );
 
-67 
+71 
 CBLAS_INDEX
  
 cbÏs_iÿmax
@@ -16831,7 +17043,7 @@ X
 šcX
 );
 
-68 
+72 
 CBLAS_INDEX
  
 cbÏs_izamax
@@ -16843,7 +17055,7 @@ X
 šcX
 );
 
-79 
+83 
 cbÏs_ssw­
 (cÚ¡ 
 N
@@ -16853,13 +17065,13 @@ X
 šcX
 ,
 
-80 *
+84 *
 Y
 , cÚ¡ 
 šcY
 );
 
-81 
+85 
 cbÏs_scÝy
 (cÚ¡ 
 N
@@ -16869,13 +17081,13 @@ X
 šcX
 ,
 
-82 *
+86 *
 Y
 , cÚ¡ 
 šcY
 );
 
-83 
+87 
 cbÏs_§xpy
 (cÚ¡ 
 N
@@ -16885,46 +17097,12 @@ N
 X
 ,
 
-84 cÚ¡ 
+88 cÚ¡ 
 šcX
 , *
 Y
 , cÚ¡ 
 šcY
-);
-
-85 
-ÿŽas_§xpby
-(cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-86 cÚ¡ 
-šcX
-, cÚ¡ 
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-87 
-	gÿŽas_s£t
-
-
-88 (cÚ¡ 
-	gN
-, cÚ¡ 
-	g®pha
-, *
-	gX
-, cÚ¡ 
-	gšcX
 );
 
 90 
@@ -16977,41 +17155,7 @@ Y
 šcY
 );
 
-96 
-ÿŽas_daxpby
-(cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-97 cÚ¡ 
-šcX
-, cÚ¡ 
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-98 
-	gÿŽas_d£t
-
-
-99 (cÚ¡ 
-	gN
-, cÚ¡ 
-	g®pha
-, *
-	gX
-, cÚ¡ 
-	gšcX
-);
-
-101 
+97 
 cbÏs_csw­
 (cÚ¡ 
 N
@@ -17021,13 +17165,13 @@ X
 šcX
 ,
 
-102 *
+98 *
 Y
 , cÚ¡ 
 šcY
 );
 
-103 
+99 
 cbÏs_ccÝy
 (cÚ¡ 
 N
@@ -17037,13 +17181,13 @@ X
 šcX
 ,
 
-104 *
+100 *
 Y
 , cÚ¡ 
 šcY
 );
 
-105 
+101 
 cbÏs_ÿxpy
 (cÚ¡ 
 N
@@ -17053,7 +17197,7 @@ N
 X
 ,
 
-106 cÚ¡ 
+102 cÚ¡ 
 šcX
 , *
 Y
@@ -17061,41 +17205,7 @@ Y
 šcY
 );
 
-107 
-ÿŽas_ÿxpby
-(cÚ¡ 
-N
-, cÚ¡ *
-®pha
-, cÚ¡ *
-X
-,
-
-108 cÚ¡ 
-šcX
-, cÚ¡ *
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-109 
-	gÿŽas_c£t
-
-
-110 (cÚ¡ 
-	gN
-, cÚ¡ *
-	g®pha
-, *
-	gX
-, cÚ¡ 
-	gšcX
-);
-
-112 
+104 
 cbÏs_zsw­
 (cÚ¡ 
 N
@@ -17105,13 +17215,13 @@ X
 šcX
 ,
 
-113 *
+105 *
 Y
 , cÚ¡ 
 šcY
 );
 
-114 
+106 
 cbÏs_zcÝy
 (cÚ¡ 
 N
@@ -17121,13 +17231,13 @@ X
 šcX
 ,
 
-115 *
+107 *
 Y
 , cÚ¡ 
 šcY
 );
 
-116 
+108 
 cbÏs_zaxpy
 (cÚ¡ 
 N
@@ -17137,7 +17247,7 @@ N
 X
 ,
 
-117 cÚ¡ 
+109 cÚ¡ 
 šcX
 , *
 Y
@@ -17145,41 +17255,7 @@ Y
 šcY
 );
 
-118 
-ÿŽas_zaxpby
-(cÚ¡ 
-N
-, cÚ¡ *
-®pha
-, cÚ¡ *
-X
-,
-
-119 cÚ¡ 
-šcX
-, cÚ¡ *
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-120 
-	gÿŽas_z£t
-
-
-121 (cÚ¡ 
-	gN
-, cÚ¡ *
-	g®pha
-, *
-	gX
-, cÚ¡ 
-	gšcX
-);
-
-127 
+115 
 cbÏs_¤Ùg
 (*
 a
@@ -17191,7 +17267,7 @@ c
 s
 );
 
-128 
+116 
 cbÏs_¤Ùmg
 (*
 d1
@@ -17205,7 +17281,7 @@ b2
 P
 );
 
-129 
+117 
 cbÏs_¤Ù
 (cÚ¡ 
 N
@@ -17215,7 +17291,7 @@ X
 šcX
 ,
 
-130 *
+118 *
 Y
 , cÚ¡ 
 šcY
@@ -17225,7 +17301,7 @@ c
 s
 );
 
-131 
+119 
 cbÏs_¤Ùm
 (cÚ¡ 
 N
@@ -17235,7 +17311,7 @@ X
 šcX
 ,
 
-132 *
+120 *
 Y
 , cÚ¡ 
 šcY
@@ -17243,7 +17319,7 @@ Y
 P
 );
 
-134 
+122 
 cbÏs_drÙg
 (*
 a
@@ -17255,7 +17331,7 @@ c
 s
 );
 
-135 
+123 
 cbÏs_drÙmg
 (*
 d1
@@ -17269,7 +17345,7 @@ b2
 P
 );
 
-136 
+124 
 cbÏs_drÙ
 (cÚ¡ 
 N
@@ -17279,7 +17355,7 @@ X
 šcX
 ,
 
-137 *
+125 *
 Y
 , cÚ¡ 
 šcY
@@ -17289,7 +17365,7 @@ c
 s
 );
 
-138 
+126 
 cbÏs_drÙm
 (cÚ¡ 
 N
@@ -17299,7 +17375,7 @@ X
 šcX
 ,
 
-139 *
+127 *
 Y
 , cÚ¡ 
 šcY
@@ -17307,7 +17383,7 @@ Y
 P
 );
 
-145 
+133 
 cbÏs_ssÿl
 (cÚ¡ 
 N
@@ -17319,7 +17395,7 @@ X
 šcX
 );
 
-146 
+134 
 cbÏs_dsÿl
 (cÚ¡ 
 N
@@ -17331,7 +17407,7 @@ X
 šcX
 );
 
-147 
+135 
 cbÏs_csÿl
 (cÚ¡ 
 N
@@ -17343,7 +17419,7 @@ X
 šcX
 );
 
-148 
+136 
 cbÏs_zsÿl
 (cÚ¡ 
 N
@@ -17355,7 +17431,7 @@ X
 šcX
 );
 
-149 
+137 
 cbÏs_cssÿl
 (cÚ¡ 
 N
@@ -17367,7 +17443,7 @@ X
 šcX
 );
 
-150 
+138 
 cbÏs_zdsÿl
 (cÚ¡ 
 N
@@ -17379,79 +17455,15 @@ X
 šcX
 );
 
-155 
-cbÏs_üÙg
-(*
-a
-, *
-b
-, *
-c
-, *
-s
-);
-
-156 
-cbÏs_zrÙg
-(*
-a
-, *
-b
-, *
-c
-, *
-s
-);
-
-157 
-cbÏs_c¤Ù
-(cÚ¡ 
-N
-, *
-X
-, cÚ¡ 
-šcX
-, *
-Y
-, cÚ¡ 
-šcY
-,
-
-158 cÚ¡ 
-c
-, cÚ¡ 
-s
-);
-
-159 
-cbÏs_zdrÙ
-(cÚ¡ 
-N
-, *
-X
-, cÚ¡ 
-šcX
-, *
-Y
-, cÚ¡ 
-šcY
-,
-
-160 cÚ¡ 
-c
-, cÚ¡ 
-s
-);
-
-171 
+149 
 cbÏs_sgemv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 ,
 
-172 cÚ¡ 
+150 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17461,7 +17473,7 @@ M
 N
 ,
 
-173 cÚ¡ 
+151 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -17469,7 +17481,7 @@ A
 lda
 ,
 
-174 cÚ¡ *
+152 cÚ¡ *
 X
 , cÚ¡ 
 šcX
@@ -17477,21 +17489,21 @@ X
 b‘a
 ,
 
-175 *
+153 *
 Y
 , cÚ¡ 
 šcY
 );
 
-176 
+154 
 cbÏs_sgbmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 ,
 
-177 cÚ¡ 
+155 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17501,7 +17513,7 @@ M
 N
 ,
 
-178 cÚ¡ 
+156 cÚ¡ 
 KL
 , cÚ¡ 
 KU
@@ -17509,7 +17521,7 @@ KU
 ®pha
 ,
 
-179 cÚ¡ *
+157 cÚ¡ *
 A
 , cÚ¡ 
 lda
@@ -17517,7 +17529,7 @@ lda
 X
 ,
 
-180 cÚ¡ 
+158 cÚ¡ 
 šcX
 , cÚ¡ 
 b‘a
@@ -17527,19 +17539,19 @@ Y
 šcY
 );
 
-181 
+159 
 cbÏs_¡rmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-182 cÚ¡ 
+160 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17549,7 +17561,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-183 cÚ¡ 
+161 cÚ¡ 
 N
 , cÚ¡ *
 A
@@ -17557,25 +17569,25 @@ A
 lda
 ,
 
-184 *
+162 *
 X
 , cÚ¡ 
 šcX
 );
 
-185 
+163 
 cbÏs_¡bmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-186 cÚ¡ 
+164 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17585,7 +17597,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-187 cÚ¡ 
+165 cÚ¡ 
 N
 , cÚ¡ 
 K
@@ -17595,25 +17607,25 @@ A
 lda
 ,
 
-188 *
+166 *
 X
 , cÚ¡ 
 šcX
 );
 
-189 
+167 
 cbÏs_¡pmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-190 cÚ¡ 
+168 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17623,7 +17635,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-191 cÚ¡ 
+169 cÚ¡ 
 N
 , cÚ¡ *
 Ap
@@ -17633,12 +17645,202 @@ X
 šcX
 );
 
-192 
+170 
 cbÏs_¡rsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+171 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+CBLAS_DIAG
+ 
+DŸg
+,
+
+172 cÚ¡ 
+N
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+, *
+X
+,
+
+173 cÚ¡ 
+šcX
+);
+
+174 
+cbÏs_¡bsv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+175 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+CBLAS_DIAG
+ 
+DŸg
+,
+
+176 cÚ¡ 
+N
+, cÚ¡ 
+K
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+,
+
+177 *
+X
+, cÚ¡ 
+šcX
+);
+
+178 
+cbÏs_¡psv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+179 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+CBLAS_DIAG
+ 
+DŸg
+,
+
+180 cÚ¡ 
+N
+, cÚ¡ *
+Ap
+, *
+X
+, cÚ¡ 
+šcX
+);
+
+182 
+cbÏs_dgemv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+,
+
+183 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+184 cÚ¡ 
+®pha
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+,
+
+185 cÚ¡ *
+X
+, cÚ¡ 
+šcX
+, cÚ¡ 
+b‘a
+,
+
+186 *
+Y
+, cÚ¡ 
+šcY
+);
+
+187 
+cbÏs_dgbmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+,
+
+188 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+189 cÚ¡ 
+KL
+, cÚ¡ 
+KU
+, cÚ¡ 
+®pha
+,
+
+190 cÚ¡ *
+A
+, cÚ¡ 
+lda
+, cÚ¡ *
+X
+,
+
+191 cÚ¡ 
+šcX
+, cÚ¡ 
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+192 
+cbÏs_dŒmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -17657,24 +17859,24 @@ DŸg
 
 194 cÚ¡ 
 N
-, cÚ¡ *
+, cÚ¡ *
 A
 , cÚ¡ 
 lda
-, *
-X
 ,
 
-195 cÚ¡ 
+195 *
+X
+, cÚ¡ 
 šcX
 );
 
 196 
-cbÏs_¡bsv
+cbÏs_dtbmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -17695,24 +17897,24 @@ DŸg
 N
 , cÚ¡ 
 K
-, cÚ¡ *
+, cÚ¡ *
 A
 , cÚ¡ 
 lda
 ,
 
-199 *
+199 *
 X
 , cÚ¡ 
 šcX
 );
 
 200 
-cbÏs_¡psv
+cbÏs_dmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -17731,147 +17933,27 @@ DŸg
 
 202 cÚ¡ 
 N
-, cÚ¡ *
+, cÚ¡ *
 Ap
-, *
-X
-, cÚ¡ 
-šcX
-);
-
-204 
-cbÏs_dgemv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-,
-
-205 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-206 cÚ¡ 
-®pha
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-207 cÚ¡ *
-X
-, cÚ¡ 
-šcX
-, cÚ¡ 
-b‘a
-,
-
-208 *
-Y
-, cÚ¡ 
-šcY
-);
-
-209 
-cbÏs_dgbmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-,
-
-210 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-211 cÚ¡ 
-KL
-, cÚ¡ 
-KU
-, cÚ¡ 
-®pha
-,
-
-212 cÚ¡ *
-A
-, cÚ¡ 
-lda
-, cÚ¡ *
-X
-,
-
-213 cÚ¡ 
-šcX
-, cÚ¡ 
-b‘a
 , *
-Y
-, cÚ¡ 
-šcY
-);
-
-214 
-cbÏs_dŒmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-215 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-CBLAS_DIAG
- 
-DŸg
-,
-
-216 cÚ¡ 
-N
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-217 *
 X
 , cÚ¡ 
 šcX
 );
 
-218 
-cbÏs_dtbmv
+203 
+cbÏs_dŒsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-219 cÚ¡ 
+204 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17881,7 +17963,43 @@ CBLAS_DIAG
 DŸg
 ,
 
-220 cÚ¡ 
+205 cÚ¡ 
+N
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+, *
+X
+,
+
+206 cÚ¡ 
+šcX
+);
+
+207 
+cbÏs_dtbsv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+208 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+CBLAS_DIAG
+ 
+DŸg
+,
+
+209 cÚ¡ 
 N
 , cÚ¡ 
 K
@@ -17891,25 +18009,25 @@ A
 lda
 ,
 
-221 *
+210 *
 X
 , cÚ¡ 
 šcX
 );
 
-222 
-cbÏs_dmv
+211 
+cbÏs_dsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-223 cÚ¡ 
+212 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -17919,7 +18037,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-224 cÚ¡ 
+213 cÚ¡ 
 N
 , cÚ¡ *
 Ap
@@ -17929,12 +18047,96 @@ X
 šcX
 );
 
-225 
-cbÏs_dŒsv
+215 
+cbÏs_cgemv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
+,
+
+216 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+217 cÚ¡ *
+®pha
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+,
+
+218 cÚ¡ *
+X
+, cÚ¡ 
+šcX
+, cÚ¡ *
+b‘a
+,
+
+219 *
+Y
+, cÚ¡ 
+šcY
+);
+
+220 
+cbÏs_cgbmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+,
+
+221 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+222 cÚ¡ 
+KL
+, cÚ¡ 
+KU
+, cÚ¡ *
+®pha
+,
+
+223 cÚ¡ *
+A
+, cÚ¡ 
+lda
+, cÚ¡ *
+X
+,
+
+224 cÚ¡ 
+šcX
+, cÚ¡ *
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+225 
+cbÏs_ùrmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -17953,24 +18155,24 @@ DŸg
 
 227 cÚ¡ 
 N
-, cÚ¡ *
+, cÚ¡ *
 A
 , cÚ¡ 
 lda
-, *
-X
 ,
 
-228 cÚ¡ 
+228 *
+X
+, cÚ¡ 
 šcX
 );
 
 229 
-cbÏs_dtbsv
+cbÏs_ùbmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -17991,24 +18193,24 @@ DŸg
 N
 , cÚ¡ 
 K
-, cÚ¡ *
+, cÚ¡ *
 A
 , cÚ¡ 
 lda
 ,
 
-232 *
+232 *
 X
 , cÚ¡ 
 šcX
 );
 
 233 
-cbÏs_dsv
+cbÏs_ùpmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -18027,147 +18229,27 @@ DŸg
 
 235 cÚ¡ 
 N
-, cÚ¡ *
+, cÚ¡ *
 Ap
-, *
-X
-, cÚ¡ 
-šcX
-);
-
-237 
-cbÏs_cgemv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-,
-
-238 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-239 cÚ¡ *
-®pha
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-240 cÚ¡ *
-X
-, cÚ¡ 
-šcX
-, cÚ¡ *
-b‘a
-,
-
-241 *
-Y
-, cÚ¡ 
-šcY
-);
-
-242 
-cbÏs_cgbmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-,
-
-243 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-244 cÚ¡ 
-KL
-, cÚ¡ 
-KU
-, cÚ¡ *
-®pha
-,
-
-245 cÚ¡ *
-A
-, cÚ¡ 
-lda
-, cÚ¡ *
-X
-,
-
-246 cÚ¡ 
-šcX
-, cÚ¡ *
-b‘a
 , *
-Y
-, cÚ¡ 
-šcY
-);
-
-247 
-cbÏs_ùrmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-248 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-CBLAS_DIAG
- 
-DŸg
-,
-
-249 cÚ¡ 
-N
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-250 *
 X
 , cÚ¡ 
 šcX
 );
 
-251 
-cbÏs_ùbmv
+236 
+cbÏs_ùrsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-252 cÚ¡ 
+237 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -18177,7 +18259,43 @@ CBLAS_DIAG
 DŸg
 ,
 
-253 cÚ¡ 
+238 cÚ¡ 
+N
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+, *
+X
+,
+
+239 cÚ¡ 
+šcX
+);
+
+240 
+cbÏs_ùbsv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+241 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+CBLAS_DIAG
+ 
+DŸg
+,
+
+242 cÚ¡ 
 N
 , cÚ¡ 
 K
@@ -18187,25 +18305,25 @@ A
 lda
 ,
 
-254 *
+243 *
 X
 , cÚ¡ 
 šcX
 );
 
-255 
-cbÏs_ùpmv
+244 
+cbÏs_ùpsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-256 cÚ¡ 
+245 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -18215,7 +18333,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-257 cÚ¡ 
+246 cÚ¡ 
 N
 , cÚ¡ *
 Ap
@@ -18225,12 +18343,96 @@ X
 šcX
 );
 
-258 
-cbÏs_ùrsv
+248 
+cbÏs_zgemv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
+,
+
+249 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+250 cÚ¡ *
+®pha
+, cÚ¡ *
+A
+, cÚ¡ 
+lda
+,
+
+251 cÚ¡ *
+X
+, cÚ¡ 
+šcX
+, cÚ¡ *
+b‘a
+,
+
+252 *
+Y
+, cÚ¡ 
+šcY
+);
+
+253 
+cbÏs_zgbmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+,
+
+254 cÚ¡ 
+CBLAS_TRANSPOSE
+ 
+T¿nsA
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+255 cÚ¡ 
+KL
+, cÚ¡ 
+KU
+, cÚ¡ *
+®pha
+,
+
+256 cÚ¡ *
+A
+, cÚ¡ 
+lda
+, cÚ¡ *
+X
+,
+
+257 cÚ¡ 
+šcX
+, cÚ¡ *
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+258 
+cbÏs_zŒmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -18253,20 +18455,20 @@ N
 A
 , cÚ¡ 
 lda
-, *
-X
 ,
 
-261 cÚ¡ 
+261 *
+X
+, cÚ¡ 
 šcX
 );
 
 262 
-cbÏs_ùbsv
+cbÏs_ztbmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -18300,11 +18502,11 @@ X
 );
 
 266 
-cbÏs_ùpsv
+cbÏs_zmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -18331,209 +18533,19 @@ X
 šcX
 );
 
-270 
-cbÏs_zgemv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-,
-
-271 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-272 cÚ¡ *
-®pha
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-273 cÚ¡ *
-X
-, cÚ¡ 
-šcX
-, cÚ¡ *
-b‘a
-,
-
-274 *
-Y
-, cÚ¡ 
-šcY
-);
-
-275 
-cbÏs_zgbmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-,
-
-276 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-277 cÚ¡ 
-KL
-, cÚ¡ 
-KU
-, cÚ¡ *
-®pha
-,
-
-278 cÚ¡ *
-A
-, cÚ¡ 
-lda
-, cÚ¡ *
-X
-,
-
-279 cÚ¡ 
-šcX
-, cÚ¡ *
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-280 
-cbÏs_zŒmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-281 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-CBLAS_DIAG
- 
-DŸg
-,
-
-282 cÚ¡ 
-N
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-283 *
-X
-, cÚ¡ 
-šcX
-);
-
-284 
-cbÏs_ztbmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-285 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-CBLAS_DIAG
- 
-DŸg
-,
-
-286 cÚ¡ 
-N
-, cÚ¡ 
-K
-, cÚ¡ *
-A
-, cÚ¡ 
-lda
-,
-
-287 *
-X
-, cÚ¡ 
-šcX
-);
-
-288 
-cbÏs_zmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-289 cÚ¡ 
-CBLAS_TRANSPOSE
- 
-T¿nsA
-, cÚ¡ 
-CBLAS_DIAG
- 
-DŸg
-,
-
-290 cÚ¡ 
-N
-, cÚ¡ *
-Ap
-, *
-X
-, cÚ¡ 
-šcX
-);
-
-291 
+269 
 cbÏs_zŒsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-292 cÚ¡ 
+270 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -18543,7 +18555,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-293 cÚ¡ 
+271 cÚ¡ 
 N
 , cÚ¡ *
 A
@@ -18553,23 +18565,23 @@ lda
 X
 ,
 
-294 cÚ¡ 
+272 cÚ¡ 
 šcX
 );
 
-295 
+273 
 cbÏs_ztbsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-296 cÚ¡ 
+274 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -18579,7 +18591,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-297 cÚ¡ 
+275 cÚ¡ 
 N
 , cÚ¡ 
 K
@@ -18589,25 +18601,25 @@ A
 lda
 ,
 
-298 *
+276 *
 X
 , cÚ¡ 
 šcX
 );
 
-299 
+277 
 cbÏs_zsv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-300 cÚ¡ 
+278 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsA
@@ -18617,7 +18629,7 @@ CBLAS_DIAG
 DŸg
 ,
 
-301 cÚ¡ 
+279 cÚ¡ 
 N
 , cÚ¡ *
 Ap
@@ -18627,150 +18639,342 @@ X
 šcX
 );
 
-307 
+285 
 cbÏs_ssymv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-308 cÚ¡ 
+286 cÚ¡ 
 N
 , cÚ¡ 
 ®pha
 , cÚ¡ *
+A
+,
+
+287 cÚ¡ 
+lda
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+288 cÚ¡ 
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+289 
+cbÏs_ssbmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+290 cÚ¡ 
+N
+, cÚ¡ 
+K
+, cÚ¡ 
+®pha
+, cÚ¡ *
+A
+,
+
+291 cÚ¡ 
+lda
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+292 cÚ¡ 
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+293 
+cbÏs_s¥mv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+294 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+Ap
+,
+
+295 cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+296 cÚ¡ 
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+297 
+cbÏs_sg”
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+298 cÚ¡ 
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+299 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
+A
+, cÚ¡ 
+lda
+);
+
+300 
+cbÏs_ssyr
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+301 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
+,
+
+302 cÚ¡ 
+šcX
+, *
+A
+, cÚ¡ 
+lda
+);
+
+303 
+cbÏs_s¥r
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+304 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
+,
+
+305 cÚ¡ 
+šcX
+, *
+Ap
+);
+
+306 
+cbÏs_ssyr2
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+307 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
+,
+
+308 cÚ¡ 
+šcX
+, cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
 A
 ,
 
 309 cÚ¡ 
 lda
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-310 cÚ¡ 
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
 );
 
-311 
-cbÏs_ssbmv
+310 
+cbÏs_s¥r2
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
+,
+
+311 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
 ,
 
 312 cÚ¡ 
-N
-, cÚ¡ 
-K
-, cÚ¡ 
-®pha
-, cÚ¡ *
-A
-,
-
-313 cÚ¡ 
-lda
-, cÚ¡ *
-X
-, cÚ¡ 
 šcX
-,
-
-314 cÚ¡ 
-b‘a
-, *
+, cÚ¡ *
 Y
 , cÚ¡ 
 šcY
+, *
+A
 );
 
-315 
-cbÏs_s¥mv
+314 
+cbÏs_dsymv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-316 cÚ¡ 
+315 cÚ¡ 
 N
-, cÚ¡ 
+, cÚ¡ 
 ®pha
-, cÚ¡ *
-Ap
+, cÚ¡ *
+A
 ,
 
-317 cÚ¡ *
+316 cÚ¡ 
+lda
+, cÚ¡ *
 X
 , cÚ¡ 
 šcX
 ,
 
-318 cÚ¡ 
+317 cÚ¡ 
 b‘a
-, *
+, *
 Y
 , cÚ¡ 
 šcY
 );
 
-319 
-cbÏs_sg”
+318 
+cbÏs_dsbmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
-, cÚ¡ 
-M
-, cÚ¡ 
-N
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
 ,
 
-320 cÚ¡ 
+319 cÚ¡ 
+N
+, cÚ¡ 
+K
+, cÚ¡ 
 ®pha
-, cÚ¡ *
+, cÚ¡ *
+A
+,
+
+320 cÚ¡ 
+lda
+, cÚ¡ *
 X
 , cÚ¡ 
 šcX
 ,
 
-321 cÚ¡ *
+321 cÚ¡ 
+b‘a
+, *
 Y
 , cÚ¡ 
 šcY
-, *
-A
-, cÚ¡ 
-lda
 );
 
 322 
-cbÏs_ssyr
+cbÏs_d¥mv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -18779,86 +18983,90 @@ U¶o
 
 323 cÚ¡ 
 N
-, cÚ¡ 
+, cÚ¡ 
 ®pha
-, cÚ¡ *
-X
+, cÚ¡ *
+Ap
 ,
 
-324 cÚ¡ 
+324 cÚ¡ *
+X
+, cÚ¡ 
 šcX
-, *
+,
+
+325 cÚ¡ 
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+326 
+cbÏs_dg”
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+327 cÚ¡ 
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+328 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
 A
 , cÚ¡ 
 lda
 );
 
-325 
-cbÏs_s¥r
+329 
+cbÏs_dsyr
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
-,
-
-326 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-327 cÚ¡ 
-šcX
-, *
-Ap
-);
-
-328 
-cbÏs_ssyr2
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-329 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
 ,
 
 330 cÚ¡ 
-šcX
-, cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
 ,
 
 331 cÚ¡ 
+šcX
+, *
+A
+, cÚ¡ 
 lda
 );
 
 332 
-cbÏs_s¥r2
+cbÏs_d¥r
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -18867,166 +19075,124 @@ U¶o
 
 333 cÚ¡ 
 N
-, cÚ¡ 
+, cÚ¡ 
 ®pha
-, cÚ¡ *
+, cÚ¡ *
 X
 ,
 
 334 cÚ¡ 
 šcX
-, cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
+, *
+Ap
 );
 
-336 
-cbÏs_dsymv
+335 
+cbÏs_dsyr2
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-337 cÚ¡ 
+336 cÚ¡ 
 N
 , cÚ¡ 
 ®pha
 , cÚ¡ *
+X
+,
+
+337 cÚ¡ 
+šcX
+, cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
 A
 ,
 
 338 cÚ¡ 
 lda
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-339 cÚ¡ 
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
 );
 
-340 
-cbÏs_dsbmv
+339 
+cbÏs_d¥r2
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
+,
+
+340 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
 ,
 
 341 cÚ¡ 
-N
-, cÚ¡ 
-K
-, cÚ¡ 
-®pha
-, cÚ¡ *
-A
-,
-
-342 cÚ¡ 
-lda
-, cÚ¡ *
-X
-, cÚ¡ 
 šcX
-,
-
-343 cÚ¡ 
-b‘a
-, *
+, cÚ¡ *
 Y
 , cÚ¡ 
 šcY
+, *
+A
 );
 
-344 
-cbÏs_d¥mv
+347 
+cbÏs_chemv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-345 cÚ¡ 
+348 cÚ¡ 
 N
-, cÚ¡ 
+, cÚ¡ *
 ®pha
-, cÚ¡ *
-Ap
-,
-
-346 cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-347 cÚ¡ 
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-348 
-cbÏs_dg”
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-349 cÚ¡ 
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-350 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
+, cÚ¡ *
 A
-, cÚ¡ 
+,
+
+349 cÚ¡ 
 lda
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+350 cÚ¡ *
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
 );
 
 351 
-cbÏs_dsyr
+cbÏs_chbmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
@@ -19035,131 +19201,15 @@ U¶o
 
 352 cÚ¡ 
 N
-, cÚ¡ 
+, cÚ¡ 
+K
+, cÚ¡ *
 ®pha
-, cÚ¡ *
-X
+, cÚ¡ *
+A
 ,
 
 353 cÚ¡ 
-šcX
-, *
-A
-, cÚ¡ 
-lda
-);
-
-354 
-cbÏs_d¥r
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-355 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-356 cÚ¡ 
-šcX
-, *
-Ap
-);
-
-357 
-cbÏs_dsyr2
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-358 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-359 cÚ¡ 
-šcX
-, cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-,
-
-360 cÚ¡ 
-lda
-);
-
-361 
-cbÏs_d¥r2
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-362 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-363 cÚ¡ 
-šcX
-, cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-);
-
-369 
-cbÏs_chemv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-370 cÚ¡ 
-N
-, cÚ¡ *
-®pha
-, cÚ¡ *
-A
-,
-
-371 cÚ¡ 
 lda
 , cÚ¡ *
 X
@@ -19167,7 +19217,7 @@ X
 šcX
 ,
 
-372 cÚ¡ *
+354 cÚ¡ *
 b‘a
 , *
 Y
@@ -19175,19 +19225,265 @@ Y
 šcY
 );
 
-373 
-cbÏs_chbmv
+355 
+cbÏs_chpmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-374 cÚ¡ 
+356 cÚ¡ 
+N
+, cÚ¡ *
+®pha
+, cÚ¡ *
+Ap
+,
+
+357 cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+358 cÚ¡ *
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+359 
+cbÏs_cg”u
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+360 cÚ¡ *
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+361 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
+A
+, cÚ¡ 
+lda
+);
+
+362 
+cbÏs_cg”c
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+M
+, cÚ¡ 
+N
+,
+
+363 cÚ¡ *
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+364 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
+A
+, cÚ¡ 
+lda
+);
+
+365 
+cbÏs_ch”
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+366 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+367 *
+A
+, cÚ¡ 
+lda
+);
+
+368 
+cbÏs_ch´
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+369 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
+,
+
+370 cÚ¡ 
+šcX
+, *
+A
+);
+
+371 
+cbÏs_ch”2
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+, cÚ¡ 
+N
+,
+
+372 cÚ¡ *
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+373 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
+A
+, cÚ¡ 
+lda
+);
+
+374 
+cbÏs_ch´2
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+, cÚ¡ 
+N
+,
+
+375 cÚ¡ *
+®pha
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+376 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
+, *
+Ap
+);
+
+378 
+cbÏs_zhemv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+379 cÚ¡ 
+N
+, cÚ¡ *
+®pha
+, cÚ¡ *
+A
+,
+
+380 cÚ¡ 
+lda
+, cÚ¡ *
+X
+, cÚ¡ 
+šcX
+,
+
+381 cÚ¡ *
+b‘a
+, *
+Y
+, cÚ¡ 
+šcY
+);
+
+382 
+cbÏs_zhbmv
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+,
+
+383 cÚ¡ 
 N
 , cÚ¡ 
 K
@@ -19197,7 +19493,7 @@ K
 A
 ,
 
-375 cÚ¡ 
+384 cÚ¡ 
 lda
 , cÚ¡ *
 X
@@ -19205,7 +19501,7 @@ X
 šcX
 ,
 
-376 cÚ¡ *
+385 cÚ¡ *
 b‘a
 , *
 Y
@@ -19213,19 +19509,19 @@ Y
 šcY
 );
 
-377 
-cbÏs_chpmv
+386 
+cbÏs_zhpmv
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
 ,
 
-378 cÚ¡ 
+387 cÚ¡ 
 N
 , cÚ¡ *
 ®pha
@@ -19233,13 +19529,13 @@ N
 Ap
 ,
 
-379 cÚ¡ *
+388 cÚ¡ *
 X
 , cÚ¡ 
 šcX
 ,
 
-380 cÚ¡ *
+389 cÚ¡ *
 b‘a
 , *
 Y
@@ -19247,130 +19543,44 @@ Y
 šcY
 );
 
-381 
-cbÏs_cg”u
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-382 cÚ¡ *
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-383 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-, cÚ¡ 
-lda
-);
-
-384 
-cbÏs_cg”c
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-385 cÚ¡ *
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-386 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-, cÚ¡ 
-lda
-);
-
-387 
-cbÏs_ch”
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-388 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-389 *
-A
-, cÚ¡ 
-lda
-);
-
 390 
-cbÏs_ch´
+cbÏs_zg”u
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
+Üd”
+, cÚ¡ 
+M
+, cÚ¡ 
+N
 ,
 
-391 cÚ¡ 
-N
-, cÚ¡ 
+391 cÚ¡ *
 ®pha
 , cÚ¡ *
 X
+, cÚ¡ 
+šcX
 ,
 
-392 cÚ¡ 
-šcX
+392 cÚ¡ *
+Y
+, cÚ¡ 
+šcY
 , *
 A
+, cÚ¡ 
+lda
 );
 
 393 
-cbÏs_ch”2
+cbÏs_zg”c
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
+Üd”
+, cÚ¡ 
+M
 , cÚ¡ 
 N
 ,
@@ -19394,20 +19604,20 @@ lda
 );
 
 396 
-cbÏs_ch´2
+cbÏs_zh”
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
-, cÚ¡ 
-N
 ,
 
-397 cÚ¡ *
+397 cÚ¡ 
+N
+, cÚ¡ 
 ®pha
 , cÚ¡ *
 X
@@ -19415,74 +19625,86 @@ X
 šcX
 ,
 
-398 cÚ¡ *
-Y
+398 *
+A
 , cÚ¡ 
-šcY
-, *
-Ap
+lda
 );
 
-400 
-cbÏs_zhemv
+399 
+cbÏs_zh´
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
+,
+
+400 cÚ¡ 
+N
+, cÚ¡ 
+®pha
+, cÚ¡ *
+X
 ,
 
 401 cÚ¡ 
-N
-, cÚ¡ *
-®pha
-, cÚ¡ *
+šcX
+, *
 A
+);
+
+402 
+cbÏs_zh”2
+(cÚ¡ 
+CBLAS_ORDER
+ 
+Üd”
+, cÚ¡ 
+CBLAS_UPLO
+ 
+U¶o
+, cÚ¡ 
+N
 ,
 
-402 cÚ¡ 
-lda
+403 cÚ¡ *
+®pha
 , cÚ¡ *
 X
 , cÚ¡ 
 šcX
 ,
 
-403 cÚ¡ *
-b‘a
-, *
+404 cÚ¡ *
 Y
 , cÚ¡ 
 šcY
+, *
+A
+, cÚ¡ 
+lda
 );
 
-404 
-cbÏs_zhbmv
+405 
+cbÏs_zh´2
 (cÚ¡ 
 CBLAS_ORDER
  
-Ord”
+Üd”
 , cÚ¡ 
 CBLAS_UPLO
  
 U¶o
-,
-
-405 cÚ¡ 
-N
 , cÚ¡ 
-K
-, cÚ¡ *
-®pha
-, cÚ¡ *
-A
+N
 ,
 
-406 cÚ¡ 
-lda
+406 cÚ¡ *
+®pha
 , cÚ¡ *
 X
 , cÚ¡ 
@@ -19490,224 +19712,14 @@ X
 ,
 
 407 cÚ¡ *
-b‘a
-, *
 Y
 , cÚ¡ 
 šcY
-);
-
-408 
-cbÏs_zhpmv
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-409 cÚ¡ 
-N
-, cÚ¡ *
-®pha
-, cÚ¡ *
+, *
 Ap
-,
-
-410 cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-411 cÚ¡ *
-b‘a
-, *
-Y
-, cÚ¡ 
-šcY
-);
-
-412 
-cbÏs_zg”u
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-413 cÚ¡ *
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-414 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-, cÚ¡ 
-lda
-);
-
-415 
-cbÏs_zg”c
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-M
-, cÚ¡ 
-N
-,
-
-416 cÚ¡ *
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-417 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-, cÚ¡ 
-lda
 );
 
 418 
-cbÏs_zh”
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-419 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-420 *
-A
-, cÚ¡ 
-lda
-);
-
-421 
-cbÏs_zh´
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-,
-
-422 cÚ¡ 
-N
-, cÚ¡ 
-®pha
-, cÚ¡ *
-X
-,
-
-423 cÚ¡ 
-šcX
-, *
-A
-);
-
-424 
-cbÏs_zh”2
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-, cÚ¡ 
-N
-,
-
-425 cÚ¡ *
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-426 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-A
-, cÚ¡ 
-lda
-);
-
-427 
-cbÏs_zh´2
-(cÚ¡ 
-CBLAS_ORDER
- 
-Ord”
-, cÚ¡ 
-CBLAS_UPLO
- 
-U¶o
-, cÚ¡ 
-N
-,
-
-428 cÚ¡ *
-®pha
-, cÚ¡ *
-X
-, cÚ¡ 
-šcX
-,
-
-429 cÚ¡ *
-Y
-, cÚ¡ 
-šcY
-, *
-Ap
-);
-
-440 
 cbÏs_sgemm
 (cÚ¡ 
 CBLAS_ORDER
@@ -19719,7 +19731,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-441 cÚ¡ 
+419 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsB
@@ -19729,7 +19741,7 @@ M
 N
 ,
 
-442 cÚ¡ 
+420 cÚ¡ 
 K
 , cÚ¡ 
 ®pha
@@ -19737,7 +19749,7 @@ K
 A
 ,
 
-443 cÚ¡ 
+421 cÚ¡ 
 lda
 , cÚ¡ *
 B
@@ -19745,7 +19757,7 @@ B
 ldb
 ,
 
-444 cÚ¡ 
+422 cÚ¡ 
 b‘a
 , *
 C
@@ -19753,7 +19765,7 @@ C
 ldc
 );
 
-445 
+423 
 cbÏs_ssymm
 (cÚ¡ 
 CBLAS_ORDER
@@ -19765,7 +19777,7 @@ CBLAS_SIDE
 Side
 ,
 
-446 cÚ¡ 
+424 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -19775,7 +19787,7 @@ M
 N
 ,
 
-447 cÚ¡ 
+425 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -19783,7 +19795,7 @@ A
 lda
 ,
 
-448 cÚ¡ *
+426 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -19791,13 +19803,13 @@ ldb
 b‘a
 ,
 
-449 *
+427 *
 C
 , cÚ¡ 
 ldc
 );
 
-450 
+428 
 cbÏs_ssyrk
 (cÚ¡ 
 CBLAS_ORDER
@@ -19809,7 +19821,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-451 cÚ¡ 
+429 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -19819,7 +19831,7 @@ N
 K
 ,
 
-452 cÚ¡ 
+430 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -19827,7 +19839,7 @@ A
 lda
 ,
 
-453 cÚ¡ 
+431 cÚ¡ 
 b‘a
 , *
 C
@@ -19835,7 +19847,7 @@ C
 ldc
 );
 
-454 
+432 
 cbÏs_ssyr2k
 (cÚ¡ 
 CBLAS_ORDER
@@ -19847,7 +19859,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-455 cÚ¡ 
+433 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -19857,7 +19869,7 @@ N
 K
 ,
 
-456 cÚ¡ 
+434 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -19865,7 +19877,7 @@ A
 lda
 ,
 
-457 cÚ¡ *
+435 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -19873,13 +19885,13 @@ ldb
 b‘a
 ,
 
-458 *
+436 *
 C
 , cÚ¡ 
 ldc
 );
 
-459 
+437 
 cbÏs_¡rmm
 (cÚ¡ 
 CBLAS_ORDER
@@ -19891,7 +19903,7 @@ CBLAS_SIDE
 Side
 ,
 
-460 cÚ¡ 
+438 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -19901,7 +19913,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-461 cÚ¡ 
+439 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -19911,7 +19923,7 @@ M
 N
 ,
 
-462 cÚ¡ 
+440 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -19919,13 +19931,13 @@ A
 lda
 ,
 
-463 *
+441 *
 B
 , cÚ¡ 
 ldb
 );
 
-464 
+442 
 cbÏs_¡rsm
 (cÚ¡ 
 CBLAS_ORDER
@@ -19937,7 +19949,7 @@ CBLAS_SIDE
 Side
 ,
 
-465 cÚ¡ 
+443 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -19947,7 +19959,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-466 cÚ¡ 
+444 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -19957,7 +19969,7 @@ M
 N
 ,
 
-467 cÚ¡ 
+445 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -19965,13 +19977,13 @@ A
 lda
 ,
 
-468 *
+446 *
 B
 , cÚ¡ 
 ldb
 );
 
-470 
+448 
 cbÏs_dgemm
 (cÚ¡ 
 CBLAS_ORDER
@@ -19983,7 +19995,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-471 cÚ¡ 
+449 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsB
@@ -19993,7 +20005,7 @@ M
 N
 ,
 
-472 cÚ¡ 
+450 cÚ¡ 
 K
 , cÚ¡ 
 ®pha
@@ -20001,7 +20013,7 @@ K
 A
 ,
 
-473 cÚ¡ 
+451 cÚ¡ 
 lda
 , cÚ¡ *
 B
@@ -20009,7 +20021,7 @@ B
 ldb
 ,
 
-474 cÚ¡ 
+452 cÚ¡ 
 b‘a
 , *
 C
@@ -20017,7 +20029,7 @@ C
 ldc
 );
 
-475 
+453 
 cbÏs_dsymm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20029,7 +20041,7 @@ CBLAS_SIDE
 Side
 ,
 
-476 cÚ¡ 
+454 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20039,7 +20051,7 @@ M
 N
 ,
 
-477 cÚ¡ 
+455 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20047,7 +20059,7 @@ A
 lda
 ,
 
-478 cÚ¡ *
+456 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20055,13 +20067,13 @@ ldb
 b‘a
 ,
 
-479 *
+457 *
 C
 , cÚ¡ 
 ldc
 );
 
-480 
+458 
 cbÏs_dsyrk
 (cÚ¡ 
 CBLAS_ORDER
@@ -20073,7 +20085,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-481 cÚ¡ 
+459 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20083,7 +20095,7 @@ N
 K
 ,
 
-482 cÚ¡ 
+460 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20091,7 +20103,7 @@ A
 lda
 ,
 
-483 cÚ¡ 
+461 cÚ¡ 
 b‘a
 , *
 C
@@ -20099,7 +20111,7 @@ C
 ldc
 );
 
-484 
+462 
 cbÏs_dsyr2k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20111,7 +20123,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-485 cÚ¡ 
+463 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20121,7 +20133,7 @@ N
 K
 ,
 
-486 cÚ¡ 
+464 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20129,7 +20141,7 @@ A
 lda
 ,
 
-487 cÚ¡ *
+465 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20137,13 +20149,13 @@ ldb
 b‘a
 ,
 
-488 *
+466 *
 C
 , cÚ¡ 
 ldc
 );
 
-489 
+467 
 cbÏs_dŒmm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20155,7 +20167,7 @@ CBLAS_SIDE
 Side
 ,
 
-490 cÚ¡ 
+468 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20165,7 +20177,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-491 cÚ¡ 
+469 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -20175,7 +20187,7 @@ M
 N
 ,
 
-492 cÚ¡ 
+470 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20183,13 +20195,13 @@ A
 lda
 ,
 
-493 *
+471 *
 B
 , cÚ¡ 
 ldb
 );
 
-494 
+472 
 cbÏs_dŒsm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20201,7 +20213,7 @@ CBLAS_SIDE
 Side
 ,
 
-495 cÚ¡ 
+473 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20211,7 +20223,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-496 cÚ¡ 
+474 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -20221,7 +20233,7 @@ M
 N
 ,
 
-497 cÚ¡ 
+475 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20229,13 +20241,13 @@ A
 lda
 ,
 
-498 *
+476 *
 B
 , cÚ¡ 
 ldb
 );
 
-500 
+478 
 cbÏs_cgemm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20247,7 +20259,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-501 cÚ¡ 
+479 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsB
@@ -20257,7 +20269,7 @@ M
 N
 ,
 
-502 cÚ¡ 
+480 cÚ¡ 
 K
 , cÚ¡ *
 ®pha
@@ -20265,7 +20277,7 @@ K
 A
 ,
 
-503 cÚ¡ 
+481 cÚ¡ 
 lda
 , cÚ¡ *
 B
@@ -20273,7 +20285,7 @@ B
 ldb
 ,
 
-504 cÚ¡ *
+482 cÚ¡ *
 b‘a
 , *
 C
@@ -20281,7 +20293,7 @@ C
 ldc
 );
 
-505 
+483 
 cbÏs_csymm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20293,7 +20305,7 @@ CBLAS_SIDE
 Side
 ,
 
-506 cÚ¡ 
+484 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20303,7 +20315,7 @@ M
 N
 ,
 
-507 cÚ¡ *
+485 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20311,7 +20323,7 @@ A
 lda
 ,
 
-508 cÚ¡ *
+486 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20319,13 +20331,13 @@ ldb
 b‘a
 ,
 
-509 *
+487 *
 C
 , cÚ¡ 
 ldc
 );
 
-510 
+488 
 cbÏs_csyrk
 (cÚ¡ 
 CBLAS_ORDER
@@ -20337,7 +20349,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-511 cÚ¡ 
+489 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20347,7 +20359,7 @@ N
 K
 ,
 
-512 cÚ¡ *
+490 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20355,7 +20367,7 @@ A
 lda
 ,
 
-513 cÚ¡ *
+491 cÚ¡ *
 b‘a
 , *
 C
@@ -20363,7 +20375,7 @@ C
 ldc
 );
 
-514 
+492 
 cbÏs_csyr2k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20375,7 +20387,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-515 cÚ¡ 
+493 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20385,7 +20397,7 @@ N
 K
 ,
 
-516 cÚ¡ *
+494 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20393,7 +20405,7 @@ A
 lda
 ,
 
-517 cÚ¡ *
+495 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20401,13 +20413,13 @@ ldb
 b‘a
 ,
 
-518 *
+496 *
 C
 , cÚ¡ 
 ldc
 );
 
-519 
+497 
 cbÏs_ùrmm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20419,7 +20431,7 @@ CBLAS_SIDE
 Side
 ,
 
-520 cÚ¡ 
+498 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20429,7 +20441,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-521 cÚ¡ 
+499 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -20439,7 +20451,7 @@ M
 N
 ,
 
-522 cÚ¡ *
+500 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20447,13 +20459,13 @@ A
 lda
 ,
 
-523 *
+501 *
 B
 , cÚ¡ 
 ldb
 );
 
-524 
+502 
 cbÏs_ùrsm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20465,7 +20477,7 @@ CBLAS_SIDE
 Side
 ,
 
-525 cÚ¡ 
+503 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20475,7 +20487,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-526 cÚ¡ 
+504 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -20485,7 +20497,7 @@ M
 N
 ,
 
-527 cÚ¡ *
+505 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20493,13 +20505,13 @@ A
 lda
 ,
 
-528 *
+506 *
 B
 , cÚ¡ 
 ldb
 );
 
-530 
+508 
 cbÏs_zgemm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20511,7 +20523,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-531 cÚ¡ 
+509 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿nsB
@@ -20521,7 +20533,7 @@ M
 N
 ,
 
-532 cÚ¡ 
+510 cÚ¡ 
 K
 , cÚ¡ *
 ®pha
@@ -20529,7 +20541,7 @@ K
 A
 ,
 
-533 cÚ¡ 
+511 cÚ¡ 
 lda
 , cÚ¡ *
 B
@@ -20537,7 +20549,7 @@ B
 ldb
 ,
 
-534 cÚ¡ *
+512 cÚ¡ *
 b‘a
 , *
 C
@@ -20545,7 +20557,7 @@ C
 ldc
 );
 
-535 
+513 
 cbÏs_zsymm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20557,7 +20569,7 @@ CBLAS_SIDE
 Side
 ,
 
-536 cÚ¡ 
+514 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20567,7 +20579,7 @@ M
 N
 ,
 
-537 cÚ¡ *
+515 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20575,7 +20587,7 @@ A
 lda
 ,
 
-538 cÚ¡ *
+516 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20583,13 +20595,13 @@ ldb
 b‘a
 ,
 
-539 *
+517 *
 C
 , cÚ¡ 
 ldc
 );
 
-540 
+518 
 cbÏs_zsyrk
 (cÚ¡ 
 CBLAS_ORDER
@@ -20601,7 +20613,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-541 cÚ¡ 
+519 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20611,7 +20623,7 @@ N
 K
 ,
 
-542 cÚ¡ *
+520 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20619,7 +20631,7 @@ A
 lda
 ,
 
-543 cÚ¡ *
+521 cÚ¡ *
 b‘a
 , *
 C
@@ -20627,7 +20639,7 @@ C
 ldc
 );
 
-544 
+522 
 cbÏs_zsyr2k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20639,7 +20651,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-545 cÚ¡ 
+523 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20649,7 +20661,7 @@ N
 K
 ,
 
-546 cÚ¡ *
+524 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20657,7 +20669,7 @@ A
 lda
 ,
 
-547 cÚ¡ *
+525 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20665,13 +20677,13 @@ ldb
 b‘a
 ,
 
-548 *
+526 *
 C
 , cÚ¡ 
 ldc
 );
 
-549 
+527 
 cbÏs_zŒmm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20683,7 +20695,7 @@ CBLAS_SIDE
 Side
 ,
 
-550 cÚ¡ 
+528 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20693,7 +20705,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-551 cÚ¡ 
+529 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -20703,7 +20715,7 @@ M
 N
 ,
 
-552 cÚ¡ *
+530 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20711,13 +20723,13 @@ A
 lda
 ,
 
-553 *
+531 *
 B
 , cÚ¡ 
 ldb
 );
 
-554 
+532 
 cbÏs_zŒsm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20729,7 +20741,7 @@ CBLAS_SIDE
 Side
 ,
 
-555 cÚ¡ 
+533 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20739,7 +20751,7 @@ CBLAS_TRANSPOSE
 T¿nsA
 ,
 
-556 cÚ¡ 
+534 cÚ¡ 
 CBLAS_DIAG
  
 DŸg
@@ -20749,7 +20761,7 @@ M
 N
 ,
 
-557 cÚ¡ *
+535 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20757,13 +20769,13 @@ A
 lda
 ,
 
-558 *
+536 *
 B
 , cÚ¡ 
 ldb
 );
 
-564 
+542 
 cbÏs_chemm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20775,7 +20787,7 @@ CBLAS_SIDE
 Side
 ,
 
-565 cÚ¡ 
+543 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20785,7 +20797,7 @@ M
 N
 ,
 
-566 cÚ¡ *
+544 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20793,7 +20805,7 @@ A
 lda
 ,
 
-567 cÚ¡ *
+545 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20801,13 +20813,13 @@ ldb
 b‘a
 ,
 
-568 *
+546 *
 C
 , cÚ¡ 
 ldc
 );
 
-569 
+547 
 cbÏs_ch”k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20819,7 +20831,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-570 cÚ¡ 
+548 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20829,7 +20841,7 @@ N
 K
 ,
 
-571 cÚ¡ 
+549 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20837,7 +20849,7 @@ A
 lda
 ,
 
-572 cÚ¡ 
+550 cÚ¡ 
 b‘a
 , *
 C
@@ -20845,7 +20857,7 @@ C
 ldc
 );
 
-573 
+551 
 cbÏs_ch”2k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20857,7 +20869,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-574 cÚ¡ 
+552 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20867,7 +20879,7 @@ N
 K
 ,
 
-575 cÚ¡ *
+553 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20875,7 +20887,7 @@ A
 lda
 ,
 
-576 cÚ¡ *
+554 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20883,13 +20895,13 @@ ldb
 b‘a
 ,
 
-577 *
+555 *
 C
 , cÚ¡ 
 ldc
 );
 
-578 
+557 
 cbÏs_zhemm
 (cÚ¡ 
 CBLAS_ORDER
@@ -20901,7 +20913,7 @@ CBLAS_SIDE
 Side
 ,
 
-579 cÚ¡ 
+558 cÚ¡ 
 CBLAS_UPLO
  
 U¶o
@@ -20911,7 +20923,7 @@ M
 N
 ,
 
-580 cÚ¡ *
+559 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -20919,7 +20931,7 @@ A
 lda
 ,
 
-581 cÚ¡ *
+560 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -20927,13 +20939,13 @@ ldb
 b‘a
 ,
 
-582 *
+561 *
 C
 , cÚ¡ 
 ldc
 );
 
-583 
+562 
 cbÏs_zh”k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20945,7 +20957,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-584 cÚ¡ 
+563 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20955,7 +20967,7 @@ N
 K
 ,
 
-585 cÚ¡ 
+564 cÚ¡ 
 ®pha
 , cÚ¡ *
 A
@@ -20963,7 +20975,7 @@ A
 lda
 ,
 
-586 cÚ¡ 
+565 cÚ¡ 
 b‘a
 , *
 C
@@ -20971,7 +20983,7 @@ C
 ldc
 );
 
-587 
+566 
 cbÏs_zh”2k
 (cÚ¡ 
 CBLAS_ORDER
@@ -20983,7 +20995,7 @@ CBLAS_UPLO
 U¶o
 ,
 
-588 cÚ¡ 
+567 cÚ¡ 
 CBLAS_TRANSPOSE
  
 T¿ns
@@ -20993,7 +21005,7 @@ N
 K
 ,
 
-589 cÚ¡ *
+568 cÚ¡ *
 ®pha
 , cÚ¡ *
 A
@@ -21001,7 +21013,7 @@ A
 lda
 ,
 
-590 cÚ¡ *
+569 cÚ¡ *
 B
 , cÚ¡ 
 ldb
@@ -21009,21 +21021,25 @@ ldb
 b‘a
 ,
 
-591 *
+570 *
 C
 , cÚ¡ 
 ldc
 );
 
-593 
-cbÏs_”½º
+572 
+cbÏs_x”bÏ
 (
-›¼
-, 
-šfo
-, *
+p
+, cÚ¡ *
+rout
+, cÚ¡ *
 fÜm
 , ...);
+
+574 #ifdeà
+__ýlu¥lus
+
 
 	@/usr/include/math.h
 
@@ -21397,23 +21413,29 @@ __STDC__
 __GNUC__
  - 0) \
 
-101 && (!
+101 && (!(
 defšed
  
 __NO_LONG_DOUBLE_MATH
- || defšed 
+ && defšed 
+_LIBC
+) \
+
+102 || 
+defšed
+ 
 __LDBL_COMPAT
 )
 
-102 #ifdeà
+103 #ifdeà
 __LDBL_COMPAT
 
 
-104 #ifdeà
+105 #ifdeà
 __USE_ISOC99
 
 
-105 
+106 
 	$__Ædbl_Ãx‰ow¬df
  (
 __x
@@ -21421,7 +21443,7 @@ __x
 __y
 )
 
-106 
+107 
 __THROW
  
 	`__©Œibu‹__
@@ -21429,11 +21451,11 @@ __THROW
 __cÚ¡__
 ));
 
-107 #ifdeà
+108 #ifdeà
 __REDIRECT_NTH
 
 
-108 
+109 
 	`__REDIRECT_NTH
  (
 Ãx‰ow¬df
@@ -21443,17 +21465,17 @@ __x
 __y
 ),
 
-109 
+110 
 __Ædbl_Ãx‰ow¬df
 )
 
-110 
+111 
 	`__©Œibu‹__
  ((
 __cÚ¡__
 ));
 
-111 
+112 
 	`__REDIRECT_NTH
  (
 Ãx‰ow¬d
@@ -21463,7 +21485,7 @@ __x
 __y
 ),
 
-112 
+113 
 Ãxá”
 è
 	`__©Œibu‹__
@@ -21471,19 +21493,19 @@ __y
 __cÚ¡__
 ));
 
-113 
+114 
 	`__REDIRECT_NTH
  (
 Ãx‰ow¬dl
 ,
 
-114 (
+115 (
 __x
 , 
 __y
 ),
 
-115 
+116 
 Ãxá”
 è
 	`__©Œibu‹__
@@ -21491,11 +21513,19 @@ __y
 __cÚ¡__
 ));
 
-122 #undeà
+121 #ià
+defšed
+ 
+__LDBL_COMPAT
+ || defšed 
+__NO_LONG_DOUBLE_MATH
+
+
+123 #undeà
 __MATHDECL_1
 
 
-123 
+124 
 	#__MATHDECL_2
 (
 ty³
@@ -21509,7 +21539,7 @@ suffix
 ®Ÿs
 ) \
 
-124 
+125 
 ty³
  
 	`__REDIRECT_NTH
@@ -21521,7 +21551,7 @@ funùiÚ
 suffix
 ), \
 
-125 
+126 
 ¬gs
 , 
 ®Ÿs
@@ -21529,7 +21559,7 @@ suffix
 
 	)
 
-126 
+127 
 	#__MATHDECL_1
 (
 ty³
@@ -21541,7 +21571,7 @@ suffix
 ¬gs
 ) \
 
-127 
+128 
 	`__MATHDECL_2
 (
 ty³
@@ -21557,17 +21587,17 @@ suffix
 
 	)
 
-130 #iâdeà
+134 #iâdeà
 _MlÚg_doubË_
 
 
-131 
+135 
 	#_MlÚg_doubË_
  
 
 	)
 
-133 
+137 
 	#_MdoubË_
  
 _MlÚg_doubË_
@@ -21575,11 +21605,11 @@ _MlÚg_doubË_
 
 	)
 
-134 #ifdeà
+138 #ifdeà
 __STDC__
 
 
-135 
+139 
 	#__MATH_PRECNAME
 (
 Çme
@@ -21591,7 +21621,7 @@ l
 	)
 r
 
-137 
+141 
 	#__MATH_PRECNAME
 (
 Çme
@@ -21603,7 +21633,7 @@ l
 	)
 r
 
-139 
+143 
 	#_MdoubË_BEGIN_NAMESPACE
  
 __BEGIN_NAMESPACE_C99
@@ -21611,7 +21641,7 @@ __BEGIN_NAMESPACE_C99
 
 	)
 
-140 
+144 
 	#_MdoubË_END_NAMESPACE
  
 __END_NAMESPACE_C99
@@ -21619,45 +21649,45 @@ __END_NAMESPACE_C99
 
 	)
 
-141 
+145 
 	#__MATH_DECLARE_LDOUBLE
  1
 
 	)
 
-142 
+146 
 	~<b™s/m©hÿÎs.h
 >
 
-143 #undeà
+147 #undeà
 _MdoubË_
 
 
-144 #undeà
+148 #undeà
 _MdoubË_BEGIN_NAMESPACE
 
 
-145 #undeà
+149 #undeà
 _MdoubË_END_NAMESPACE
 
 
-146 #undeà
+150 #undeà
 __MATH_PRECNAME
 
 
-151 #undeà
+155 #undeà
 __MATHDECL_1
 
 
-152 #undeà
+156 #undeà
 __MATHDECL
 
 
-153 #undeà
+157 #undeà
 __MATHCALL
 
 
-156 #ià
+160 #ià
 defšed
  
 __USE_MISC
@@ -21665,19 +21695,19 @@ __USE_MISC
 __USE_XOPEN
 
 
-158 
+162 
 signgam
 ;
 
-163 #ifdeà
+167 #ifdeà
 __USE_ISOC99
 
 
-201 
+205 
 FP_NAN
 ,
 
-202 
+206 
 	#FP_NAN
  
 FP_NAN
@@ -21685,11 +21715,11 @@ FP_NAN
 
 	)
 
-203 
+207 
 FP_INFINITE
 ,
 
-204 
+208 
 	#FP_INFINITE
  
 FP_INFINITE
@@ -21697,11 +21727,11 @@ FP_INFINITE
 
 	)
 
-205 
+209 
 FP_ZERO
 ,
 
-206 
+210 
 	#FP_ZERO
  
 FP_ZERO
@@ -21709,11 +21739,11 @@ FP_ZERO
 
 	)
 
-207 
+211 
 FP_SUBNORMAL
 ,
 
-208 
+212 
 	#FP_SUBNORMAL
  
 FP_SUBNORMAL
@@ -21721,11 +21751,11 @@ FP_SUBNORMAL
 
 	)
 
-209 
+213 
 FP_NORMAL
 
 
-210 
+214 
 	#FP_NORMAL
  
 FP_NORMAL
@@ -21733,17 +21763,17 @@ FP_NORMAL
 
 	)
 
-214 #ifdeà
+218 #ifdeà
 __NO_LONG_DOUBLE_MATH
 
 
-215 
+219 
 	#åþassify
 (
 x
 ) \
 
-216 ( (
+220 ( (
 x
 è=ð (è? 
 	`__åþassifyf
@@ -21753,27 +21783,27 @@ x
 
 	)
 
-218 
+222 
 	#åþassify
 (
 x
 ) \
 
-219 ( (
+223 ( (
 x
 ) ==  () \
 
-220 ? 
+224 ? 
 	`__åþassifyf
  (
 x
 ) \
 
-221 :  (
+225 :  (
 x
 ) ==  () \
 
-222 ? 
+226 ? 
 	`__åþassify
  (
 x
@@ -21783,17 +21813,17 @@ x
 
 	)
 
-226 #ifdeà
+230 #ifdeà
 __NO_LONG_DOUBLE_MATH
 
 
-227 
+231 
 	#signb™
 (
 x
 ) \
 
-228 ( (
+232 ( (
 x
 è=ð (è? 
 	`__signb™f
@@ -21803,27 +21833,27 @@ x
 
 	)
 
-230 
+234 
 	#signb™
 (
 x
 ) \
 
-231 ( (
+235 ( (
 x
 ) ==  () \
 
-232 ? 
+236 ? 
 	`__signb™f
  (
 x
 ) \
 
-233 :  (
+237 :  (
 x
 ) ==  () \
 
-234 ? 
+238 ? 
 	`__signb™
  (
 x
@@ -21833,17 +21863,17 @@ x
 
 	)
 
-238 #ifdeà
+242 #ifdeà
 __NO_LONG_DOUBLE_MATH
 
 
-239 
+243 
 	#isfš™e
 (
 x
 ) \
 
-240 ( (
+244 ( (
 x
 è=ð (è? 
 	`__fš™ef
@@ -21853,27 +21883,27 @@ x
 
 	)
 
-242 
+246 
 	#isfš™e
 (
 x
 ) \
 
-243 ( (
+247 ( (
 x
 ) ==  () \
 
-244 ? 
+248 ? 
 	`__fš™ef
  (
 x
 ) \
 
-245 :  (
+249 :  (
 x
 ) ==  () \
 
-246 ? 
+250 ? 
 	`__fš™e
  (
 x
@@ -21883,7 +21913,7 @@ x
 
 	)
 
-250 
+254 
 	#i¢Üm®
 (
 x
@@ -21895,17 +21925,17 @@ FP_NORMAL
 
 	)
 
-254 #ifdeà
+258 #ifdeà
 __NO_LONG_DOUBLE_MATH
 
 
-255 
+259 
 	#i¢ª
 (
 x
 ) \
 
-256 ( (
+260 ( (
 x
 è=ð (è? 
 	`__i¢ªf
@@ -21915,27 +21945,27 @@ x
 
 	)
 
-258 
+262 
 	#i¢ª
 (
 x
 ) \
 
-259 ( (
+263 ( (
 x
 ) ==  () \
 
-260 ? 
+264 ? 
 	`__i¢ªf
  (
 x
 ) \
 
-261 :  (
+265 :  (
 x
 ) ==  () \
 
-262 ? 
+266 ? 
 	`__i¢ª
  (
 x
@@ -21945,17 +21975,17 @@ x
 
 	)
 
-266 #ifdeà
+270 #ifdeà
 __NO_LONG_DOUBLE_MATH
 
 
-267 
+271 
 	#isšf
 (
 x
 ) \
 
-268 ( (
+272 ( (
 x
 è=ð (è? 
 	`__isšff
@@ -21965,27 +21995,27 @@ x
 
 	)
 
-270 
+274 
 	#isšf
 (
 x
 ) \
 
-271 ( (
+275 ( (
 x
 ) ==  () \
 
-272 ? 
+276 ? 
 	`__isšff
  (
 x
 ) \
 
-273 :  (
+277 :  (
 x
 ) ==  () \
 
-274 ? 
+278 ? 
 	`__isšf
  (
 x
@@ -21995,23 +22025,23 @@ x
 
 	)
 
-278 
+282 
 	#MATH_ERRNO
  1
 
 	)
 
-279 
+283 
 	#MATH_ERREXCEPT
  2
 
 	)
 
-284 #iâdeà
+288 #iâdeà
 __FAST_MATH__
 
 
-285 
+289 
 	#m©h_”rhªdlšg
  (
 MATH_ERRNO
@@ -22021,85 +22051,85 @@ MATH_ERREXCEPT
 
 	)
 
-290 #ifdef 
+294 #ifdef 
 __USE_MISC
 
 
-294 
+298 
 _IEEE_
  = -1,
 
-295 
+299 
 _SVID_
 ,
 
-296 
+300 
 _XOPEN_
 ,
 
-297 
+301 
 _POSIX_
 ,
 
-298 
+302 
 _ISOC_
 
 
-299 } 
+303 } 
 	t_LIB_VERSION_TYPE
 ;
 
-304 
+308 
 _LIB_VERSION_TYPE
  
 _LIB_VERSION
 ;
 
-308 #ifdeà
+312 #ifdeà
 __USE_SVID
 
 
-314 #ifdeà
+318 #ifdeà
 __ýlu¥lus
 
 
-315 
+319 
 __exû±iÚ
 
 
-317 
+321 
 exû±iÚ
 
 
-320 
+324 
 ty³
 ;
 
-321 *
+325 *
 Çme
 ;
 
-322 
+326 
 ¬g1
 ;
 
-323 
+327 
 ¬g2
 ;
 
-324 
+328 
 »tv®
 ;
 
-325 
+329 
 	}
 };
 
-327 #ifdeà
+331 #ifdeà
 __ýlu¥lus
 
 
-328 
+332 
 	$m©h”r
  (
 __exû±iÚ
@@ -22109,7 +22139,7 @@ __exc
 	`throw
  ();
 
-330 
+334 
 	`m©h”r
  (
 exû±iÚ
@@ -22117,65 +22147,65 @@ exû±iÚ
 __exc
 );
 
-333 
+337 
 	#X_TLOSS
  1.41484755040568800000e+16
 
 	)
 
-336 
+340 
 	#DOMAIN
  1
 
 	)
 
-337 
+341 
 	#SING
  2
 
 	)
 
-338 
+342 
 	#OVERFLOW
  3
 
 	)
 
-339 
+343 
 	#UNDERFLOW
  4
 
 	)
 
-340 
+344 
 	#TLOSS
  5
 
 	)
 
-341 
+345 
 	#PLOSS
  6
 
 	)
 
-344 
+348 
 	#HUGE
  3.40282347e+38F
 
 	)
 
-348 #ifdeà
+352 #ifdeà
 __USE_XOPEN
 
 
-350 
+354 
 	#MAXFLOAT
  3.40282347e+38F
 
 	)
 
-357 #ià
+361 #ià
 defšed
  
 __USE_BSD
@@ -22183,167 +22213,167 @@ __USE_BSD
 __USE_XOPEN
 
 
-358 
+362 
 	#M_E
  2.7182818284590452354
 
 	)
 
-359 
+363 
 	#M_LOG2E
  1.4426950408889634074
 
 	)
 
-360 
+364 
 	#M_LOG10E
  0.43429448190325182765
 
 	)
 
-361 
+365 
 	#M_LN2
  0.69314718055994530942
 
 	)
 
-362 
+366 
 	#M_LN10
  2.30258509299404568402
 
 	)
 
-363 
+367 
 	#M_PI
  3.14159265358979323846
 
 	)
 
-364 
+368 
 	#M_PI_2
  1.57079632679489661923
 
 	)
 
-365 
+369 
 	#M_PI_4
  0.78539816339744830962
 
 	)
 
-366 
+370 
 	#M_1_PI
  0.31830988618379067154
 
 	)
 
-367 
+371 
 	#M_2_PI
  0.63661977236758134308
 
 	)
 
-368 
+372 
 	#M_2_SQRTPI
  1.12837916709551257390
 
 	)
 
-369 
+373 
 	#M_SQRT2
  1.41421356237309504880
 
 	)
 
-370 
+374 
 	#M_SQRT1_2
  0.70710678118654752440
 
 	)
 
-376 #ifdeà
+380 #ifdeà
 __USE_GNU
 
 
-377 
+381 
 	#M_El
  2.7182818284590452353602874713526625L
 
 	)
 
-378 
+382 
 	#M_LOG2El
  1.4426950408889634073599246810018921L
 
 	)
 
-379 
+383 
 	#M_LOG10El
  0.4342944819032518276511289189166051L
 
 	)
 
-380 
+384 
 	#M_LN2l
  0.6931471805599453094172321214581766L
 
 	)
 
-381 
+385 
 	#M_LN10l
  2.3025850929940456840179914546843642L
 
 	)
 
-382 
+386 
 	#M_PIl
  3.1415926535897932384626433832795029L
 
 	)
 
-383 
+387 
 	#M_PI_2l
  1.5707963267948966192313216916397514L
 
 	)
 
-384 
+388 
 	#M_PI_4l
  0.7853981633974483096156608458198757L
 
 	)
 
-385 
+389 
 	#M_1_PIl
  0.3183098861837906715377675267450287L
 
 	)
 
-386 
+390 
 	#M_2_PIl
  0.6366197723675813430755350534900574L
 
 	)
 
-387 
+391 
 	#M_2_SQRTPIl
  1.1283791670955125738961589031215452L
 
 	)
 
-388 
+392 
 	#M_SQRT2l
  1.4142135623730950488016887242096981L
 
 	)
 
-389 
+393 
 	#M_SQRT1_2l
  0.7071067811865475244008443621048490L
 
 	)
 
-396 #ià
+400 #ià
 defšed
  
 __STRICT_ANSI__
@@ -22351,13 +22381,13 @@ __STRICT_ANSI__
 __NO_MATH_INLINES
 
 
-397 
+401 
 	#__NO_MATH_INLINES
  1
 
 	)
 
-400 #ià
+404 #ià
 defšed
  
 __USE_ISOC99
@@ -22365,7 +22395,7 @@ __USE_ISOC99
 	`__GNUC_PREREQ
 (2,97)
 
-407 
+411 
 	#isg»©”
 (
 x
@@ -22377,7 +22407,7 @@ y
 
 	)
 
-408 
+412 
 	#isg»©”equ®
 (
 x
@@ -22389,7 +22419,7 @@ y
 
 	)
 
-409 
+413 
 	#i¦ess
 (
 x
@@ -22401,7 +22431,7 @@ y
 
 	)
 
-410 
+414 
 	#i¦es£qu®
 (
 x
@@ -22413,7 +22443,7 @@ y
 
 	)
 
-411 
+415 
 	#i¦essg»©”
 (
 x
@@ -22425,7 +22455,7 @@ y
 
 	)
 
-412 
+416 
 	#isunÜd”ed
 (
 u
@@ -22437,33 +22467,33 @@ v
 
 	)
 
-416 #ifdeà
+420 #ifdeà
 __USE_EXTERN_INLINES
 
 
-417 
+421 
 	~<b™s/m©hšlše.h
 >
 
-422 #ià
+426 #ià
 defšed
  
 __FINITE_MATH_ONLY__
  && __FINITE_MATH_ONLY__ > 0
 
-423 
+427 
 	~<b™s/m©h-fš™e.h
 >
 
-426 #ifdeà
+430 #ifdeà
 __USE_ISOC99
 
 
-430 #iâdeà
+434 #iâdeà
 isg»©”
 
 
-431 
+435 
 	#isg»©”
 (
 x
@@ -22471,11 +22501,11 @@ x
 y
 ) \
 
-432 (
+436 (
 __ex‹nsiÚ__
  \
 
-433 ({ 
+437 ({ 
 	`__ty³of__
 (
 x
@@ -22487,7 +22517,7 @@ y
 __y
  = (y); \
 
-434 !
+438 !
 	`isunÜd”ed
  (
 __x
@@ -22499,11 +22529,11 @@ __y
 
 	)
 
-438 #iâdeà
+442 #iâdeà
 isg»©”equ®
 
 
-439 
+443 
 	#isg»©”equ®
 (
 x
@@ -22511,11 +22541,11 @@ x
 y
 ) \
 
-440 (
+444 (
 __ex‹nsiÚ__
  \
 
-441 ({ 
+445 ({ 
 	`__ty³of__
 (
 x
@@ -22527,7 +22557,7 @@ y
 __y
  = (y); \
 
-442 !
+446 !
 	`isunÜd”ed
  (
 __x
@@ -22537,11 +22567,11 @@ __y
 
 	)
 
-446 #iâdeà
+450 #iâdeà
 i¦ess
 
 
-447 
+451 
 	#i¦ess
 (
 x
@@ -22549,11 +22579,11 @@ x
 y
 ) \
 
-448 (
+452 (
 __ex‹nsiÚ__
  \
 
-449 ({ 
+453 ({ 
 	`__ty³of__
 (
 x
@@ -22565,7 +22595,7 @@ y
 __y
  = (y); \
 
-450 !
+454 !
 	`isunÜd”ed
  (
 __x
@@ -22575,11 +22605,11 @@ __y
 
 	)
 
-454 #iâdeà
+458 #iâdeà
 i¦es£qu®
 
 
-455 
+459 
 	#i¦es£qu®
 (
 x
@@ -22587,11 +22617,11 @@ x
 y
 ) \
 
-456 (
+460 (
 __ex‹nsiÚ__
  \
 
-457 ({ 
+461 ({ 
 	`__ty³of__
 (
 x
@@ -22603,7 +22633,7 @@ y
 __y
  = (y); \
 
-458 !
+462 !
 	`isunÜd”ed
  (
 __x
@@ -22613,11 +22643,11 @@ __y
 
 	)
 
-462 #iâdeà
+466 #iâdeà
 i¦essg»©”
 
 
-463 
+467 
 	#i¦essg»©”
 (
 x
@@ -22625,11 +22655,11 @@ x
 y
 ) \
 
-464 (
+468 (
 __ex‹nsiÚ__
  \
 
-465 ({ 
+469 ({ 
 	`__ty³of__
 (
 x
@@ -22641,7 +22671,7 @@ y
 __y
  = (y); \
 
-466 !
+470 !
 	`isunÜd”ed
  (
 __x
@@ -22651,11 +22681,11 @@ __y
 
 	)
 
-470 #iâdeà
+474 #iâdeà
 isunÜd”ed
 
 
-471 
+475 
 	#isunÜd”ed
 (
 u
@@ -22663,11 +22693,11 @@ u
 v
 ) \
 
-472 (
+476 (
 __ex‹nsiÚ__
  \
 
-473 ({ 
+477 ({ 
 	`__ty³of__
 (
 u
@@ -22679,7 +22709,7 @@ v
 __v
  = (v); \
 
-474 
+478 
 	`åþassify
  (
 __u
@@ -22691,7 +22721,7 @@ __v
 
 	)
 
-479 
+483 
 	g__END_DECLS
 
 
@@ -29456,104 +29486,68 @@ _FORTIFY_SOURCE
  && _FORTIFY_SOURCE > 0 \
 
 313 && 
+__GNUC_PREREQ
+ (4, 1è&& 
 defšed
  
-__OPTIMIZE__
+	g__OPTIMIZE__
  && __OPTIMIZE__ > 0
 
-314 #ià!
-__GNUC_PREREQ
- (4, 1)
-
-315 #ifdeà
-__GNUC_RH_RELEASE__
-
-
-316 #w¬nšg 
-_FORTIFY_SOURCE
- 
-suµÜ‹d
- 
-Úly
- 
-w™h
- 
-GCC
- 4.1 
-ªd
- 
-Ï‹r
-
-
-318 
-	#__USE_FORTIFY_LEVEL
- 0
-
-	)
-
-319 #–ià
+314 #ià
 _FORTIFY_SOURCE
  > 1
 
-320 
+315 
 	#__USE_FORTIFY_LEVEL
  2
 
 	)
 
-322 
+317 
 	#__USE_FORTIFY_LEVEL
  1
 
 	)
 
-325 
+320 
 	#__USE_FORTIFY_LEVEL
  0
 
 	)
 
-329 
-	#__STDC_IEC_559__
- 1
+324 
+	~<b™s/´edefs.h
+>
 
-	)
-
-330 
-	#__STDC_IEC_559_COMPLEX__
- 1
-
-	)
-
-333 
+327 
 	#__STDC_ISO_10646__
  200009L
 
 	)
 
-341 #undeà
+335 #undeà
 __GNU_LIBRARY__
 
 
-342 
+336 
 	#__GNU_LIBRARY__
  6
 
 	)
 
-346 
+340 
 	#__GLIBC__
  2
 
 	)
 
-347 
+341 
 	#__GLIBC_MINOR__
- 14
+ 15
 
 	)
 
-349 
+343 
 	#__GLIBC_PREREQ
 (
 maj
@@ -29561,7 +29555,7 @@ maj
 mš
 ) \
 
-350 ((
+344 ((
 __GLIBC__
  << 16è+ 
 __GLIBC_MINOR__
@@ -29573,13 +29567,13 @@ mš
 
 	)
 
-353 #ià
+347 #ià
 defšed
  
 __GNUC__
  \
 
-354 || (
+348 || (
 defšed
  
 	g__PGI
@@ -29587,7 +29581,7 @@ defšed
 	g__i386__
  ) \
 
-355 || (
+349 || (
 defšed
  
 	g__INTEL_COMPILER
@@ -29597,31 +29591,31 @@ defšed
 	g__Ÿ64__
 )) \
 
-356 || (
+350 || (
 defšed
  
 	g__STDC_VERSION__
  && __STDC_VERSION__ >= 199901L)
 
-357 
+351 
 	#__GLIBC_HAVE_LONG_LONG
  1
 
 	)
 
-361 #iâdeà
+355 #iâdeà
 __ASSEMBLER__
 
 
-362 #iâdeà
+356 #iâdeà
 _SYS_CDEFS_H
 
 
-363 
+357 
 	~<sys/cdefs.h
 >
 
-368 #ià
+362 #ià
 defšed
  
 __USE_FILE_OFFSET64
@@ -29629,19 +29623,19 @@ __USE_FILE_OFFSET64
 __REDIRECT
 
 
-369 
+363 
 	#__USE_LARGEFILE
  1
 
 	)
 
-370 
+364 
 	#__USE_LARGEFILE64
  1
 
 	)
 
-376 #ià
+370 #ià
 __GNUC_PREREQ
  (2, 7è&& 
 defšed
@@ -29649,7 +29643,7 @@ defšed
 __OPTIMIZE__
  \
 
-377 && !
+371 && !
 defšed
  
 	g__OPTIMIZE_SIZE__
@@ -29657,19 +29651,49 @@ defšed
 	g__NO_INLINE__
  \
 
-378 && 
+372 && 
 defšed
  
 	g__ex‹º_šlše
 
 
-379 
+373 
 	#__USE_EXTERN_INLINES
  1
 
 	)
 
-387 
+378 #ià
+__GNUC_PREREQ
+ (2, 7è&& 
+defšed
+ 
+__OPTIMIZE__
+ \
+
+379 && (
+defšed
+ 
+	g_LIBC
+ || !defšed 
+	g__OPTIMIZE_SIZE__
+è&& !defšed 
+	g__NO_INLINE__
+ \
+
+380 && 
+defšed
+ 
+	g__ex‹º_šlše
+
+
+381 
+	#__USE_EXTERN_INLINES_IN_LIBC
+ 1
+
+	)
+
+389 
 	~<gnu/¡ubs.h
 >
 
@@ -29726,8 +29750,8 @@ __loÿË_t
 .
 1
 /usr/include
-29
-496
+31
+530
 eHbbox.cpp
 eHbbox.h
 eHbox.cpp
@@ -29735,6 +29759,8 @@ eHbox.h
 eHconv.cpp
 eHfacemodel.cpp
 eHfacemodel.h
+eHfeatpyramid.cpp
+eHfeatpyramid.h
 eHhog.cpp
 eHimage.cpp
 eHimage.h

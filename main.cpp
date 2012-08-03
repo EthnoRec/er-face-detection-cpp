@@ -10,6 +10,10 @@
 #include <string.h>
 
 using std::ios;
+using std::cout;
+using std::endl;
+
+static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
 int main(){
 	image_ptr img = image_alloc(10,10);
