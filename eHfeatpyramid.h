@@ -11,13 +11,11 @@
 #include "eHmatrix.h"
 #include "eHimage.h"
 #include "eHfacemodel.h"
-#include <vector>
-
-using std::vector;
 
 typedef struct eHfeatpyramid {
-	vector<mat3d_t> feat;
+	mat3d_ptr* feat;
 	double* scale;
+	int len;
 	int interval;
 	int imy;
 	int imx;

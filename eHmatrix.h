@@ -42,6 +42,12 @@ mat3d_ptr mat3d_alloc(size_t sizy, size_t sizx, size_t sizz);
 /* this should be used only for mat2d allocated with mat3d_alloc() */
 void mat3d_delete(mat3d_ptr);
 
+/* pad 3d matrix with pad_val in 3 directions, y:pad[0] x:pad[1] z:pad[2] */
+void mat3d_pad(mat3d_ptr mat, const size_t* pad, double pad_val);
+
+/* fill area of 3d matrix with fill_val*/
+void mat3d_fill(mat3d_ptr mat, const size_t* start, const size_t* width, double fill_val);
+
 matkd_ptr matkd_alloc(size_t k, size_t* sizs);
 
 /* this should be used only for mat2d allocated with matkd_alloc() */

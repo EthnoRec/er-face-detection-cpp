@@ -8,6 +8,7 @@
 #include <fstream>
 
 #include <string.h>
+#include <math.h>
 
 using std::ios;
 using std::cout;

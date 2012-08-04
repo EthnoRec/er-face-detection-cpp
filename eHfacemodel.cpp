@@ -239,7 +239,7 @@ facemodel_t* facemodel_parseXml(char* xmlstr) {
 			assert(par<j);
 			/* amount of (virtual) padding to hallucinate */
 			if (ds==0) step = 1;else
-				step = int(pow(2.0,(double)ds)+0.1);
+				step = int(pow(2.0,(double)ds));
 			virtpady = (step-1)*max(model->maxsize[0]-1-1,0);
 			virtpadx = (step-1)*max(model->maxsize[1]-1-1,0);
 			/* starting points (simulates additional padding at finer scales */
