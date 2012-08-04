@@ -16,12 +16,12 @@ using std::endl;
 
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
-int main(){
-	image_ptr img = image_alloc(10,10);
-	image_ptr scaled = image_resize(img,0.5);
-	image_ptr reduced = image_reduce(img);
+int main(int argc, char** argv){
+	image_t* img = image_readJPG(argv[1]);
+	image_t* scaled = image_resize(img, 0.5);
 	image_delete(img);
 	image_delete(scaled);
+	cout<<scaled->sizy<<" "<<scaled->sizx<<endl;
 
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
 	facemodel_delete(model);

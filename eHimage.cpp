@@ -7,6 +7,8 @@
 #include "eHimage.h"
 #include <assert.h>
 #include <string.h>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
@@ -25,6 +27,24 @@ void image_delete(image_ptr img){
 	delete[] img->ch[1];
 	delete[] img->ch[2];
 	delete img;
+}
+
+image_ptr image_readJPG(char* filename) {
+	using namespace cv;
+	Mat img = imread(filename, 1);
+	if(!img.data) {
+		return NULL;
+	}
+	image_ptr im = image_alloc(img.size().height, img.size().width);
+	for(int y=0;y<im->sizy;y++) {
+		for(int x=0;x<im->sizx;x++) {
+			im->ch[0][y+x*im->sizy]=img.at<Vec3b>(y,x).val[0];
+			im->ch[1][y+x*im->sizy]=img.at<Vec3b>(y,x).val[1];
+			im->ch[2][y+x*im->sizy]=img.at<Vec3b>(y,x).val[2];
+		}
+	}
+
+	return im;
 }
 
 /* struct used for caching interpolation values */

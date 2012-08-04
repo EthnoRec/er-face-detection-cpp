@@ -35,6 +35,11 @@ image_ptr image_alloc(size_t sizy, size_t sizx);
 void image_delete(image_ptr);
 
 /*
+ * Read Jpeg image file
+ */
+image_ptr image_readJPG(char* filename);
+
+/*
  * Resize image to given scale
  */
 image_ptr image_resize(const image_ptr, double scale);
