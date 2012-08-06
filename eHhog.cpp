@@ -65,6 +65,10 @@ mat3d_ptr eHhog(const image_ptr img, int sbin) {
   blocks[1] = (int)round2int((double)dims[1]/(double)sbin);
   double *hist = new double[blocks[0]*blocks[1]*18];
   double *norm = new double[blocks[0]*blocks[1]];
+  for(int i=0;i<blocks[0]*blocks[1]*18;i++)
+	  hist[i]=0;
+  for(int i=0;i<blocks[0]*blocks[1];i++)
+	  norm[i]=0;
 
   /* memory for HOG features */
   int out[3];
