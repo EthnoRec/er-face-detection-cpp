@@ -21,6 +21,8 @@
 /* small value, used to avoid division by zero */
 #define eps 0.0001
 
+//#define round2int(x) ((x-floor(x))>0.5 ? ceil(x) : floor(x))
+
 /* unit vectors used to compute gradient orientation */
 double uu[9] = {1.0000, 
 		0.9397, 
@@ -62,7 +64,7 @@ mat3d_ptr eHhog(const image_ptr img, int sbin) {
   blocks[0] = (int)round2int((double)dims[0]/(double)sbin);
   blocks[1] = (int)round2int((double)dims[1]/(double)sbin);
   double *hist = new double[blocks[0]*blocks[1]*18];
-  double *norm = new double[blocks[0]*blocks[1], sizeof(double)];
+  double *norm = new double[blocks[0]*blocks[1]];
 
   /* memory for HOG features */
   int out[3];
@@ -78,7 +80,7 @@ mat3d_ptr eHhog(const image_ptr img, int sbin) {
   for (int x = 1; x < visible[1]-1; x++) {
     for (int y = 1; y < visible[0]-1; y++) {
       /* first color channel */
-      double *s = img->ch[0] + min(x, dims[1]-2)*dims[0] + min(y, dims[0]-2);
+      double *s = img->ch[2] + min(x, dims[1]-2)*dims[0] + min(y, dims[0]-2);
       double dy = *(s+1) - *(s-1);
       double dx = *(s+dims[0]) - *(s-dims[0]);
       double v = dx*dx + dy*dy;
@@ -90,7 +92,7 @@ mat3d_ptr eHhog(const image_ptr img, int sbin) {
       double v2 = dx2*dx2 + dy2*dy2;
 
       /* third color channel */
-      s = img->ch[2] + min(x, dims[1]-2)*dims[0] + min(y,dims[0]-2);
+      s = img->ch[0] + min(x, dims[1]-2)*dims[0] + min(y,dims[0]-2);
       double dy3 = *(s+1) - *(s-1);
       double dx3 = *(s+dims[0]) - *(s-dims[0]);
       double v3 = dx3*dx3 + dy3*dy3;

@@ -29,7 +29,7 @@ void image_delete(image_ptr img){
 	delete img;
 }
 
-image_ptr image_readJPG(char* filename) {
+image_ptr image_readJPG(const char* filename) {
 	using namespace cv;
 	Mat img = imread(filename, 1);
 	if(!img.data) {

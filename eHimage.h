@@ -37,7 +37,7 @@ void image_delete(image_ptr);
 /*
  * Read Jpeg image file
  */
-image_ptr image_readJPG(char* filename);
+image_ptr image_readJPG(const char* filename);
 
 /*
  * Resize image to given scale
