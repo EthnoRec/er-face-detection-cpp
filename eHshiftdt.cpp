@@ -45,6 +45,12 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 	 */
 	double* tmpM;
 	int* tmpIy;
+	/* negating to define a cost */
+	ax = -ax;
+	bx = -bx;
+	ay = -ay;
+	by = -by;
+
 	if(leny*sizx<=EH_MAX_LEN){
 		tmpM = tmpM_pre;
 		tmpIy = tmpIy_pre;
