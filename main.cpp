@@ -16,7 +16,9 @@ using std::ios;
 using std::cout;
 using std::endl;
 
+mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end);
 mat3d_ptr eHhog(const image_ptr img, int sbin);
+
 
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
@@ -26,6 +28,8 @@ int main(int argc, char** argv){
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
 	
 	facepyra_t* pyra = facepyra_create(img,model);
+	mat3d_ptr resp = eHconv(pyra->feat[0],model->filters,0,145);
+	mat3d_delete(resp);
 	facepyra_delete(pyra);
 
 	facemodel_delete(model);

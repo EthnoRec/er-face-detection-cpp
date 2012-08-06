@@ -17,9 +17,13 @@
  * 2012-08 @ eH
  */
 #include "eHmatrix.h"
+#include "eHfacemodel.h"
 #include <math.h>
 #include <string.h>
 #include <assert.h>
+#include <vector>
+
+using std::vector;
 
 extern "C" {
 #include "cblas.h"
@@ -90,19 +94,21 @@ void *process(void *thread_arg) {
  * entry point
  * resp = eHconv(A, cell of B, start, end);
  */
-mat3d_ptr eHconv(mat3d_ptr feats, matkd_ptr filters, int start, int end) {
+mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
 
   int len = end-start+1;
-  int filter_len = filters->siz[0]*filters->siz[1]*filters->siz[2];
-  assert(len<=filters->siz[3]);
-  int height = feats->sizy - filters->siz[0] + 1;
-  int width = feats->sizx - filters->siz[1] + 1;
+  int filter_h = filters[0].w.sizy;
+  int filter_w = filters[0].w.sizx;
+  int filter_z = filters[0].w.sizz;
+  assert(len<=filters.size());
+  int height = feats->sizy - filter_h + 1;
+  int width = feats->sizx - filter_w + 1;
   assert(height>=1 && width>=1);
-  mat3d_ptr resps= mat3d_alloc(height, width, filters->siz[3]);
+  mat3d_ptr resps= mat3d_alloc(height, width, filters.size());
 
   thread_data td;
   double* tmp_feats = new double[feats->sizy*feats->sizx*feats->sizz];
-  double* tmp_filter = new double[filters->siz[0]*filters->siz[1]*filters->siz[2]];
+  double* tmp_filter = new double[filter_h*filter_w*filter_z];
   prepare_map(tmp_feats,feats->vals,feats->sizy,feats->sizx,feats->sizz);
 
   for (int i = 0; i < len; i++) {
@@ -110,11 +116,11 @@ mat3d_ptr eHconv(mat3d_ptr feats, matkd_ptr filters, int start, int end) {
 	  td.A.sizy = feats->sizy;
 	  td.A.sizx = feats->sizz;
 	  td.A.sizz = feats->sizx;
-	  td.B.vals = prepare_filter(tmp_filter, filters->vals+i*filter_len, 
-		  filters->siz[0], filters->siz[1], filters->siz[2]);
-	  td.B.sizy = filters->siz[2];
-	  td.B.sizx = filters->siz[1];
-	  td.B.sizz = filters->siz[0];
+	  td.B.vals = prepare_filter(tmp_filter, filters[i].w.vals, 
+		  filter_h, filter_w, filter_z);
+	  td.B.sizy = filter_z;
+	  td.B.sizx = filter_w;
+	  td.B.sizz = filter_h;
 	  td.C.vals = resps->vals+i*height*width;
 	  td.C.sizy = height;
 	  td.C.sizx = width;
@@ -123,5 +129,6 @@ mat3d_ptr eHconv(mat3d_ptr feats, matkd_ptr filters, int start, int end) {
   }
   delete[] tmp_feats;
   delete[] tmp_filter;
+  return resps;
 }
 
