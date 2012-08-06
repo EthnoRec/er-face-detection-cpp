@@ -12,6 +12,8 @@
 
 #include <vector>
 #include "eHmatrix.h"
+#include "eHimage.h"
+#include "eHbbox.h"
 
 using std::vector;
 
@@ -30,13 +32,18 @@ typedef struct part {
 	int defid;
 	int filterid;
 	int parent;
-	/*cache for later use, not from file*/
+	/*infos not directly from file*/
 	int sizy;
 	int sizx;
 	int scale;
 	int startx;
 	int starty;
 	int step;
+	/*cache for later use, NOT part of model*/
+	mat3d_ptr score;
+	int level;
+	
+
 } facepart_t;
 
 typedef struct eHfacemodel {
@@ -63,6 +70,11 @@ facemodel_t* facemodel_parseXml(char* xmlstr);
  * Read face model from file
  */
 facemodel_t* facemodel_readFromFile(const char* filepath);
+
+/*
+ * Detection
+ */
+vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, double thrs = -0.65);
 
 /*
  * Delete a face model, release related memory

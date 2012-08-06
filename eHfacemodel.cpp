@@ -5,11 +5,15 @@
  * 2012-08 @ eH
  */
 #include "eHfacemodel.h"
+#include "eHfeatpyramid.h"
 #include "eHutils.h"
+
 #include "rapidxml-1.13/rapidxml.hpp"
+
 #include <vector>
 #include <iostream>
 #include <fstream>
+
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -265,6 +269,16 @@ facemodel_t* facemodel_readFromFile(const char* filepath) {
 	facemodel_t* model = facemodel_parseXml(xmlstr);
 	delete[] xmlstr;
 	return model;
+}
+
+vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model) {
+	vector<bbox_t> boxes;
+
+	/* build feature pyramid */
+	facepyra_t* pyra = facepyra_create(img, model->interval, model->sbin, model->maxsize);
+	
+	/* XXX MORE CODE HERE*/
+	return boxes;
 }
 
 void facemodel_delete(facemodel_t* model) {

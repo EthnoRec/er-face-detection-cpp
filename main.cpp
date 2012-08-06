@@ -31,7 +31,7 @@ int main(int argc, char** argv){
 	image_t* img = image_readJPG("image/10081706_5.jpg");
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
 	
-	facepyra_t* pyra = facepyra_create(img,model);
+	facepyra_t* pyra = facepyra_create(img,model->interval,model->sbin,model->maxsize);
 	mat3d_ptr resp = eHconv(pyra->feat[0],model->filters,0,145);
 
 	mat3d_delete(resp);

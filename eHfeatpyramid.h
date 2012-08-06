@@ -10,7 +10,6 @@
 
 #include "eHmatrix.h"
 #include "eHimage.h"
-#include "eHfacemodel.h"
 
 typedef struct eHfeatpyramid {
 	mat3d_ptr* feat;
@@ -21,7 +20,7 @@ typedef struct eHfeatpyramid {
 	int imx;
 } facepyra_t;
 
-facepyra_t* facepyra_create(image_t* im, facemodel_t* model);
+facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize);
 
 void facepyra_delete(facepyra_t* pyra);
 
