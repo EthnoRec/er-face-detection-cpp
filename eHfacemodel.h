@@ -33,7 +33,7 @@ typedef struct part {
 	/*cache for later use, not from file*/
 	int sizy;
 	int sizx;
-	double scale;
+	int scale;
 	int startx;
 	int starty;
 	int step;

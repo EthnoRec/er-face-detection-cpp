@@ -34,12 +34,6 @@ int main(int argc, char** argv){
 	facepyra_t* pyra = facepyra_create(img,model);
 	mat3d_ptr resp = eHconv(pyra->feat[0],model->filters,0,145);
 
-	double* M = new double[640*538];
-	int* Ix = new int[640*538];
-	int* Iy = new int[640*538];
-	eHshiftdt(M,Ix,Iy,538,640,0,0,2,img->ch[2],538,640,1,1,1,1);
-	
-
 	mat3d_delete(resp);
 	facepyra_delete(pyra);
 
