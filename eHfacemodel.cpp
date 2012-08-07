@@ -281,7 +281,7 @@ facemodel_t* facemodel_readFromFile(const char* filepath) {
 	return model;
 }
 
-vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model) {
+vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double thrs) {
 	vector<bbox_t> boxes;
 
 	/* build feature pyramid */
@@ -306,7 +306,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model) {
 				int fid = parts->at(k).filterid;
 				int level = rlevel-(parts->at(k)).scale*model->interval;
 				if(resp[level]==NULL){
-					resp[level]=eHconv(pyra->feat[level], model->filters, 0, model->filters.size());
+					resp[level]=eHconv(pyra->feat[level], model->filters, 0, model->filters.size()-1);
 				}
 				parts->at(k).level = level;
 				parts->at(k).score = resp[level]->vals + fid*(resp[level]->sizy)*(resp[level]->sizx);
@@ -345,9 +345,14 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model) {
 			/* find boxes following pointers */
 
 			/* XXX MORE CODE HERE, 
-			 * memo:
-			 * clean Ix Iy
 			 */
+
+			/* clean Ix Iy */
+			for(k=numparts-1;k>0;k--){
+				facepart_t* child = &(parts->at(k));
+				delete[] child->Ix;
+				delete[] child->Iy;
+			}
 
 		}
 	}
