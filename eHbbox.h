@@ -24,6 +24,6 @@ typedef struct eHbbox {
  * outer - bounding box covering all parts
  * area - area of outer
  */
-void calcOut_bbox(bbox_t*);
+void bbox_calcOut(bbox_t*);
 
 #endif

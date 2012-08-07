@@ -33,7 +33,7 @@ void nms(vector<bbox_t>& bboxes, double overlap) {
 	/* get bounding box & area */
 	vector<bbox_t>::iterator iter;
 	for(iter=bboxes.begin();iter!=bboxes.end();iter++)
-		calcOut_bbox(&(*iter));
+		bbox_calcOut(&(*iter));
 
 	/* use list for frequent removal */
 	list<bbox_t> lsbboxes(bboxes.begin(),bboxes.end());

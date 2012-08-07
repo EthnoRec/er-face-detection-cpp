@@ -337,10 +337,39 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 			}
 			
 			/* add bias to root score (const term) */
-			for(int i=0;i<rootpart->sizScore[0]*rootpart->sizScore[1];i++)
+			vector<int> slct; slct.reserve(10000);
+			for(int i=0;i<rootpart->sizScore[0]*rootpart->sizScore[1];i++) {
 				rootpart->score[i] += model->defs[0].w[0];
+				if(rootpart->score[i]>=thrs)
+					slct.push_back(i);
+			}
 			
 			/* backtrack */
+			/* root */
+			int k0=boxes.size();
+			int newboxes_len = slct.size();
+			boxes.resize(k0+newboxes_len);
+			int* ptr = new int[numparts*newboxes_len];/*XXX*/
+			for(int i=0;i<newboxes_len;i++){
+				ptr[i*numparts]=slct[i];
+				double scale = pyra->scale[rootpart->level];
+				int padx = max(model->maxsize[1]-2,0);
+				int pady = max(model->maxsize[0]-2,0);
+				int y = slct[i]%rootpart->sizScore[0];
+				int x = (slct[i]-y)/rootpart->sizScore[0];
+				fbox_t tmpbox = {
+					(x-1-padx)*scale+1,
+					(y-1-pady)*scale+1,
+					(x-1-padx+rootpart->sizx)*scale,
+					(y-1-pady+rootpart->sizy)*scale
+				};
+				boxes[k0+i].boxes.push_back(tmpbox);
+			}
+			/*remaining parts TODO*/
+
+
+			delete[] ptr;
+
 
 			/* find boxes following pointers */
 

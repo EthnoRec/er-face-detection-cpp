@@ -10,7 +10,7 @@ static inline double max(double x, double y) {return (x <= y ? y : x); }
  * outer - bounding box covering all parts
  * area - area of outer
  */
-void calcOut_bbox(bbox_t* bbox){
+void bbox_calcOut(bbox_t* bbox){
 	vector<fbox_t>::iterator iter;
 	setbox(&(bbox->outer),IMG_BOUND,IMG_BOUND,-IMG_BOUND,-IMG_BOUND);
 	for(iter=bbox->boxes.begin();iter!=bbox->boxes.end();iter++)
