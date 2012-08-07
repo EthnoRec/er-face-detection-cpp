@@ -39,13 +39,21 @@ typedef struct part {
 	int startx;
 	int starty;
 	int step;
-	/*cache for later use, NOT part of model*/
-	mat3d_ptr score;
+	/*cache for local usage, NOT part of model*/
+	double* score;
+	int sizScore[2];
+	int* Ix;
+	int* Iy;
+	int sizI[2];/*Ix, Iy, normally the same as sizScore*/
 	int level;
 	
 
 } facepart_t;
 
+/* XXX assume all filters are of the same size
+ * (e.g. face_p146.xml), otherwise code need further 
+ * modification
+ */
 typedef struct eHfacemodel {
 	vector<facefilter_t> filters;
 	vector<facedef_t> defs;
@@ -74,7 +82,7 @@ facemodel_t* facemodel_readFromFile(const char* filepath);
 /*
  * Detection
  */
-vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, double thrs = -0.65);
+vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double thrs = -0.65);
 
 /*
  * Delete a face model, release related memory

@@ -19,12 +19,22 @@
 #include <math.h>
 #include <assert.h>
 
+#define EH_MAX_LEN 800
+
 using std::vector;
 using std::ifstream;
 using std::ios;
 
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
+
+static double msg_cache[EH_MAX_LEN*EH_MAX_LEN];
+
+void eHshiftdt(double* M, int* Ix, int* Iy, 
+		int lenx, int leny, int offx, int offy, int dstep, 
+		double* vals, int sizx, int sizy, 
+		double* w);
+mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end);
 
 /* NOTE: change field_width to actual value (and remove assertion) 
  * can get higher speed
@@ -271,13 +281,81 @@ facemodel_t* facemodel_readFromFile(const char* filepath) {
 	return model;
 }
 
-vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model) {
+vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model) {
 	vector<bbox_t> boxes;
 
 	/* build feature pyramid */
 	facepyra_t* pyra = facepyra_create(img, model->interval, model->sbin, model->maxsize);
-	
-	/* XXX MORE CODE HERE*/
+
+	int minlevel = model->interval+1;
+	mat3d_ptr* resp = new mat3d_ptr[pyra->len];
+	memset(resp, 0, pyra->len*sizeof(mat3d_ptr));
+
+ 	/* index changed from matlab 0-1 style to C style:
+	 * 	level
+	 */
+	int c, rlevel, k; /* component#, root level, part# */
+	for(c=0;c<model->components.size();c++){
+		vector<facepart_t>* parts = &(model->components[c]);
+		int numparts = parts->size();
+		for(rlevel=model->interval;rlevel<pyra->len;rlevel++){
+			facepart_t* rootpart = &(parts->at(0));
+
+			/* local part scores */
+			for(k=0;k<numparts;k++){
+				int fid = parts->at(k).filterid;
+				int level = rlevel-(parts->at(k)).scale*model->interval;
+				if(resp[level]==NULL){
+					resp[level]=eHconv(pyra->feat[level], model->filters, 0, model->filters.size());
+				}
+				parts->at(k).level = level;
+				parts->at(k).score = resp[level]->vals + fid*(resp[level]->sizy)*(resp[level]->sizx);
+				parts->at(k).sizScore[0] = resp[level]->sizy;
+				parts->at(k).sizScore[1] = resp[level]->sizx;
+			}
+
+			/* part relations - tree message passing */
+			for(k=numparts-1;k>0;k--){
+				facepart_t* child = &(parts->at(k));
+				int par = child->parent;
+				int Ny = parts->at(par).sizScore[0];
+				int Nx = parts->at(par).sizScore[1];
+				/* assume all filters are of the same size */
+				assert(Ny == child->sizScore[0] && Nx == child->sizScore[1]);
+				double* msg;
+				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
+					msg = new double[Nx*Ny];
+				else
+					msg = msg_cache;
+				child->Iy = new int[Ny*Nx];
+				child->Ix = new int[Ny*Nx];
+				eHshiftdt(msg,child->Ix,child->Iy,Nx,Ny,child->startx,child->starty,child->step,child->score,child->sizScore[1],child->sizScore[0],model->defs[child->defid].w);
+				for(int i=0;i<Ny*Nx;i++)
+					parts->at(par).score[i]+=msg[i];
+				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
+					delete[] msg;
+			}
+			
+			/* add bias to root score (const term) */
+			for(int i=0;i<rootpart->sizScore[0]*rootpart->sizScore[1];i++)
+				rootpart->score[i] += model->defs[0].w[0];
+			
+			/* backtrack */
+
+			/* find boxes following pointers */
+
+			/* XXX MORE CODE HERE, 
+			 * memo:
+			 * clean Ix Iy
+			 */
+
+		}
+	}
+
+	for(int i=0;i<pyra->len;i++)
+		if(resp[i]!=NULL) mat3d_delete(resp[i]);
+	delete[] resp;
+	facepyra_delete(pyra);
 	return boxes;
 }
 

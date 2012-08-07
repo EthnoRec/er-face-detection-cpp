@@ -14,7 +14,7 @@
 typedef struct eHfeatpyramid {
 	mat3d_ptr* feat;
 	double* scale;
-	int len;
+	int len; /*levels of pyra, size of feat & scale*/
 	int interval;
 	int imy;
 	int imx;

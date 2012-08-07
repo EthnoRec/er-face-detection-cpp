@@ -38,7 +38,8 @@ void dt1d(double* src, double* dst, int* ptr, int sstep, int slen,
 void eHshiftdt(double* M, int* Ix, int* Iy, 
 		int lenx, int leny, int offx, int offy, int dstep, 
 		double* vals, int sizx, int sizy, 
-		double ax, double bx, double ay, double by) {
+		double* w) {
+		//double ax, double bx, double ay, double by) {
 	/*
 	 * Calculation is performed as 1-d transforms in 2 steps
 	 * vals (sizy*sizx) => tmpM (leny*sizx) => M (leny*lenx)
@@ -46,10 +47,10 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 	double* tmpM;
 	int* tmpIy;
 	/* negating to define a cost */
-	ax = -ax;
-	bx = -bx;
-	ay = -ay;
-	by = -by;
+	double ax = -w[0];
+	double bx = -w[1];
+	double ay = -w[2];
+	double by = -w[3];
 
 	if(leny*sizx<=EH_MAX_LEN){
 		tmpM = tmpM_pre;
@@ -88,12 +89,12 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 /* wrapper using matrix data structures */
 void eHshiftdt(mat2d_ptr matM, int* Ix, int* Iy, 
 		int offx, int offy, int dstep, 
-		mat2d_ptr score, 
-		double ax, double bx, double ay, double by) {
+		mat2d_ptr score, double * w) { 
+		//double ax, double bx, double ay, double by) {
 	eHshiftdt(matM->vals, Ix, Iy, 
 			matM->sizx, matM->sizy, offx, offy, dstep, 
 			score->vals, score->sizx, score->sizy, 
-			ax, bx, ay, by);
+			w);
 }
 
 void dt1d(double* src, double* dst, int* ptr, int sstep, int slen, 
