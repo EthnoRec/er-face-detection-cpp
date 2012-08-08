@@ -30,19 +30,15 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
 int main(int argc, char** argv){
-	//image_t* img = image_readJPG(argv[1]);
-	image_t* img = image_readJPG("image/10081706_5.jpg");
+	image_t* img = NULL;
+	if(argc<2)
+		img = image_readJPG("image/10081706_5.jpg");
+	else
+		img = image_readJPG(argv[1]);
 	//image_display(img,"test");
 	
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
-	//model->interval = 5;
-	
-	//facepyra_t* pyra = facepyra_create(img,model->interval,model->sbin,model->maxsize);
-	//mat3d_ptr resp = eHconv(pyra->feat[10],model->filters,0,145);
-	//mat3d_delete(resp);
-	//facepyra_delete(pyra);
 	vector<bbox_t> faces = facemodel_detect(img, model);
-
 
 	facemodel_delete(model);
 	image_delete(img);
