@@ -2,6 +2,7 @@
  * eHbbox.h
  *
  * Bounding box
+ * XXX consider use Rect<> instead of fbox_t
  */
 #ifndef EHBBOX_H
 #define EHBBOX_H

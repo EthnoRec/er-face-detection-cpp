@@ -1,7 +1,8 @@
 /*
- * eHconv.cpp
+ * eHconvMT.cpp
  *
  * Convolve a feature map with a set of filters
+ * Multithreaded version
  * usage:
  * 	mat3d_ptr resps = 
  * 	eHconv(mat3d_ptr feats, matkd_ptr filters, int start, int end) 
@@ -21,13 +22,20 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
+#include <pthread.h>
+#include <sys/time.h>
 #include <vector>
+#include <iostream>
 
 using std::vector;
+using std::cerr;
+using std::endl;
 
 extern "C" {
 #include "cblas.h"
 }
+
+extern timeval time_spent_dgemv;
 
 struct thread_data {
 	mat3d_t A;
@@ -85,54 +93,74 @@ void *process(void *thread_arg) {
       int lda = args->A.sizy;
       int incx = 1;
       int incy = 1;
+      timeval start_dgemv, end_dgemv, interval_dgemv;
+      gettimeofday(&start_dgemv,NULL);
       cblas_dgemv(CblasColMajor,CblasNoTrans, m, n, one, A_off, lda, B_off, incx, one, C_off, incy);
+      gettimeofday(&end_dgemv,NULL);
+      timersub(&end_dgemv,&start_dgemv,&interval_dgemv);
+      timeradd(&interval_dgemv,&time_spent_dgemv, &time_spent_dgemv);
     }
   }
+  pthread_exit(NULL);
 }
 
 /*
  * entry point
  * resp = eHconv(A, cell of B, start, end);
  */
-mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
-//void  eHconv(vector<mat2d_ptr>& resps, const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
+ mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
+ //void  eHconv(vector<mat2d_ptr>& resps, const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
 
   int len = end-start+1;
   int filter_h = filters[0].w.sizy;
   int filter_w = filters[0].w.sizx;
   int filter_z = filters[0].w.sizz;
+  int filter_len = filter_h*filter_w*filter_z;
   assert(len<=filters.size());
   int height = feats->sizy - filter_h + 1;
   int width = feats->sizx - filter_w + 1;
   assert(height>=1 && width>=1);
   mat3d_ptr resps= mat3d_alloc(height, width, filters.size());
-  /*XXX necessary? */
+  /*XXX necessary */
   for(int i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
 	  resps->vals[i]=0;
 
-  thread_data td;
+  thread_data* td = new thread_data[len];
+  pthread_t* ts = new pthread_t[len];
   double* tmp_feats = new double[feats->sizy*feats->sizx*feats->sizz];
-  double* tmp_filter = new double[filter_h*filter_w*filter_z];
+  double* tmp_filter = new double[filter_len*len];
   prepare_map(tmp_feats,feats->vals,feats->sizy,feats->sizx,feats->sizz);
 
   for (int i = 0; i < len; i++) {
-	  td.A.vals = tmp_feats;
-	  td.A.sizy = feats->sizy;
-	  td.A.sizx = feats->sizz;
-	  td.A.sizz = feats->sizx;
-	  td.B.vals = prepare_filter(tmp_filter, filters[i].w.vals, 
+	  td[i].A.vals = tmp_feats;
+	  td[i].A.sizy = feats->sizy;
+	  td[i].A.sizx = feats->sizz;
+	  td[i].A.sizz = feats->sizx;
+	  td[i].B.vals = prepare_filter(tmp_filter+i*filter_len, filters[i].w.vals, 
 		  filter_h, filter_w, filter_z);
-	  td.B.sizy = filter_z;
-	  td.B.sizx = filter_w;
-	  td.B.sizz = filter_h;
-	  td.C.vals = resps->vals+i*height*width;
-	  td.C.sizy = height;
-	  td.C.sizx = width;
+	  td[i].B.sizy = filter_z;
+	  td[i].B.sizx = filter_w;
+	  td[i].B.sizz = filter_h;
+	  td[i].C.vals = resps->vals+i*height*width;
+	  td[i].C.sizy = height;
+	  td[i].C.sizx = width;
 	  
-	  process((void *)&td);
+	  if(pthread_create(&ts[i], NULL, process, (void*)&td[i])){
+		  /*error*/
+		  cerr<<"Error creating thread!"<<endl;
+		  break;
+	  }
+	  //process((void *)&td[i]);
+  }
+  void* status;
+  for (int i=0;i<len;i++){
+	  pthread_join(ts[i],&status);
   }
   delete[] tmp_feats;
   delete[] tmp_filter;
+  delete[] td;
+  delete[] ts;
   return resps;
 }
+
 
