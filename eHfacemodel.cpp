@@ -374,10 +374,10 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					int y = slct[i]%rootpart->sizScore[0];
 					int x = (slct[i]-y)/rootpart->sizScore[0];
 					fbox_t tmpbox = {
-						(x-1-padx)*scale+1,
-						(y-1-pady)*scale+1,
-						(x-1-padx+rootpart->sizx)*scale,
-						(y-1-pady+rootpart->sizy)*scale
+						(x-padx)*scale,
+						(y-pady)*scale,
+						(x-padx+rootpart->sizx)*scale-1,
+						(y-pady+rootpart->sizy)*scale-1
 					};
 					boxes[k0+i].boxes.push_back(tmpbox);
 					boxes[k0+i].component = c;
@@ -394,10 +394,10 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 						y = tmppart->Iy[ptr[par*newboxes_len+i]];
 						ptr[k*newboxes_len+i] = x*tmppart->sizScore[0]+y;
 						fbox_t tmpbox = {
-							(x-1-padx)*scale+1,
-							(y-1-pady)*scale+1,
-							(x-1-padx+tmppart->sizx)*scale,
-							(y-1-pady+tmppart->sizy)*scale
+							(x-padx)*scale,
+							(y-pady)*scale,
+							(x-padx+tmppart->sizx)*scale-1,
+							(y-pady+tmppart->sizy)*scale-1
 						};
 						boxes[k0+i].boxes.push_back(tmpbox);
 					}
