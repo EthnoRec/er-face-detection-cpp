@@ -21,7 +21,6 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
-#include <sys/time.h>
 #include <vector>
 
 using std::vector;
@@ -29,8 +28,6 @@ using std::vector;
 extern "C" {
 #include "cblas.h"
 }
-
-extern timeval time_spent_dgemv;
 
 struct thread_data {
 	mat3d_t A;
@@ -88,12 +85,7 @@ void *process(void *thread_arg) {
       int lda = args->A.sizy;
       int incx = 1;
       int incy = 1;
-      timeval start_dgemv, end_dgemv, interval_dgemv;
-      gettimeofday(&start_dgemv,NULL);
       cblas_dgemv(CblasColMajor,CblasNoTrans, m, n, one, A_off, lda, B_off, incx, one, C_off, incy);
-      gettimeofday(&end_dgemv,NULL);
-      timersub(&end_dgemv,&start_dgemv,&interval_dgemv);
-      timeradd(&interval_dgemv,&time_spent_dgemv, &time_spent_dgemv);
     }
   }
 }
