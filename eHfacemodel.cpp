@@ -20,8 +20,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
+#include <sys/time.h>
 
 #define EH_MAX_LEN 800
+
+#define EH_PH_TESTING
 
 using std::vector;
 using std::ifstream;
@@ -39,6 +42,11 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end);
 void eHnms(vector<bbox_t>& bboxes, double overlap);
 
+timeval  time_spent_dgemv;
+timeval time_spent_conv;
+timeval  time_spent_pyra;
+timeval  time_spent_feat;
+timeval  time_spent_dp;
 
 /* NOTE: change field_width to actual value (and remove assertion) 
  * can get higher speed
@@ -288,10 +296,24 @@ facemodel_t* facemodel_readFromFile(const char* filepath) {
 vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double thrs) {
 	vector<bbox_t> boxes;
 
+#ifdef 	EH_PH_TESTING
+	time_spent_dgemv.tv_sec=time_spent_dgemv.tv_usec=0;
+	time_spent_conv.tv_sec=time_spent_conv.tv_usec=0;;
+	time_spent_pyra.tv_sec=time_spent_pyra.tv_usec=0;
+	time_spent_dp.tv_sec=time_spent_dp.tv_usec=0;
+	time_spent_feat.tv_sec=time_spent_feat.tv_usec=0;
+#endif
+
 	/* build feature pyramid */
 	model->interval = 5;
 	int imsize[] = {img->sizy, img->sizx};
+
+	timeval start_pyra, end_pyra, interval_pyra;
+	gettimeofday(&start_pyra,NULL);
 	facepyra_t* pyra = facepyra_create(img, model->interval, model->sbin, model->maxsize);
+	gettimeofday(&end_pyra,NULL);
+	timersub(&end_pyra,&start_pyra,&interval_pyra);
+	timeradd(&interval_pyra,&time_spent_pyra, &time_spent_pyra);
 
 	int minlevel = model->interval+1;
 	mat3d_ptr* resp = new mat3d_ptr[pyra->len];
@@ -312,17 +334,23 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 				int fid = parts->at(k).filterid;
 				int level = rlevel-(parts->at(k)).scale*model->interval;
 				if(resp[level]==NULL){
+					timeval start_conv, end_conv, interval_conv;
+					gettimeofday(&start_conv,NULL);
 					resp[level]=eHconv(pyra->feat[level], model->filters, 0, model->filters.size()-1);
+					gettimeofday(&end_conv,NULL);
+					timersub(&end_conv,&start_conv,&interval_conv);
+					timeradd(&interval_conv,&time_spent_conv,&time_spent_conv);
 				}
 				parts->at(k).level = level;
 				int len = (resp[level]->sizy)*(resp[level]->sizx);
 				parts->at(k).score = new double[len];
 				memcpy(parts->at(k).score,resp[level]->vals+fid*len,len*sizeof(double));
-				//parts->at(k).score = resp[level]->vals + fid*(resp[level]->sizy)*(resp[level]->sizx);
 				parts->at(k).sizScore[0] = resp[level]->sizy;
 				parts->at(k).sizScore[1] = resp[level]->sizx;
 			}
 
+			timeval start_dp, end_dp, interval_dp;
+			gettimeofday(&start_dp,NULL);
 			/* part relations - tree message passing */
 			for(k=numparts-1;k>0;k--){
 				facepart_t* child = &(parts->at(k));
@@ -405,6 +433,9 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 
 				delete[] ptr;
 			}
+			gettimeofday(&end_dp,NULL);
+			timersub(&end_dp,&start_dp,&interval_dp);
+			timeradd(&interval_dp, &time_spent_dp, &time_spent_dp);
 
 			/* clean Ix Iy score */
 			for(k=numparts-1;k>0;k--){
@@ -426,7 +457,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 		bbox_clipboxes(boxes[i],imsize);
 	eHnms(boxes, 0.3);
 
-	/*testing code*/
+	/*testing code: display outer bbox*/
 	using namespace cv;
 	Mat M(img->sizy,img->sizx,CV_8UC3);
 	for(int y=0;y<img->sizy;y++) {

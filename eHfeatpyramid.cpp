@@ -7,10 +7,13 @@
 #include "eHfeatpyramid.h"
 #include "eHmatrix.h"
 #include <math.h>
+#include <sys/time.h>
 
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+
+extern timeval time_spent_feat;
 
 mat3d_ptr eHhog(const image_ptr img, int sbin);
 
@@ -31,17 +34,32 @@ facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const in
 	pyra->scale = new double[pyra->len];
 	for(int i=0;i<interval;i++) {
 		/* first 2 octave */
+		timeval start_feat, end_feat, interval_feat;
 		scaled = image_resize(im,(1.0/pow(sc,i)));
+		gettimeofday(&start_feat, NULL);
 		pyra->feat[i]=eHhog(scaled, sbin/2);
+		gettimeofday(&end_feat,NULL);
+		timersub(&end_feat,&start_feat,&interval_feat);
+		timeradd(&interval_feat, &time_spent_feat, &time_spent_feat);
 		pyra->scale[i]=2.0/pow(sc,i);
+		gettimeofday(&start_feat, NULL);
 		pyra->feat[i+interval] = eHhog(scaled,sbin);
+		gettimeofday(&end_feat,NULL);
+		timersub(&end_feat,&start_feat,&interval_feat);
+		timeradd(&interval_feat, &time_spent_feat, &time_spent_feat);
+	
 		pyra->scale[i+interval] = 1.0/pow(sc,i);
 		/* remaining octaves */
 		for (int j=i+interval;; j+=interval){
 			tmp = image_reduce(scaled);
 			image_delete(scaled);
 			scaled = tmp;
+			gettimeofday(&start_feat,NULL);
 			pyra->feat[j+interval] = eHhog(scaled,sbin);
+			gettimeofday(&end_feat,NULL);
+			timersub(&end_feat,&start_feat,&interval_feat);
+			timeradd(&interval_feat, &time_spent_feat, &time_spent_feat);
+
 			pyra->scale[j+interval] = 0.5*pyra->scale[j];
 			if(j+interval+interval>=pyra->len)
 				break;

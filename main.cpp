@@ -10,9 +10,12 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <sys/time.h>
 
 #include <string.h>
 #include <math.h>
+
+#define millisecs(x) ((x).tv_sec*1000 + (x).tv_usec/1000)
 
 using std::ios;
 using std::cout;
@@ -29,6 +32,12 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
+extern struct timeval time_spent_feat;
+extern struct timeval time_spent_dgemv;
+extern struct timeval time_spent_dp;
+extern struct timeval time_spent_conv;
+extern struct timeval  time_spent_pyra;
+
 int main(int argc, char** argv){
 	image_t* img = NULL;
 	if(argc<2)
@@ -38,10 +47,21 @@ int main(int argc, char** argv){
 	//image_display(img,"test");
 	
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
+	timeval start_detect, end_detect, time_spent_detect;
+	gettimeofday(&start_detect, NULL);
 	vector<bbox_t> faces = facemodel_detect(img, model);
+
+	gettimeofday(&end_detect, NULL);
+	timersub(&end_detect, &start_detect,&time_spent_detect);
 
 	facemodel_delete(model);
 	image_delete(img);
+	cout<<"time_spent_feat: "<<millisecs(time_spent_feat)<<endl
+		<<"time_spent_dgemv: "<<millisecs(time_spent_dgemv)<<endl
+		<<"time_spent_conv: "<<millisecs(time_spent_conv)<<endl
+		<<"time_spent_pyra: "<<millisecs(time_spent_pyra)<<endl
+		<<"time_spent_dp: "<<millisecs(time_spent_dp)<<endl
+		<<"time_spent_detect: "<<millisecs(time_spent_detect)<<endl;
 
 	return 0;
 }
