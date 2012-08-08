@@ -285,6 +285,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 	vector<bbox_t> boxes;
 
 	/* build feature pyramid */
+	model->interval = 5;
 	facepyra_t* pyra = facepyra_create(img, model->interval, model->sbin, model->maxsize);
 
 	int minlevel = model->interval+1;
@@ -344,17 +345,19 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					slct.push_back(i);
 			}
 			
+			if(!slct.empty()) {
 			/* backtrack */
 			/* root */
 			int k0=boxes.size();
 			int newboxes_len = slct.size();
 			boxes.resize(k0+newboxes_len);
 			int* ptr = new int[numparts*newboxes_len];/*XXX*/
+			int padx = max(model->maxsize[1]-2,0);
+			int pady = max(model->maxsize[0]-2,0);
+			double scale;
 			for(int i=0;i<newboxes_len;i++){
-				ptr[i*numparts]=slct[i];
-				double scale = pyra->scale[rootpart->level];
-				int padx = max(model->maxsize[1]-2,0);
-				int pady = max(model->maxsize[0]-2,0);
+				ptr[i]=slct[i];
+				scale = pyra->scale[rootpart->level];
 				int y = slct[i]%rootpart->sizScore[0];
 				int x = (slct[i]-y)/rootpart->sizScore[0];
 				fbox_t tmpbox = {
@@ -364,17 +367,33 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					(y-1-pady+rootpart->sizy)*scale
 				};
 				boxes[k0+i].boxes.push_back(tmpbox);
+				boxes[k0+i].component = c;
+				boxes[k0+i].score = rootpart->score[slct[i]];
 			}
-			/*remaining parts TODO*/
-
+			/*remaining parts*/
+			for(k=1;k<numparts;k++){
+				facepart_t* tmppart = &(parts->at(k));
+				int par = tmppart->parent;
+				scale = pyra->scale[tmppart->level];
+				int x,y;
+				for(int i=0;i<newboxes_len;i++){
+					x = tmppart->Ix[ptr[par*newboxes_len+i]];
+					y = tmppart->Iy[ptr[par*newboxes_len+i]];
+					ptr[k*newboxes_len+i] = x*tmppart->sizScore[0]+y;
+					fbox_t tmpbox = {
+						(x-1-padx)*scale+1,
+						(y-1-pady)*scale+1,
+						(x-1-padx+tmppart->sizx)*scale,
+						(y-1-pady+tmppart->sizy)*scale
+					};
+					boxes[k0+i].boxes.push_back(tmpbox);
+				}
+			}
 
 			delete[] ptr;
-
-
+			}
 			/* find boxes following pointers */
-
-			/* XXX MORE CODE HERE, 
-			 */
+			
 
 			/* clean Ix Iy */
 			for(k=numparts-1;k>0;k--){

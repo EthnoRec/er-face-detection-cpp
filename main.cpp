@@ -33,19 +33,16 @@ int main(int argc, char** argv){
 	//image_t* img = image_readJPG(argv[1]);
 	image_t* img = image_readJPG("image/10081706_5.jpg");
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
+	model->interval = 5;
 	
-	//facepyra_t* pyra = facepyra_create(img,model->interval,model->sbin,model->maxsize);
-	//mat3d_ptr resp = eHconv(pyra->feat[0],model->filters,0,145);
-	//mat3d_delete(resp);
-	//facepyra_delete(pyra);
-	//vector<bbox_t> boxes = facemodel_detect(img, model);
-	
+	facepyra_t* pyra = facepyra_create(img,model->interval,model->sbin,model->maxsize);
+	mat3d_ptr resp = eHconv(pyra->feat[10],model->filters,0,145);
+	mat3d_delete(resp);
+	facepyra_delete(pyra);
+	vector<bbox_t> boxes = facemodel_detect(img, model);
 
 	facemodel_delete(model);
 	image_delete(img);
 
-	fbox_t a = {1.1, 2.2, 3.3, 4.4};
-	vector<fbox_t>b(10);
-	b.push_back({1,2,3,4});
 	return 0;
 }

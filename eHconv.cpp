@@ -106,6 +106,9 @@ mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int 
   int width = feats->sizx - filter_w + 1;
   assert(height>=1 && width>=1);
   mat3d_ptr resps= mat3d_alloc(height, width, filters.size());
+  /*XXX necessary? */
+  for(int i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
+	  resps->vals[i]=0;
 
   thread_data td;
   double* tmp_feats = new double[feats->sizy*feats->sizx*feats->sizz];
