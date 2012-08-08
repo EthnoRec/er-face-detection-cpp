@@ -310,7 +310,10 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					resp[level]=eHconv(pyra->feat[level], model->filters, 0, model->filters.size()-1);
 				}
 				parts->at(k).level = level;
-				parts->at(k).score = resp[level]->vals + fid*(resp[level]->sizy)*(resp[level]->sizx);
+				int len = (resp[level]->sizy)*(resp[level]->sizx);
+				parts->at(k).score = new double[len];
+				memcpy(parts->at(k).score,resp[level]->vals+fid*len,len*sizeof(double));
+				//parts->at(k).score = resp[level]->vals + fid*(resp[level]->sizy)*(resp[level]->sizx);
 				parts->at(k).sizScore[0] = resp[level]->sizy;
 				parts->at(k).sizScore[1] = resp[level]->sizx;
 			}
@@ -330,7 +333,12 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					msg = msg_cache;
 				child->Iy = new int[Ny*Nx];
 				child->Ix = new int[Ny*Nx];
-				eHshiftdt(msg,child->Ix,child->Iy,Nx,Ny,child->startx,child->starty,child->step,child->score,child->sizScore[1],child->sizScore[0],model->defs[child->defid].w);
+				eHshiftdt(msg,child->Ix,child->Iy,Nx,Ny,
+					child->startx,child->starty,
+					child->step,child->score,
+					child->sizScore[1],child->sizScore[0],
+					model->defs[child->defid].w
+					);
 				for(int i=0;i<Ny*Nx;i++)
 					parts->at(par).score[i]+=msg[i];
 				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
@@ -340,57 +348,57 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 			/* add bias to root score (const term) */
 			vector<int> slct; slct.reserve(10000);
 			for(int i=0;i<rootpart->sizScore[0]*rootpart->sizScore[1];i++) {
-				rootpart->score[i] += model->defs[0].w[0];
+				rootpart->score[i] += model->defs[rootpart->defid].w[0];
 				if(rootpart->score[i]>=thrs)
 					slct.push_back(i);
 			}
 			
 			if(!slct.empty()) {
 			/* backtrack */
-			/* root */
-			int k0=boxes.size();
-			int newboxes_len = slct.size();
-			boxes.resize(k0+newboxes_len);
-			int* ptr = new int[numparts*newboxes_len];/*XXX*/
-			int padx = max(model->maxsize[1]-2,0);
-			int pady = max(model->maxsize[0]-2,0);
-			double scale;
-			for(int i=0;i<newboxes_len;i++){
-				ptr[i]=slct[i];
-				scale = pyra->scale[rootpart->level];
-				int y = slct[i]%rootpart->sizScore[0];
-				int x = (slct[i]-y)/rootpart->sizScore[0];
-				fbox_t tmpbox = {
-					(x-1-padx)*scale+1,
-					(y-1-pady)*scale+1,
-					(x-1-padx+rootpart->sizx)*scale,
-					(y-1-pady+rootpart->sizy)*scale
-				};
-				boxes[k0+i].boxes.push_back(tmpbox);
-				boxes[k0+i].component = c;
-				boxes[k0+i].score = rootpart->score[slct[i]];
-			}
-			/*remaining parts*/
-			for(k=1;k<numparts;k++){
-				facepart_t* tmppart = &(parts->at(k));
-				int par = tmppart->parent;
-				scale = pyra->scale[tmppart->level];
-				int x,y;
+				/* root */
+				int k0=boxes.size();
+				int newboxes_len = slct.size();
+				boxes.resize(k0+newboxes_len);
+				int* ptr = new int[numparts*newboxes_len];/*XXX*/
+				int padx = max(model->maxsize[1]-2,0);
+				int pady = max(model->maxsize[0]-2,0);
+				double scale;
 				for(int i=0;i<newboxes_len;i++){
-					x = tmppart->Ix[ptr[par*newboxes_len+i]];
-					y = tmppart->Iy[ptr[par*newboxes_len+i]];
-					ptr[k*newboxes_len+i] = x*tmppart->sizScore[0]+y;
+					ptr[i]=slct[i];
+					scale = pyra->scale[rootpart->level];
+					int y = slct[i]%rootpart->sizScore[0];
+					int x = (slct[i]-y)/rootpart->sizScore[0];
 					fbox_t tmpbox = {
 						(x-1-padx)*scale+1,
 						(y-1-pady)*scale+1,
-						(x-1-padx+tmppart->sizx)*scale,
-						(y-1-pady+tmppart->sizy)*scale
+						(x-1-padx+rootpart->sizx)*scale,
+						(y-1-pady+rootpart->sizy)*scale
 					};
 					boxes[k0+i].boxes.push_back(tmpbox);
+					boxes[k0+i].component = c;
+					boxes[k0+i].score = rootpart->score[slct[i]];
 				}
-			}
+				/*remaining parts*/
+				for(k=1;k<numparts;k++){
+					facepart_t* tmppart = &(parts->at(k));
+					int par = tmppart->parent;
+					scale = pyra->scale[tmppart->level];
+					int x,y;
+					for(int i=0;i<newboxes_len;i++){
+						x = tmppart->Ix[ptr[par*newboxes_len+i]];
+						y = tmppart->Iy[ptr[par*newboxes_len+i]];
+						ptr[k*newboxes_len+i] = x*tmppart->sizScore[0]+y;
+						fbox_t tmpbox = {
+							(x-1-padx)*scale+1,
+							(y-1-pady)*scale+1,
+							(x-1-padx+tmppart->sizx)*scale,
+							(y-1-pady+tmppart->sizy)*scale
+						};
+						boxes[k0+i].boxes.push_back(tmpbox);
+					}
+				}
 
-			delete[] ptr;
+				delete[] ptr;
 			}
 			/* find boxes following pointers */
 			
@@ -400,6 +408,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 				facepart_t* child = &(parts->at(k));
 				delete[] child->Ix;
 				delete[] child->Iy;
+				delete[] child->score;
 			}
 
 		}
