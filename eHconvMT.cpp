@@ -23,9 +23,14 @@
 #include <string.h>
 #include <assert.h>
 #include <pthread.h>
-#include <sys/time.h>
 #include <vector>
 #include <iostream>
+
+//#define EH_USE_CACHE
+
+#define EH_CACHE_FILTERS_SIZE 120000
+#define EH_CACHE_FEATURE_SIZE 5120000
+#define EH_CACHE_FILTER_NUM 146
 
 using std::vector;
 using std::cerr;
@@ -35,13 +40,18 @@ extern "C" {
 #include "cblas.h"
 }
 
-extern timeval time_spent_dgemv;
-
 struct thread_data {
 	mat3d_t A;
 	mat3d_t B;
 	mat2d_t C;
 };
+
+#ifdef EH_USE_CACHE
+static double cache_filters[EH_CACHE_FILTERS_SIZE];
+static double cache_feature[EH_CACHE_FEATURE_SIZE];
+static struct thread_data cache_threadData[EH_CACHE_FILTER_NUM];
+static pthread_t cache_threads[EH_CACHE_FILTER_NUM];
+#endif
 
 /* reshape matrix
  * (Old)y x z ==> (F)z x y
@@ -93,12 +103,7 @@ void *process(void *thread_arg) {
       int lda = args->A.sizy;
       int incx = 1;
       int incy = 1;
-      timeval start_dgemv, end_dgemv, interval_dgemv;
-      gettimeofday(&start_dgemv,NULL);
       cblas_dgemv(CblasColMajor,CblasNoTrans, m, n, one, A_off, lda, B_off, incx, one, C_off, incy);
-      gettimeofday(&end_dgemv,NULL);
-      timersub(&end_dgemv,&start_dgemv,&interval_dgemv);
-      timeradd(&interval_dgemv,&time_spent_dgemv, &time_spent_dgemv);
     }
   }
   pthread_exit(NULL);
@@ -125,10 +130,32 @@ void *process(void *thread_arg) {
   for(int i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
 	  resps->vals[i]=0;
 
-  thread_data* td = new thread_data[len];
-  pthread_t* ts = new pthread_t[len];
-  double* tmp_feats = new double[feats->sizy*feats->sizx*feats->sizz];
-  double* tmp_filter = new double[filter_len*len];
+  thread_data* td;
+  pthread_t* ts;
+  double *tmp_filter, *tmp_feats;
+#ifdef EH_USE_CACHE
+  if(len > EH_CACHE_FILTER_NUM) {
+  	td = new thread_data[len];
+ 	ts = new pthread_t[len];
+  } else {
+  	td = cache_threadData;
+	ts = cache_threads;
+  }
+  if(feats->sizy*feats->sizx*feats->sizz > EH_CACHE_FEATURE_SIZE)
+	  tmp_feats = new double[feats->sizy*feats->sizx*feats->sizz];
+  else
+	  tmp_feats = cache_feature;
+  if(filter_len*len > EH_CACHE_FILTERS_SIZE)
+	  tmp_filter = new double[filter_len*len];
+  else
+	  tmp_filter = cache_filters;
+#else
+  	td = new thread_data[len];
+ 	ts = new pthread_t[len];
+	tmp_feats = new double[feats->sizy*feats->sizx*feats->sizz];
+	tmp_filter = new double[filter_len*len];
+#endif
+
   prepare_map(tmp_feats,feats->vals,feats->sizy,feats->sizx,feats->sizz);
 
   for (int i = 0; i < len; i++) {
@@ -150,16 +177,26 @@ void *process(void *thread_arg) {
 		  cerr<<"Error creating thread!"<<endl;
 		  break;
 	  }
-	  //process((void *)&td[i]);
   }
   void* status;
   for (int i=0;i<len;i++){
 	  pthread_join(ts[i],&status);
   }
-  delete[] tmp_feats;
+#ifdef EH_USE_CACHE 
+  if(feats->sizy*feats->sizx*feats->sizz > EH_CACHE_FEATURE_SIZE)
+	  delete[] tmp_feats;
+  if(filter_len*len > EH_CACHE_FILTERS_SIZE)
+	  delete[] tmp_filter;
+  if(len > EH_CACHE_FILTER_NUM) {
+  	delete[] td;
+  	delete[] ts;
+  }
+#else
   delete[] tmp_filter;
+  delete[] tmp_feats;
   delete[] td;
   delete[] ts;
+#endif
   return resps;
 }
 

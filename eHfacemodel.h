@@ -15,6 +15,8 @@
 #include "eHimage.h"
 #include "eHbbox.h"
 
+#define EH_TEST_TIMER
+
 using std::vector;
 
 typedef struct filter {
