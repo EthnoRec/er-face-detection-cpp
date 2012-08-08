@@ -23,3 +23,9 @@ void bbox_calcOut(bbox_t* bbox){
 	bbox->area = max(0,(bbox->outer.x2-bbox->outer.x1))
 		*max(0,(bbox->outer.y2-bbox->outer.y1));
 }
+
+void bbox_clipboxes(bbox_t& bbox, const int* imsize) {
+	for(int i = 0;i<bbox.boxes.size();i++) {
+		box_clip(bbox.boxes[i], imsize);
+	}
+}

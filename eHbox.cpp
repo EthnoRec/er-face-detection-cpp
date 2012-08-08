@@ -22,3 +22,10 @@ double intersect_area(const fbox_t box1, const fbox_t box2) {
 	double h = max(0,min(box1.y2,box2.y2)-max(box1.y1,box2.y1));
 	return w*h;
 }
+
+void box_clip(fbox_t& box, const int* imsize) {
+	box.x1 = max(0, box.x1);
+	box.y1 = max(0, box.y1);
+	box.x2 = min(imsize[1]-1, box.x2);
+	box.y2 = min(imsize[0]-1, box.y2);
+}

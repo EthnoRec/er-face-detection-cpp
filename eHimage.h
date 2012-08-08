@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <string>
 
 /* Basic color image data structure
  * default 3 channels: ch[0]=b ch[1]=g ch[2]=r
@@ -39,6 +40,11 @@ void image_delete(image_ptr);
  */
 image_ptr image_readJPG(const char* filename);
 
+/*
+ * Display an image
+ */
+void image_display(const image_ptr img, const std::string& winname);
+	
 /*
  * Resize image to given scale
  */

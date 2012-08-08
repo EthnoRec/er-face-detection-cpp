@@ -27,4 +27,6 @@ void setbox(ibox_t*, int x1, int y1, int x2, int y2);
 
 double intersect_area(const fbox_t box1, const fbox_t box2);
 
+void box_clip(fbox_t& box, const int* imsize);
+
 #endif

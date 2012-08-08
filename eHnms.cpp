@@ -20,7 +20,7 @@ using std::list;
 
 bool compare_score(bbox_t a, bbox_t b) {return (a.score>b.score);}
 
-void nms(vector<bbox_t>& bboxes, double overlap) {
+void eHnms(vector<bbox_t>& bboxes, double overlap) {
 	if (bboxes.empty())
 		return ;
 	/* sort bboxes according to score */
@@ -37,7 +37,7 @@ void nms(vector<bbox_t>& bboxes, double overlap) {
 
 	/* use list for frequent removal */
 	list<bbox_t> lsbboxes(bboxes.begin(),bboxes.end());
-	list<bbox_t>::iterator iter_l1, iter_l2;
+	list<bbox_t>::iterator iter_l1, iter_l2, iter_tmp;
 	double intersect;
 	iter_l1 = lsbboxes.begin();
 	while(iter_l1!=lsbboxes.end()){
@@ -46,7 +46,10 @@ void nms(vector<bbox_t>& bboxes, double overlap) {
 		while(iter_l2!=lsbboxes.end()){
 			intersect = intersect_area(iter_l1->outer, iter_l2->outer);
 			if((intersect/iter_l1->area)>overlap || (intersect/iter_l2->area)>overlap) {
+				iter_tmp = iter_l2;
+				iter_tmp++;
 				lsbboxes.erase(iter_l2);
+				iter_l2 = iter_tmp;
 				continue;
 			}
 			iter_l2++;

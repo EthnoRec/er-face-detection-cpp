@@ -26,4 +26,9 @@ typedef struct eHbbox {
  */
 void bbox_calcOut(bbox_t*);
 
+/*
+ * clip the boxes to image boundary
+ */
+void bbox_clipboxes(bbox_t& bbox, const int* imsize);
+
 #endif
