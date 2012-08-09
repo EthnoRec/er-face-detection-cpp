@@ -26,4 +26,7 @@ typedef struct eHfilter {
  */
 mat3d_ptr filterv_apply(const vector<filter_t> filters, const mat3d_ptr feats, int start, int end);
 
+/* Single thread version */
+mat3d_ptr filterv_apply_ST(const vector<filter_t> filters, const mat3d_ptr feats, int start, int end);
+
 #endif
