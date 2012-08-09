@@ -6,13 +6,12 @@
  */
 #include "eHfeatpyramid.h"
 #include "eHmatrix.h"
+#include "eHimageFeature.h"
 #include <math.h>
 
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
-
-mat3d_ptr eHhog(const image_ptr img, int sbin);
 
 facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate) {
 	facepyra_t* pyra = new facepyra_t;
