@@ -37,8 +37,7 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 		int lenx, int leny, int offx, int offy, int dstep, 
 		double* vals, int sizx, int sizy, 
 		double* w);
-mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end);
-void eHnms(vector<bbox_t>& bboxes, double overlap);
+mat3d_ptr eHconv(const mat3d_ptr feats, const vector<filter_t> filters, int start, int end);
 
 #ifdef EH_TEST_TIMER
 timeval time_spent_pyra;
@@ -83,12 +82,12 @@ facemodel_t* facemodel_parseXml(char* xmlstr) {
 	int* tmp_int_ptr;	
 	double* tmp_double_ptr;
 
-	/* model->filters : vector<facefilter_t> */
+	/* model->filters : vector<filter_t> */
 	int num_filters = strtol(filters->first_attribute("num")->value(),NULL,10);
 	xml_node<>* filter = filters->first_node("filter");
 	xml_node<>* filter_i = filter->first_node("i");
 	xml_node<>* filter_w = filter->first_node("w");
-	facefilter_t tmp_facefilter;
+	filter_t tmp_facefilter;
 		/*1st filter*/
 	tmp_facefilter.i = strtol(filter_i->value(),NULL,10);
 	field_width = -1;
@@ -466,7 +465,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 
 	for (int i=0; i<boxes.size(); i++)
 		bbox_clipboxes(boxes[i],imsize);
-	eHnms(boxes, 0.3);
+	bboxv_nms(boxes, 0.3);
 
 #ifdef EH_TEST_TIMER
 	gettimeofday(&end_detect,NULL);

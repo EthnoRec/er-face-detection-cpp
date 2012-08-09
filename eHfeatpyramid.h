@@ -20,7 +20,7 @@ typedef struct eHfeatpyramid {
 	int imx;
 } facepyra_t;
 
-facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize);
+facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate=true);
 
 void facepyra_delete(facepyra_t* pyra);
 

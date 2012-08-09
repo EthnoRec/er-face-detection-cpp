@@ -14,7 +14,7 @@ static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) 
 
 mat3d_ptr eHhog(const image_ptr img, int sbin);
 
-facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize) {
+facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate) {
 	facepyra_t* pyra = new facepyra_t;
 
 	/* select padding, allowing for one cell in model to be visible
@@ -26,26 +26,39 @@ facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const in
 	int min_level = floor(log((double)min(im->sizy,im->sizx)/(5.0*sbin))/log(sc));
 	image_t* scaled;
 	image_t* tmp;
-	pyra->len = min_level+interval+1;
+	pyra->len = min_level+1;
+	if(hallucinate) pyra->len += interval;
 	pyra->feat = new mat3d_ptr[pyra->len];
 	pyra->scale = new double[pyra->len];
 	for(int i=0;i<interval;i++) {
 		/* first 2 octave */
 		scaled = image_resize(im,(1.0/pow(sc,i)));
-		pyra->feat[i]=eHhog(scaled, sbin/2);
-		pyra->scale[i]=2.0/pow(sc,i);
-		pyra->feat[i+interval] = eHhog(scaled,sbin);
-		pyra->scale[i+interval] = 1.0/pow(sc,i);
+		if(hallucinate) {
+			pyra->feat[i]=eHhog(scaled, sbin/2);
+			pyra->scale[i]=2.0/pow(sc,i);
+			pyra->feat[i+interval] = eHhog(scaled,sbin);
+			pyra->scale[i+interval] = 1.0/pow(sc,i);
+		} else {
+			pyra->feat[i] = eHhog(scaled,sbin);
+			pyra->scale[i] = 1.0/pow(sc,i);
+		}
 
 		/* remaining octaves */
 		for (int j=i+interval;; j+=interval){
 			tmp = image_reduce(scaled);
 			image_delete(scaled);
 			scaled = tmp;
-			pyra->feat[j+interval] = eHhog(scaled,sbin);
-			pyra->scale[j+interval] = 0.5*pyra->scale[j];
-			if(j+interval+interval>=pyra->len)
-				break;
+			if(hallucinate) {
+				pyra->feat[j+interval] = eHhog(scaled,sbin);
+				pyra->scale[j+interval] = 0.5*pyra->scale[j];
+				if(j+interval+interval>=pyra->len)
+					break;
+			} else {
+				pyra->feat[j] = eHhog(scaled, sbin);
+				pyra->scale[j] = 0.5*pyra->scale[j];
+				if(j+interval>=pyra->len)
+					break;
+			}
 		}
 	}
 

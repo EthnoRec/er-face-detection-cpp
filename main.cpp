@@ -22,7 +22,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end);
+mat3d_ptr eHconv(const mat3d_ptr feats, const vector<filter_t> filters, int start, int end);
 mat3d_ptr eHhog(const image_ptr img, int sbin);
 void eHshiftdt(double* M, int* Ix, int* Iy, 
 		int lenx, int leny, int offx, int offy, int dstep, 

@@ -13,16 +13,12 @@
 #include <vector>
 #include "eHmatrix.h"
 #include "eHimage.h"
+#include "eHfilter.h"
 #include "eHbbox.h"
 
 #define EH_TEST_TIMER
 
 using std::vector;
-
-typedef struct filter {
-	int i;
-	mat3d_t w;
-} facefilter_t;
 
 typedef struct deformation {
 	int i;
@@ -57,7 +53,7 @@ typedef struct part {
  * modification
  */
 typedef struct eHfacemodel {
-	vector<facefilter_t> filters;
+	vector<filter_t> filters;
 	vector<facedef_t> defs;
 	vector<vector<facepart_t> > components;
 	int maxsize[2];

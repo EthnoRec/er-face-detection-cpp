@@ -21,12 +21,12 @@ typedef struct eHbox_i {
 	int y2;
 } ibox_t;
 
-void setbox(fbox_t*, double x1, double y1, double x2, double y2);
+void fbox_set(fbox_t*, double x1, double y1, double x2, double y2);
 
-void setbox(ibox_t*, int x1, int y1, int x2, int y2);
+void ibox_set(ibox_t*, int x1, int y1, int x2, int y2);
 
-double intersect_area(const fbox_t box1, const fbox_t box2);
+double fbox_interArea(const fbox_t& box1, const fbox_t& box2);
 
-void box_clip(fbox_t& box, const int* imsize);
+void fbox_clip(fbox_t& box, const int* imsize);
 
 #endif

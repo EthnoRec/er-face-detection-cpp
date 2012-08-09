@@ -1,5 +1,6 @@
 /*
  * eHutils.h
+ * Some useful stuff (string parsing etc. )
  *
  * Hang Su
  * 2012-08 @ eH

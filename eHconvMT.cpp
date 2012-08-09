@@ -18,7 +18,7 @@
  * 2012-08 @ eH
  */
 #include "eHmatrix.h"
-#include "eHfacemodel.h"
+#include "eHfilter.h"
 #include <math.h>
 #include <string.h>
 #include <assert.h>
@@ -113,8 +113,8 @@ void *process(void *thread_arg) {
  * entry point
  * resp = eHconv(A, cell of B, start, end);
  */
- mat3d_ptr eHconv(const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
- //void  eHconv(vector<mat2d_ptr>& resps, const mat3d_ptr feats, const vector<facefilter_t> filters, int start, int end) {
+ mat3d_ptr eHconv(const mat3d_ptr feats, const vector<filter_t> filters, int start, int end) {
+ //void  eHconv(vector<mat2d_ptr>& resps, const mat3d_ptr feats, const vector<filter_t> filters, int start, int end) {
 
   int len = end-start+1;
   int filter_h = filters[0].w.sizy;
