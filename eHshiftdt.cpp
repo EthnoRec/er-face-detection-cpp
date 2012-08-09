@@ -13,6 +13,7 @@
 #define EH_MAX_LEN 800
 #include <math.h>
 #include "eHmatrix.h"
+#include "eHshiftdt.h"
 
 //#define EH_USE_CACHE
 
@@ -33,8 +34,14 @@ static int tmpIy_pre[EH_MAX_LEN*EH_MAX_LEN];
 void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen, 
 		double a, double b, int dshift, double dstep, int dlen);
 
+/* wrapper for default setting */
+void eHshiftdt(double* M, int* Ix, int* Iy, 
+		const double* vals, int sizx, int sizy, 
+		const double* w) {
+	eHshiftdt(M, Ix, Iy, sizx, sizy, 0, 0, 1, vals, sizx, sizy, w);
+}
+
 /*
- * entry point
  * NOTE: M, Ix, Iy should already be allocated before passed in, 
  * they are then modified as output results
  * M, Ix, Iy, vals - column first order
@@ -96,24 +103,6 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 	delete[] tmpM;
 	delete[] tmpIy;
 #endif
-}
-
-/* wrapper using matrix data structures */
-void eHshiftdt(mat2d_ptr matM, int* Ix, int* Iy, 
-		int offx, int offy, int dstep, 
-		mat2d_ptr score, double * w) { 
-		//double ax, double bx, double ay, double by) {
-	eHshiftdt(matM->vals, Ix, Iy, 
-			matM->sizx, matM->sizy, offx, offy, dstep, 
-			score->vals, score->sizx, score->sizy, 
-			w);
-}
-
-/* wrapper for default setting */
-void eHshiftdt(double* M, int* Ix, int* Iy, 
-		const double* vals, int sizx, int sizy, 
-		const double* w) {
-	eHshiftdt(M, Ix, Iy, sizx, sizy, 0, 0, 1, vals, sizx, sizy, w);
 }
 
 void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen, 

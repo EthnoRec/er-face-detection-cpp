@@ -7,6 +7,7 @@
 #include "eHfacemodel.h"
 #include "eHfeatpyramid.h"
 #include "eHfilter.h" 
+#include "eHshiftdt.h"
 #include "eHutils.h"
 
 #include "rapidxml-1.13/rapidxml.hpp"
@@ -33,11 +34,6 @@ static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 
 static double msg_cache[EH_MAX_LEN*EH_MAX_LEN];
-
-void eHshiftdt(double* M, int* Ix, int* Iy, 
-		int lenx, int leny, int offx, int offy, int dstep, 
-		const double* vals, int sizx, int sizy, 
-		const double* w);
 
 #ifdef EH_TEST_TIMER
 timeval time_spent_pyra;
