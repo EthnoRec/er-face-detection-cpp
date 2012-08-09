@@ -241,8 +241,8 @@ facemodel_t* facemodel_parseXml(char* xmlstr) {
 	/* additional fields (not from file) */
 	facepart_t* part_ptr;
 	int par, ax, ay, ds, step, virtpady, virtpadx;
-	for (int i=0;i<model->components.size();i++){
-		for (int j=0; j<model->components[i].size();j++) {
+	for (unsigned i=0;i<model->components.size();i++){
+		for (unsigned j=0; j<model->components[i].size();j++) {
 			part_ptr = &(model->components[i][j]);
 			part_ptr->sizy = model->filters[part_ptr->filterid].w.sizy;
 			part_ptr->sizx = model->filters[part_ptr->filterid].w.sizx;
@@ -256,7 +256,7 @@ facemodel_t* facemodel_parseXml(char* xmlstr) {
 				assert(j==0);
 				part_ptr->scale = 0;
 			}
-			assert(par<j);
+			assert(par<(int)j);
 			/* amount of (virtual) padding to hallucinate */
 			if (ds==0) step = 1;else
 				step = int(pow(2.0,(double)ds));
@@ -314,15 +314,14 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 	timeradd(&interval_pyra,&time_spent_pyra, &time_spent_pyra);
 #endif
 
-	int minlevel = model->interval+1;
 	mat3d_ptr* resp = new mat3d_ptr[pyra->len];
 	memset(resp, 0, pyra->len*sizeof(mat3d_ptr));
 
  	/* index changed from matlab 0-1 style to C style:
 	 * 	level
 	 */
-	int c, rlevel, k; /* component#, root level, part# */
-	for(c=0;c<model->components.size();c++){
+	int rlevel, k; /* root level, part# */
+	for(unsigned c=0;c<model->components.size();c++){
 		vector<facepart_t>* parts = &(model->components[c]);
 		int numparts = parts->size();
 		for(rlevel=model->interval;rlevel<pyra->len;rlevel++){
@@ -459,7 +458,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 	delete[] resp;
 	facepyra_delete(pyra);
 
-	for (int i=0; i<boxes.size(); i++)
+	for (unsigned i=0; i<boxes.size(); i++)
 		bbox_clipboxes(boxes[i],imsize);
 	bboxv_nms(boxes, 0.3);
 
@@ -472,14 +471,14 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 	/*testing code: display outer bbox*/
 	using namespace cv;
 	Mat M(img->sizy,img->sizx,CV_8UC3);
-	for(int y=0;y<img->sizy;y++) {
-		for(int x=0;x<img->sizx;x++) {
+	for(unsigned y=0;y<img->sizy;y++) {
+		for(unsigned x=0;x<img->sizx;x++) {
 			M.at<Vec3b>(y,x)[0]=img->ch[0][y+x*img->sizy];
 			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
 			M.at<Vec3b>(y,x)[2]=img->ch[2][y+x*img->sizy];
 		}
 	}
-	for(int i=0;i<boxes.size();i++){
+	for(unsigned i=0;i<boxes.size();i++){
 		int x1 = (int)boxes[i].outer.x1;
 		int y1 = (int)boxes[i].outer.y1;
 		int w = (int)boxes[i].outer.x2 - x1;
@@ -496,7 +495,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 void facemodel_delete(facemodel_t* model) {
 	/* because filters[i].w.vals was allocated inside parseCSV2double, 
 	 * it should be released manually */
-	for(int i=0;i<model->filters.size();i++)
+	for(unsigned i=0;i<model->filters.size();i++)
 		delete[] model->filters[i].w.vals;
 	delete model;
 }

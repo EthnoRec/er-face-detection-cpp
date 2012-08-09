@@ -36,8 +36,8 @@ image_ptr image_readJPG(const char* filename) {
 		return NULL;
 	}
 	image_ptr im = image_alloc(img.size().height, img.size().width);
-	for(int y=0;y<im->sizy;y++) {
-		for(int x=0;x<im->sizx;x++) {
+	for(unsigned y=0;y<im->sizy;y++) {
+		for(unsigned x=0;x<im->sizx;x++) {
 			im->ch[0][y+x*im->sizy]=img.at<Vec3b>(y,x).val[0];
 			im->ch[1][y+x*im->sizy]=img.at<Vec3b>(y,x).val[1];
 			im->ch[2][y+x*im->sizy]=img.at<Vec3b>(y,x).val[2];
@@ -50,8 +50,8 @@ image_ptr image_readJPG(const char* filename) {
 void image_display(const image_ptr img, const std::string& winname) {
 	using namespace cv;
 	Mat M(img->sizy,img->sizx,CV_8UC3);
-	for(int y=0;y<img->sizy;y++) {
-		for(int x=0;x<img->sizx;x++) {
+	for(unsigned int y=0;y<img->sizy;y++) {
+		for(unsigned int x=0;x<img->sizx;x++) {
 			M.at<Vec3b>(y,x)[0]=img->ch[0][y+x*img->sizy];
 			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
 			M.at<Vec3b>(y,x)[2]=img->ch[2][y+x*img->sizy];
@@ -91,7 +91,7 @@ void resize1dtran(image_ptr src, size_t sheight,
 	int len = (int)ceil(dheight*invscale) + 2*dheight;
 	alphainfo ofs[len];
 	int k = 0;
-	for (int dy=0;dy<dheight;dy++) {
+	for (unsigned dy=0;dy<dheight;dy++) {
 		double fsy1 = dy * invscale;
 		double fsy2 = fsy1 + invscale;
 		int sy1 = (int)ceil(fsy1);
@@ -105,14 +105,14 @@ void resize1dtran(image_ptr src, size_t sheight,
 		}
 		for (int sy = sy1;sy<sy2;sy++) {
 			assert(k<len);
-			assert(sy<sheight);
+			assert(sy<(int)sheight);
 			ofs[k].di = dy*width;
 			ofs[k].si = sy;
 			ofs[k++].alpha = scale;
 		}
 		if(fsy2-sy2 > 1e-3) {
 			assert(k<len);
-			assert(sy2<sheight);
+			assert(sy2<(int)sheight);
 			ofs[k].di = dy*width;
 			ofs[k].si = sy2;
 			ofs[k++].alpha = (fsy2-sy2)*scale;
@@ -120,7 +120,7 @@ void resize1dtran(image_ptr src, size_t sheight,
 	}
 	for (int nch = 0; nch<3; nch++) {
 		memset(dst->ch[nch], 0, width*dheight*sizeof(double));
-		for (int x = 0; x<width; x++) {
+		for (unsigned x = 0; x<width; x++) {
 			double *s = src->ch[nch] + x*sheight;
 			double *d = dst->ch[nch] + x;
 			alphacopy(s,d,ofs,k);
@@ -155,7 +155,7 @@ void reduce1dtran(image_ptr src, size_t sheight,
 	double *s, *d;
 	for (int nch = 0; nch<3; nch++) {
 		memset(dst->ch[nch], 0, width*dheight*sizeof(double));
-		for (int x = 0; x<width; x++) {
+		for (unsigned x = 0; x<width; x++) {
 			s = src->ch[nch] + x*sheight;
 			d = dst->ch[nch] + x;
 
@@ -163,7 +163,7 @@ void reduce1dtran(image_ptr src, size_t sheight,
 			*d = s[0]*0.6875 + s[1]*0.2500 + s[2]*0.0625;
 			
 			/* middle rows */
-			for (int y = 1; y<dheight-2;y++) {
+			for (unsigned y = 1; y<dheight-2;y++) {
 				s += 2;
 				d += width;
 				*d = s[-2]*0.0625 + s[-1]*0.25 + s[0]*0.375 

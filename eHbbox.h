@@ -39,6 +39,6 @@ void bbox_clipboxes(bbox_t& bbox, const int* imsize);
  * Greedily select high-scoring detections and skip detections that are 
  * significantly coverd by a previously selected detection
  */
-void bboxv_nms(vector<bbox_t>& bboxes, double overlap, int prune = EH_BBOXS_PRUNE);
+void bboxv_nms(vector<bbox_t>& bboxes, double overlap, unsigned prune = EH_BBOXS_PRUNE);
 
 #endif

@@ -45,9 +45,10 @@ static pthread_t cache_threads[EH_CACHE_FILTER_NUM];
  * NOTE: result is stored in F, which should be allocated already
  */
 double *prepare_filter(double* F, double* Old, size_t sizy, size_t sizx, size_t sizz) {  
-	for (int f = 0; f < sizz; f++) {
-		for (int x = 0; x < sizx; x++) {
-			for (int y = 0; y < sizy; y++) {
+	unsigned f, x, y;
+	for (f = 0; f < sizz; f++) {
+		for (x = 0; x < sizx; x++) {
+			for (y = 0; y < sizy; y++) {
 				F[f + x*(sizz) + y*(sizx*sizz)] =  
 					Old[y + x*sizy + f*(sizy*sizx)];
 			}
@@ -61,9 +62,10 @@ double *prepare_filter(double* F, double* Old, size_t sizy, size_t sizx, size_t 
  * NOTE: result is stored in F, which should be allocated already
  */
 double *prepare_map(double* F, double* Old, size_t sizy, size_t sizx, size_t sizz) {  
-	for (int f = 0; f < sizz; f++) {
-		for (int x = 0; x < sizx; x++) {
-			for (int y = 0; y < sizy; y++) {
+	unsigned f, x, y;
+	for (f = 0; f < sizz; f++) {
+		for (x = 0; x < sizx; x++) {
+			for (y = 0; y < sizy; y++) {
 				F[y + f*sizy + x*(sizy*sizz)] =  
 					Old[y + x*sizy + f*(sizy*sizx)];
 			}
@@ -79,8 +81,8 @@ void *process(void *thread_arg) {
   double *B = args->B.vals;
   double *C = args->C.vals;
 
-  for (int x = 0; x < args->C.sizx; x++) {
-    for (int y = 0; y < args->B.sizz; y++) {
+  for (unsigned x = 0; x < args->C.sizx; x++) {
+    for (unsigned y = 0; y < args->B.sizz; y++) {
       double *A_off = A + x*(args->A.sizy*args->A.sizx) + y;
       double *B_off = B + y*(args->B.sizy*args->B.sizx);
       double *C_off = C + x*(args->C.sizy);
@@ -103,18 +105,19 @@ void *process(void *thread_arg) {
 mat3d_ptr filterv_apply(const vector<filter_t> filters, const mat3d_ptr feats, int start, int end) {
  //void  eHconv(vector<mat2d_ptr>& resps, const mat3d_ptr feats, const vector<filter_t> filters, int start, int end) {
 
-  int len = end-start+1;
+  unsigned len = end-start+1;
+  assert(end>=start);
+  assert(len<=filters.size());
   int filter_h = filters[0].w.sizy;
   int filter_w = filters[0].w.sizx;
   int filter_z = filters[0].w.sizz;
   int filter_len = filter_h*filter_w*filter_z;
-  assert(len<=filters.size());
   int height = feats->sizy - filter_h + 1;
   int width = feats->sizx - filter_w + 1;
   assert(height>=1 && width>=1);
   mat3d_ptr resps= mat3d_alloc(height, width, filters.size());
   /*XXX necessary */
-  for(int i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
+  for(unsigned i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
 	  resps->vals[i]=0;
 
   thread_data* td;
@@ -145,7 +148,7 @@ mat3d_ptr filterv_apply(const vector<filter_t> filters, const mat3d_ptr feats, i
 
   prepare_map(tmp_feats,feats->vals,feats->sizy,feats->sizx,feats->sizz);
 
-  for (int i = 0; i < len; i++) {
+  for (unsigned i = 0; i < len; i++) {
 	  td[i].A.vals = tmp_feats;
 	  td[i].A.sizy = feats->sizy;
 	  td[i].A.sizx = feats->sizz;
@@ -166,7 +169,7 @@ mat3d_ptr filterv_apply(const vector<filter_t> filters, const mat3d_ptr feats, i
 	  }
   }
   void* status;
-  for (int i=0;i<len;i++){
+  for (unsigned i=0;i<len;i++){
 	  pthread_join(ts[i],&status);
   }
 #ifdef EH_USE_CACHE 
@@ -193,8 +196,8 @@ void *process_ST(void *thread_arg) {
   double *B = args->B.vals;
   double *C = args->C.vals;
 
-  for (int x = 0; x < args->C.sizx; x++) {
-    for (int y = 0; y < args->B.sizz; y++) {
+  for (unsigned x = 0; x < args->C.sizx; x++) {
+    for (unsigned y = 0; y < args->B.sizz; y++) {
       double *A_off = A + x*(args->A.sizy*args->A.sizx) + y;
       double *B_off = B + y*(args->B.sizy*args->B.sizx);
       double *C_off = C + x*(args->C.sizy);
@@ -207,20 +210,22 @@ void *process_ST(void *thread_arg) {
       cblas_dgemv(CblasColMajor,CblasNoTrans, m, n, one, A_off, lda, B_off, incx, one, C_off, incy);
     }
   }
+  return NULL;
 }
 
 mat3d_ptr filterv_apply_ST(const vector<filter_t> filters, const mat3d_ptr feats, int start, int end) {
-  int len = end-start+1;
+  unsigned len = end-start+1;
+  assert(end>=start);
+  assert(len<=filters.size());
   int filter_h = filters[0].w.sizy;
   int filter_w = filters[0].w.sizx;
   int filter_z = filters[0].w.sizz;
-  assert(len<=filters.size());
   int height = feats->sizy - filter_h + 1;
   int width = feats->sizx - filter_w + 1;
   assert(height>=1 && width>=1);
   mat3d_ptr resps= mat3d_alloc(height, width, filters.size());
   /*XXX necessary? */
-  for(int i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
+  for(unsigned i=0;i<resps->sizx*resps->sizy*resps->sizz;i++)
 	  resps->vals[i]=0;
 
   thread_data td;
@@ -228,7 +233,7 @@ mat3d_ptr filterv_apply_ST(const vector<filter_t> filters, const mat3d_ptr feats
   double* tmp_filter = new double[filter_h*filter_w*filter_z];
   prepare_map(tmp_feats,feats->vals,feats->sizy,feats->sizx,feats->sizz);
 
-  for (int i = 0; i < len; i++) {
+  for (unsigned i = 0; i < len; i++) {
 	  td.A.vals = tmp_feats;
 	  td.A.sizy = feats->sizy;
 	  td.A.sizx = feats->sizz;

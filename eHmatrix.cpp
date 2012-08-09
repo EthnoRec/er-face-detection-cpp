@@ -39,7 +39,7 @@ void mat3d_pad(mat3d_ptr mat, const size_t* pad, double pad_val) {
 	size_t newz = mat->sizz+pad[2]*2;
 	double* vals_new = new double[newy*newx*newz];
 
-	int yy, xx, zz;
+	unsigned yy, xx, zz;
 	bool pady, padx, padz;
 	for(yy=0;yy<newy;yy++){
 		if(yy<pad[0] || yy>=mat->sizy+pad[0])
@@ -73,7 +73,7 @@ void mat3d_pad(mat3d_ptr mat, const size_t* pad, double pad_val) {
 }
 
 void  mat3d_fill(mat3d_ptr mat, const size_t* start, const size_t* width, double fill_val){
-	int yy, xx, zz;
+	unsigned yy, xx, zz;
 	for (yy=start[0];yy<start[0]+width[0];yy++)
 		for (xx=start[1];xx<start[1]+width[1];xx++)
 			for (zz=start[2];zz<start[2]+width[2];zz++)
@@ -85,7 +85,7 @@ matkd_ptr matkd_alloc(size_t k, size_t* sizs) {
 	mat->k = k;
 	mat->siz = new size_t[k];
 	int len = 1;
-	for (int i=0;i<k;i++) {
+	for (unsigned i=0;i<k;i++) {
 		len*=sizs[i];
 		mat->siz[i]=sizs[i];
 	}

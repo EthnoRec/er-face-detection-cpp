@@ -37,14 +37,14 @@ void bbox_calcOut(bbox_t* bbox){
 }
 
 void bbox_clipboxes(bbox_t& bbox, const int* imsize) {
-	for(int i = 0;i<bbox.boxes.size();i++) {
+	for(unsigned i = 0;i<bbox.boxes.size();i++) {
 		fbox_clip(bbox.boxes[i], imsize);
 	}
 }
 
 bool compare_score(bbox_t a, bbox_t b) {return (a.score>b.score);}
 
-void bboxv_nms(vector<bbox_t>& bboxes, double overlap, int prune) {
+void bboxv_nms(vector<bbox_t>& bboxes, double overlap, unsigned prune) {
 	if (bboxes.empty())
 		return ;
 	/* sort bboxes according to score */
