@@ -4878,7 +4878,7 @@
    </components>
    <maxsize size="5, 5"/>
    <len val="119601"/>
-   <interval val="10"/>
+   <interval val="5"/>
    <sbin val="4"/>
    <delta val="0.27624"/>
    <thresh val="0.99543"/>

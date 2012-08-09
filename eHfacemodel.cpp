@@ -287,7 +287,17 @@ facemodel_t* facemodel_readFromFile(const char* filepath) {
 	return model;
 }
 
-vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double thrs) {
+/* local data storage for message passing */
+struct facepart_data {
+	double* score;
+	int* Ix;
+	int* Iy;
+	int sizScore[2];
+	int sizI[2];
+	int level;
+};
+
+vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, double thrs) {
 	vector<bbox_t> boxes;
 
 #ifdef 	EH_TEST_TIMER
@@ -300,7 +310,6 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 #endif
 
 	/* build feature pyramid */
-	model->interval = 5;
 	int imsize[] = {img->sizy, img->sizx};
 
 #ifdef EH_TEST_TIMER
@@ -322,11 +331,13 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 	 */
 	int rlevel, k; /* root level, part# */
 	for(unsigned c=0;c<model->components.size();c++){
-		vector<facepart_t>* parts = &(model->components[c]);
+		const vector<facepart_t>* parts = &(model->components[c]);
 		int numparts = parts->size();
+		vector<facepart_data> parts_data;
+		parts_data.resize(numparts);
 		for(rlevel=model->interval;rlevel<pyra->len;rlevel++){
-			facepart_t* rootpart = &(parts->at(0));
-
+			const facepart_t* rootpart = &(parts->at(0));
+			facepart_data* rootpart_data = &(parts_data.at(0));
 			/* local part scores */
 			for(k=0;k<numparts;k++){
 				int fid = parts->at(k).filterid;
@@ -343,12 +354,12 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					timeradd(&interval_conv,&time_spent_conv,&time_spent_conv);
 #endif
 				}
-				parts->at(k).level = level;
+				parts_data.at(k).level = level;
 				int len = (resp[level]->sizy)*(resp[level]->sizx);
-				parts->at(k).score = new double[len];
-				memcpy(parts->at(k).score,resp[level]->vals+fid*len,len*sizeof(double));
-				parts->at(k).sizScore[0] = resp[level]->sizy;
-				parts->at(k).sizScore[1] = resp[level]->sizx;
+				parts_data.at(k).score = new double[len];
+				memcpy(parts_data.at(k).score,resp[level]->vals+fid*len,len*sizeof(double));
+				parts_data.at(k).sizScore[0] = resp[level]->sizy;
+				parts_data.at(k).sizScore[1] = resp[level]->sizx;
 			}
 #ifdef EH_TEST_TIMER
 			timeval start_dp, end_dp, interval_dp;
@@ -356,36 +367,37 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 #endif
 			/* part relations - tree message passing */
 			for(k=numparts-1;k>0;k--){
-				facepart_t* child = &(parts->at(k));
+				const facepart_t* child = &(parts->at(k));
+				facepart_data* child_data = &(parts_data.at(k));
 				int par = child->parent;
-				int Ny = parts->at(par).sizScore[0];
-				int Nx = parts->at(par).sizScore[1];
+				int Ny = parts_data.at(par).sizScore[0];
+				int Nx = parts_data.at(par).sizScore[1];
 				/* assume all filters are of the same size */
-				assert(Ny == child->sizScore[0] && Nx == child->sizScore[1]);
+				assert(Ny == child_data->sizScore[0] && Nx == child_data->sizScore[1]);
 				double* msg;
 				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
 					msg = new double[Nx*Ny];
 				else
 					msg = msg_cache;
-				child->Iy = new int[Ny*Nx];
-				child->Ix = new int[Ny*Nx];
-				eHshiftdt(msg,child->Ix,child->Iy,Nx,Ny,
+				child_data->Iy = new int[Ny*Nx];
+				child_data->Ix = new int[Ny*Nx];
+				eHshiftdt(msg,child_data->Ix,child_data->Iy,Nx,Ny,
 					child->startx,child->starty,
-					child->step,child->score,
-					child->sizScore[1],child->sizScore[0],
+					child->step,child_data->score,
+					child_data->sizScore[1],child_data->sizScore[0],
 					model->defs[child->defid].w
 					);
 				for(int i=0;i<Ny*Nx;i++)
-					parts->at(par).score[i]+=msg[i];
+					parts_data.at(par).score[i]+=msg[i];
 				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
 					delete[] msg;
 			}
 			
 			/* add bias to root score (const term) */
 			vector<int> slct; slct.reserve(10000);
-			for(int i=0;i<rootpart->sizScore[0]*rootpart->sizScore[1];i++) {
-				rootpart->score[i] += model->defs[rootpart->defid].w[0];
-				if(rootpart->score[i]>=thrs)
+			for(int i=0;i<rootpart_data->sizScore[0]*rootpart_data->sizScore[1];i++) {
+				rootpart_data->score[i] += model->defs[rootpart->defid].w[0];
+				if(rootpart_data->score[i]>=thrs)
 					slct.push_back(i);
 			}
 			
@@ -401,9 +413,9 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 				double scale;
 				for(int i=0;i<newboxes_len;i++){
 					ptr[i]=slct[i];
-					scale = pyra->scale[rootpart->level];
-					int y = slct[i]%rootpart->sizScore[0];
-					int x = (slct[i]-y)/rootpart->sizScore[0];
+					scale = pyra->scale[rootpart_data->level];
+					int y = slct[i]%rootpart_data->sizScore[0];
+					int x = (slct[i]-y)/rootpart_data->sizScore[0];
 					fbox_t tmpbox = {
 						(x-padx)*scale,
 						(y-pady)*scale,
@@ -412,18 +424,19 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					};
 					boxes[k0+i].boxes.push_back(tmpbox);
 					boxes[k0+i].component = c;
-					boxes[k0+i].score = rootpart->score[slct[i]];
+					boxes[k0+i].score = rootpart_data->score[slct[i]];
 				}
 				/*remaining parts*/
 				for(k=1;k<numparts;k++){
-					facepart_t* tmppart = &(parts->at(k));
+					const facepart_t* tmppart = &(parts->at(k));
+					facepart_data* tmppart_data = &(parts_data.at(k));
 					int par = tmppart->parent;
-					scale = pyra->scale[tmppart->level];
+					scale = pyra->scale[tmppart_data->level];
 					int x,y;
 					for(int i=0;i<newboxes_len;i++){
-						x = tmppart->Ix[ptr[par*newboxes_len+i]];
-						y = tmppart->Iy[ptr[par*newboxes_len+i]];
-						ptr[k*newboxes_len+i] = x*tmppart->sizScore[0]+y;
+						x = tmppart_data->Ix[ptr[par*newboxes_len+i]];
+						y = tmppart_data->Iy[ptr[par*newboxes_len+i]];
+						ptr[k*newboxes_len+i] = x*tmppart_data->sizScore[0]+y;
 						fbox_t tmpbox = {
 							(x-padx)*scale,
 							(y-pady)*scale,
@@ -444,7 +457,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 
 			/* clean Ix Iy score */
 			for(k=numparts-1;k>0;k--){
-				facepart_t* child = &(parts->at(k));
+				facepart_data* child = &(parts_data.at(k));
 				delete[] child->Ix;
 				delete[] child->Iy;
 				delete[] child->score;
