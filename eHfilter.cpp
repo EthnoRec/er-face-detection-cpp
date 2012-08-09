@@ -1,23 +1,10 @@
 /*
- * eHconvMT.cpp
+ * eHfilter.cpp
  *
- * Convolve a feature map with a set of filters
- * Multithreaded version
- * usage:
- * 	mat3d_ptr resps = 
- * 	eHconv(mat3d_ptr feats, matkd_ptr filters, int start, int end) 
- * 	feats - feature map 
- * 	filters - a set of part filters
- * 	start, end - range of filters used
- * NOTE: 
- * 	(1)all matrices/images are in column-major style (as in Fortran & Matlab)
- * 	(2)mat3d_ptr resps is allocated inside, proper delete is necessary after use
- * 	(3)cblas library is required
  *
  * Hang Su
  * 2012-08 @ eH
  */
-#include "eHmatrix.h"
 #include "eHfilter.h"
 #include <math.h>
 #include <string.h>
@@ -111,9 +98,9 @@ void *process(void *thread_arg) {
 
 /*
  * entry point
- * resp = eHconv(A, cell of B, start, end);
+ * resp = eHconv(cell of B, A, start, end);
  */
- mat3d_ptr eHconv(const mat3d_ptr feats, const vector<filter_t> filters, int start, int end) {
+mat3d_ptr filterv_apply(const vector<filter_t> filters, const mat3d_ptr feats, int start, int end) {
  //void  eHconv(vector<mat2d_ptr>& resps, const mat3d_ptr feats, const vector<filter_t> filters, int start, int end) {
 
   int len = end-start+1;
@@ -199,5 +186,4 @@ void *process(void *thread_arg) {
 #endif
   return resps;
 }
-
 

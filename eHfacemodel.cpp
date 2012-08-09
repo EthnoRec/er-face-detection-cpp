@@ -6,6 +6,7 @@
  */
 #include "eHfacemodel.h"
 #include "eHfeatpyramid.h"
+#include "eHfilter.h" 
 #include "eHutils.h"
 
 #include "rapidxml-1.13/rapidxml.hpp"
@@ -37,7 +38,6 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 		int lenx, int leny, int offx, int offy, int dstep, 
 		double* vals, int sizx, int sizy, 
 		double* w);
-mat3d_ptr eHconv(const mat3d_ptr feats, const vector<filter_t> filters, int start, int end);
 
 #ifdef EH_TEST_TIMER
 timeval time_spent_pyra;
@@ -341,7 +341,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, facemodel_t* model, double 
 					timeval start_conv, end_conv, interval_conv;
 					gettimeofday(&start_conv,NULL);
 #endif
-					resp[level]=eHconv(pyra->feat[level], model->filters, 0, model->filters.size()-1);
+					resp[level]=filterv_apply(model->filters, pyra->feat[level], 0, model->filters.size()-1);
 #ifdef EH_TEST_TIMER
 					gettimeofday(&end_conv,NULL);
 					timersub(&end_conv,&start_conv,&interval_conv);
