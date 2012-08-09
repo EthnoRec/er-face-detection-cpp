@@ -30,7 +30,7 @@ static int tmpIy_pre[EH_MAX_LEN*EH_MAX_LEN];
  * result is on an shifted, subsampled grid
  * used by eHshiftdt()
  */
-void dt1d(double* src, double* dst, int* ptr, int sstep, int slen, 
+void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen, 
 		double a, double b, int dshift, double dstep, int dlen);
 
 /*
@@ -41,8 +41,8 @@ void dt1d(double* src, double* dst, int* ptr, int sstep, int slen,
  */
 void eHshiftdt(double* M, int* Ix, int* Iy, 
 		int lenx, int leny, int offx, int offy, int dstep, 
-		double* vals, int sizx, int sizy, 
-		double* w) {
+		const double* vals, int sizx, int sizy, 
+		const double* w) {
 		//double ax, double bx, double ay, double by) {
 	/*
 	 * Calculation is performed as 1-d transforms in 2 steps
@@ -82,11 +82,9 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 	}
 
 	/* get argmins */
-	for (int x=0; x<lenx; x++) {
-		for (int y=0; y<leny; y++) {
-			int p = x*leny+y;
-			Iy[p] = tmpIy[Ix[p]*leny+y];
-		}
+	for (int p=0; p<leny*lenx; p++){
+		int y = p%leny;
+		Iy[p] = tmpIy[Ix[p]*leny+y];
 	}
 
 #ifdef EH_USE_CACHE
@@ -111,7 +109,14 @@ void eHshiftdt(mat2d_ptr matM, int* Ix, int* Iy,
 			w);
 }
 
-void dt1d(double* src, double* dst, int* ptr, int sstep, int slen, 
+/* wrapper for default setting */
+void eHshiftdt(double* M, int* Ix, int* Iy, 
+		const double* vals, int sizx, int sizy, 
+		const double* w) {
+	eHshiftdt(M, Ix, Iy, sizx, sizy, 0, 0, 1, vals, sizx, sizy, w);
+}
+
+void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen, 
 		double a, double b, int dshift, double dstep, int dlen) {
 #ifdef EH_USE_CACHE
 	int* v;

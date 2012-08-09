@@ -36,8 +36,8 @@ static double msg_cache[EH_MAX_LEN*EH_MAX_LEN];
 
 void eHshiftdt(double* M, int* Ix, int* Iy, 
 		int lenx, int leny, int offx, int offy, int dstep, 
-		double* vals, int sizx, int sizy, 
-		double* w);
+		const double* vals, int sizx, int sizy, 
+		const double* w);
 
 #ifdef EH_TEST_TIMER
 timeval time_spent_pyra;

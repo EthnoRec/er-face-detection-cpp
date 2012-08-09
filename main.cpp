@@ -1,35 +1,16 @@
 #include "eHimage.h"
-#include "eHmatrix.h"
-#include "eHutils.h"
 #include "eHfacemodel.h"
-#include "eHfeatpyramid.h"
-#include "eHbox.h"
-
-#include "rapidxml-1.13/rapidxml.hpp"
+#include "eHbbox.h"
 
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <sys/time.h>
 
-#include <string.h>
-#include <math.h>
-
 #define millisecs(x) ((x).tv_sec*1000 + (x).tv_usec/1000)
 
-using std::ios;
 using std::cout;
 using std::endl;
 using std::vector;
-
-mat3d_ptr eHhog(const image_ptr img, int sbin);
-void eHshiftdt(double* M, int* Ix, int* Iy, 
-		int lenx, int leny, int offx, int offy, int dstep, 
-		double* vals, int sizx, int sizy, 
-		double ax, double bx, double ay, double by);
-	
-
-static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
 #ifdef EH_TEST_TIMER
 extern struct timeval time_spent_dp;
