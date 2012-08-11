@@ -18,10 +18,10 @@ typedef struct eHfeatpyramid {
 	int interval;
 	int imy;
 	int imx;
-} facepyra_t;
+} featpyra_t;
 
-facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate=true);
+featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate=true);
 
-void facepyra_delete(facepyra_t* pyra);
+void featpyra_delete(featpyra_t* pyra);
 
 #endif

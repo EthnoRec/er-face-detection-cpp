@@ -6,7 +6,7 @@
  */
 #include "eHfacemodel.h"
 #include "eHfeatpyramid.h"
-#include "eHfilter.h" 
+#include "eHmatrix.h"
 #include "eHshiftdt.h"
 #include "eHutils.h"
 
@@ -14,7 +14,6 @@
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
 
-#include <vector>
 #include <iostream>
 #include <fstream>
 
@@ -26,7 +25,6 @@
 
 #define EH_MAX_LEN 800
 
-using std::vector;
 using std::ifstream;
 using std::ios;
 
@@ -46,21 +44,21 @@ timeval time_spent_detect;
  * can get higher speed
  *
  * index changed from matlab 0-1 style to C style:
- *  - def.anchor[0] XXX 
- *  - def.anchor[1] XXX
+ *  - def.anchor[0] 
+ *  - def.anchor[1]
  *  - part.defid 
  *  - part.filterid
  *  - part.parent 
  * index NOT changed from matlab style:
- *  - filter.i XXX
- *  - def.i XXX
+ *  - filter.i
+ *  - def.i
  */
 facemodel_t* facemodel_parseXml(char* xmlstr) {
 	using namespace rapidxml;
 	facemodel_t* model = new facemodel_t;
 	xml_document<> doc;
 	doc.parse<0>(xmlstr);
-	xml_node<>* root = doc.first_node();
+	xml_node<>* root = doc.first_node("facemodel");
 
 	/* first level nodes */
 	xml_node<>* filters = root->first_node("filters");
@@ -297,7 +295,10 @@ struct facepart_data {
 	int level;
 };
 
-vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, double thrs) {
+vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img) {
+	return facemodel_detect(model, img, model->thresh);
+}
+vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, double thrs) {
 	vector<bbox_t> boxes;
 
 #ifdef 	EH_TEST_TIMER
@@ -316,7 +317,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, d
 	timeval start_pyra, end_pyra, interval_pyra;
 	gettimeofday(&start_pyra,NULL);
 #endif
-	facepyra_t* pyra = facepyra_create(img, model->interval, model->sbin, model->maxsize);
+	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize);
 #ifdef EH_TEST_TIMER
 	gettimeofday(&end_pyra,NULL);
 	timersub(&end_pyra,&start_pyra,&interval_pyra);
@@ -469,7 +470,7 @@ vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, d
 	for(int i=0;i<pyra->len;i++)
 		if(resp[i]!=NULL) mat3d_delete(resp[i]);
 	delete[] resp;
-	facepyra_delete(pyra);
+	featpyra_delete(pyra);
 
 	for (unsigned i=0; i<boxes.size(); i++)
 		bbox_clipboxes(boxes[i],imsize);

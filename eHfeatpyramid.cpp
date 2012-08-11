@@ -13,8 +13,8 @@ static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
-facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate) {
-	facepyra_t* pyra = new facepyra_t;
+featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate) {
+	featpyra_t* pyra = new featpyra_t;
 
 	/* select padding, allowing for one cell in model to be visible
 	 * Even padding allows for consistent spatial relations across 2X scales */
@@ -91,7 +91,7 @@ facepyra_t* facepyra_create(const image_ptr im, int interval, int sbin, const in
 	return pyra;
 }
 
-void facepyra_delete(facepyra_t* pyra) {
+void featpyra_delete(featpyra_t* pyra) {
 	for (int i=0;i<pyra->len;i++) {
 		mat3d_delete(pyra->feat[i]);
 	}

@@ -11,7 +11,6 @@
 #define EHFACEMODEL_H
 
 #include <vector>
-#include "eHmatrix.h"
 #include "eHimage.h"
 #include "eHfilter.h"
 #include "eHbbox.h"
@@ -20,17 +19,17 @@
 
 using std::vector;
 
-typedef struct deformation {
+typedef struct deformation_face {
 	int i;
 	int anchor[3]; /*ax ay ds*/
 	double w[4]; /*only 1st is used for root*/
 } facedef_t;
 
-typedef struct part {
+typedef struct part_face {
 	int defid;
 	int filterid;
 	int parent;
-	/*infos not directly from file*/
+	/* infos not directly from file */
 	int sizy;
 	int sizx;
 	int scale;
@@ -70,8 +69,10 @@ facemodel_t* facemodel_readFromFile(const char* filepath);
 
 /*
  * Detection
+ * First one take thrs as an input, second use the value in model
  */
-vector<bbox_t> facemodel_detect(const image_ptr img, const facemodel_t* model, double thrs = -0.65);
+vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, double thrs);
+vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img);
 
 /*
  * Delete a face model, release related memory

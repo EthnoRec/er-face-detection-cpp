@@ -4881,6 +4881,6 @@
    <interval val="5"/>
    <sbin val="4"/>
    <delta val="0.27624"/>
-   <thresh val="0.99543"/>
+   <thresh val="-0.65"/>
    <obj val="0.22304"/>
 </facemodel>
