@@ -4,6 +4,8 @@
  * Hang Su
  * 2012-08 @ eH
  */
+#define EH_INF 1E20
+
 #include "eHposemodel.h"
 #include "eHfeatpyramid.h"
 #include "eHmatrix.h"
@@ -267,12 +269,125 @@ posemodel_t* posemodel_readFromFile(const char* filepath) {
 	return model;
 }
 
+/* local data storage for message passing */
+struct posepart_data {
+	double *score; 
+	int* Iy;
+	int* Ix;
+	int* Ik;
+	int sizScore[3];
+	int sizI[3]; /*same as parent's sizScore*/
+	int level;
+};
+
 vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, double thrs){
 	vector<bbox_t> boxes;
 	int imsize[] = {img->sizy, img->sizx};
 	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize, false);
+	mat3d_ptr* resp = new mat3d_ptr[pyra->len];
+	memset(resp, 0, pyra->len*sizeof(mat3d_ptr));
 	
-	/*TODO */
+	int numparts = model->parts.size();
+	vector<posepart_data> parts_data;
+	parts_data.resize(numparts);
+	for(int rlevel=0; rlevel<pyra->len; rlevel++) {
+		const posepart_t* rootpart = &(model->parts[0]);
+		posepart_data* rootpart_data = &(parts_data[0]);
+
+		/* Compute local scores */
+		for(int k=0;k<numparts;k++) {
+			int level = rlevel-model->parts[k].scale*model->interval;
+			int numtypes = model->parts[k].num;
+			if(resp[level]==NULL) {
+				resp[level] = filterv_apply(model->filters, pyra->feat[level], 0, model->filters.size()-1);
+			}
+			/*assume all filters are of the same size*/
+			int len = (resp[level]->sizy)*(resp[level]->sizx);
+			parts_data.at(k).score = new double[len*numtypes];
+			for(int i=0;i<numtypes;i++) {
+				memcpy(parts_data[k].score + i*len, 
+						resp[level]->vals+model->parts[k].filterid[i]*len, 
+						len*sizeof(double));
+			}
+			parts_data[k].sizScore[0]=resp[level]->sizy;
+			parts_data[k].sizScore[1]=resp[level]->sizx;
+			parts_data[k].sizScore[2]=numtypes;
+			parts_data[k].level = level;
+		}
+
+		/*again, assume all filters are of the same size*/
+		int Ny = parts_data[0].sizScore[0];
+		int Nx = parts_data[0].sizScore[1];
+		/* part relations - tree message passing */
+		double *score0, *msg;
+		int *Ix0, *Iy0;
+		for(int p=numparts-1;p>0;p--) {
+			const posepart_t* child = &(model->parts[p]);
+			posepart_data* child_data = &(parts_data[p]);
+			int par = child->parent;
+			int numtypes = child->num;
+			int numtypes_par = child->numpar;
+			msg = new double[Ny*Nx*numtypes_par];
+			child_data->Iy = new int[Ny*Nx*numtypes_par];
+			child_data->Ix = new int[Ny*Nx*numtypes_par];
+			child_data->Ik = new int[Ny*Nx*numtypes_par];
+			score0 = new double[Ny*Nx*numtypes];
+			Ix0 = new int[Ny*Nx*numtypes];
+			Iy0 = new int[Ny*Nx*numtypes];
+			for(int k=0;k<numtypes;k++) {
+				eHshiftdt(score0+k*Ny*Nx,Ix0+k*Ny*Nx,Iy0+k*Ny*Nx,
+						Nx,Ny,child->startx[k],child->starty[k],child->step,
+						child_data->score+k*Ny*Nx,Nx,Ny,
+						model->defs[child->defid[k]].w);
+			}
+			/*at each parent location, for each mixture 1:L, find best child*/
+			for(int l=0;l<model->parts[par].num;l++){
+				for(int i=0;i<Ny*Nx;i++){
+					double tmp_max = -EH_INF;
+					int tmp_argmax = -1;
+					for(int j=0;j<numtypes;j++) {
+						if(score0[j*Ny*Nx+i]+model->biases[j*numtypes_par+l].w>tmp_max) {
+							tmp_max = score0[j*Ny*Nx+i]+model->biases[j*numtypes_par+l].w;
+							tmp_argmax = j;
+						}
+					}
+					msg[l*Ny*Nx+i]=tmp_max;
+					child_data->Ik[l*Ny*Nx+i]=tmp_argmax;
+					child_data->Iy[l*Ny*Nx+i]=Iy0[tmp_argmax*Ny*Nx+i];
+					child_data->Ix[l*Ny*Nx+i]=Ix0[tmp_argmax*Ny*Nx+i];
+				}
+			}
+			for(int i=0;i<Ny*Nx*numtypes_par;i++)
+				parts_data[par].score[i]+=msg[i];
+			delete[] score0;
+			delete[] Ix0;
+			delete[] Iy0;
+			delete[] msg;
+
+		}
+
+		/*TODO add bias*/
+		/*TODO backtrack*/
+		/* clean Ix Iy Iz */
+		for(int p=numparts-1;p>0;p--) {
+			posepart_data* child = &(parts_data[p]);
+			delete[] child->Ik;
+			delete[] child->Iy;
+			delete[] child->Ix;
+		}
+
+	}
+	
+	/* released allocated memory */
+	for(int i=0; i<pyra->len; i++) 
+		if(resp[i]!=NULL) mat3d_delete(resp[i]);
+	delete[] resp;
+	featpyra_delete(pyra);
+	
+	/* clip boxes within image and do non-maximum suppression */
+	for(unsigned i=0; i<boxes.size(); i++)
+		bbox_clipboxes(boxes[i], imsize);
+	bboxv_nms(boxes,0.1,1000);
 	return boxes;
 }
 vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img) {

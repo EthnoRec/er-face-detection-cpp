@@ -31,7 +31,9 @@ using std::ios;
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 
+#ifdef EH_USE_CACHE
 static double msg_cache[EH_MAX_LEN*EH_MAX_LEN];
+#endif
 
 #ifdef EH_TEST_TIMER
 timeval time_spent_pyra;
@@ -376,10 +378,14 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 				/* assume all filters are of the same size */
 				assert(Ny == child_data->sizScore[0] && Nx == child_data->sizScore[1]);
 				double* msg;
+#ifdef EH_USE_CACHE
 				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
 					msg = new double[Nx*Ny];
 				else
 					msg = msg_cache;
+#else
+				msg = new double[Nx*Ny];
+#endif
 				child_data->Iy = new int[Ny*Nx];
 				child_data->Ix = new int[Ny*Nx];
 				eHshiftdt(msg,child_data->Ix,child_data->Iy,Nx,Ny,
@@ -390,7 +396,9 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 					);
 				for(int i=0;i<Ny*Nx;i++)
 					parts_data.at(par).score[i]+=msg[i];
+#ifdef EH_USE_CACHE
 				if(Nx*Ny>EH_MAX_LEN*EH_MAX_LEN)
+#endif
 					delete[] msg;
 			}
 			
