@@ -12,14 +12,16 @@
 #include <math.h>
 #include <string>
 
-/* Basic color image data structure
- * default 3 channels: ch[0]=b ch[1]=g ch[2]=r
- * pixel values encoded in vectors, with column major (Fortran) style
+/* Basic image data structure
+ * default rgb : ch[0]=r ch[1]=g ch[2]=b
+ * Using column major (Fortran) style
  */
 typedef struct eHimage {
+	double* data;
 	double* ch[3];
 	size_t sizy;
 	size_t sizx;
+	size_t nchannel;
 } image_t;
 typedef image_t* image_ptr;
 
@@ -27,7 +29,7 @@ typedef image_t* image_ptr;
  * Allocation of a new image of size [sizy, sizx]
  * Returned image is not zeroed
  */
-image_ptr image_alloc(size_t sizy, size_t sizx);
+image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch = 3);
 
 /*
  * Delete image and associated memory

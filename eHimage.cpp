@@ -7,28 +7,61 @@
 #include "eHimage.h"
 #include <assert.h>
 #include <string.h>
+
+//#include "CImg-1.5.0/CImg.h"
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
 static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
-image_ptr image_alloc(size_t sizy, size_t sizx){
+image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch){
 	image_ptr img = new struct eHimage;
 	img->sizy = sizy;
 	img->sizx = sizx;
-	img->ch[0] = new double[sizy*sizx];
-	img->ch[1] = new double[sizy*sizx];
-	img->ch[2] = new double[sizy*sizx];
+	img->nchannel = nch;
+	img->data = new double[sizy*sizx*nch];
+	for(unsigned i=0;i<nch;i++) {
+		img->ch[i] = img->data + i*sizy*sizx;
+	}
 	return img;
 }
 
 void image_delete(image_ptr img){
-	delete[] img->ch[0];
-	delete[] img->ch[1];
-	delete[] img->ch[2];
+	delete[] img->data;
 	delete img;
 }
 
+/*
+image_ptr image_readColorImage(const char* filename) {
+	using namespace cimg_library;
+	CImg<unsigned char> img(filename);
+	assert(img.spectrum()==3);
+	image_ptr im = image_alloc(img.height(),img.width());
+	for(int y=0;y<img.height();y++){
+		for(int x=0;x<img.width();x++){
+			im->ch[0][y+x*img.height()] = (double)*img.data(x,y,0);
+			im->ch[1][y+x*img.height()] = (double)*img.data(x,y,1);
+			im->ch[2][y+x*img.height()] = (double)*img.data(x,y,2);
+		}
+	}
+	return im;
+}
+
+cimg_library::CImgDisplay* image_display(const image_ptr img, const char* winname) {
+
+	using namespace cimg_library;
+	CImg<unsigned char> im(img->sizx,img->sizy,1,3);
+	for (int y=0; y<im.height();y++) {
+		for(int x=0;x<im.width();y++) {
+			*im.data(x,y,0) = (unsigned char)img->ch[0][y+x*img->sizy];
+			*im.data(x,y,1) = (unsigned char)img->ch[1][y+x*img->sizy];
+			*im.data(x,y,2) = (unsigned char)img->ch[2][y+x*img->sizy];
+		}
+	}
+	CImgDisplay* dispwin = new CImgDisplay(im,winname);
+	return dispwin;
+}
+*/
 image_ptr image_readJPG(const char* filename) {
 	using namespace cv;
 	Mat img = imread(filename, 1);
@@ -38,9 +71,9 @@ image_ptr image_readJPG(const char* filename) {
 	image_ptr im = image_alloc(img.size().height, img.size().width);
 	for(unsigned y=0;y<im->sizy;y++) {
 		for(unsigned x=0;x<im->sizx;x++) {
-			im->ch[0][y+x*im->sizy]=img.at<Vec3b>(y,x).val[0];
+			im->ch[0][y+x*im->sizy]=img.at<Vec3b>(y,x).val[2];
 			im->ch[1][y+x*im->sizy]=img.at<Vec3b>(y,x).val[1];
-			im->ch[2][y+x*im->sizy]=img.at<Vec3b>(y,x).val[2];
+			im->ch[2][y+x*im->sizy]=img.at<Vec3b>(y,x).val[0];
 		}
 	}
 
@@ -52,9 +85,9 @@ void image_display(const image_ptr img, const std::string& winname) {
 	Mat M(img->sizy,img->sizx,CV_8UC3);
 	for(unsigned int y=0;y<img->sizy;y++) {
 		for(unsigned int x=0;x<img->sizx;x++) {
-			M.at<Vec3b>(y,x)[0]=img->ch[0][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->sizy];
 			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
-			M.at<Vec3b>(y,x)[2]=img->ch[2][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->sizy];
 		}
 	}
 	namedWindow(winname, CV_WINDOW_AUTOSIZE);

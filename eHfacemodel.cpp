@@ -496,9 +496,9 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 	Mat M(img->sizy,img->sizx,CV_8UC3);
 	for(unsigned y=0;y<img->sizy;y++) {
 		for(unsigned x=0;x<img->sizx;x++) {
-			M.at<Vec3b>(y,x)[0]=img->ch[0][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->sizy];
 			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
-			M.at<Vec3b>(y,x)[2]=img->ch[2][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->sizy];
 		}
 	}
 	for(unsigned i=0;i<boxes.size();i++){
