@@ -59,6 +59,7 @@ featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const in
 					break;
 			}
 		}
+		image_delete(scaled);
 	}
 
 	size_t  pad[] = {pady+1, padx+1, 0};

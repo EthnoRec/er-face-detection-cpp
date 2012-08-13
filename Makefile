@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-O3 -Wall
-#CFLAGS =-Wall -g
+#CFLAGS=-O3 -Wall
+CFLAGS =-O0 -Wall -g
 LDFLAGS_BLAS=-L /usr/lib64/atlas-sse3/ -lptcblas
 #LDFLAGS_BLAS=-lblas
 LDFLAGS_OPENCV=-lopencv_core -lopencv_highgui

@@ -29,12 +29,13 @@ int main(int argc, char** argv){
 	//image_display(img,"test");
 	
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
-	posemodel_t* posemodel = posemodel_readFromFile("pose_BUFFY.xml");
+	//posemodel_t* posemodel = posemodel_readFromFile("pose_BUFFY.xml");
 
 	vector<bbox_t> faces = facemodel_detect(model,img);
+	//vector<bbox_t> poses = posemodel_detect(posemodel,img);
 
 	facemodel_delete(model);
-	posemodel_delete(posemodel);
+	//posemodel_delete(posemodel);
 	image_delete(img);
 #ifdef EH_TEST_TIMER
 	cout<<"time_spent_detect: "<<millisecs(time_spent_detect)<<" ms"<<endl

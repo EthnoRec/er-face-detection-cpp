@@ -16,7 +16,7 @@ mat2d_ptr mat2d_alloc(size_t sizy, size_t sizx) {
 
 void mat2d_delete(mat2d_ptr mat) {
 	delete[] mat->vals;
-	delete[] mat;
+	delete mat;
 }
 
 mat3d_ptr mat3d_alloc(size_t sizy, size_t sizx, size_t sizz) {
@@ -30,7 +30,7 @@ mat3d_ptr mat3d_alloc(size_t sizy, size_t sizx, size_t sizz) {
 
 void mat3d_delete(mat3d_ptr mat) {
 	delete[] mat->vals;
-	delete[] mat;
+	delete mat;
 }
 
 void mat3d_pad(mat3d_ptr mat, const size_t* pad, double pad_val) {
@@ -96,6 +96,6 @@ matkd_ptr matkd_alloc(size_t k, size_t* sizs) {
 void matkd_delete(matkd_ptr mat) {
 	delete[] mat->siz;
 	delete[] mat->vals;
-	delete[] mat;
+	delete mat;
 }
 

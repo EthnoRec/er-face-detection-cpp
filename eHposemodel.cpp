@@ -346,8 +346,8 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 					double tmp_max = -EH_INF;
 					int tmp_argmax = -1;
 					for(int j=0;j<numtypes;j++) {
-						if(score0[j*Ny*Nx+i]+model->biases[j*numtypes_par+l].w>tmp_max) {
-							tmp_max = score0[j*Ny*Nx+i]+model->biases[j*numtypes_par+l].w;
+						if(score0[j*Ny*Nx+i]+model->biases[child->biasid[j*numtypes_par+l]].w>tmp_max) {
+							tmp_max = score0[j*Ny*Nx+i]+model->biases[child->biasid[j*numtypes_par+l]].w;
 							tmp_argmax = j;
 						}
 					}
@@ -363,18 +363,94 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 			delete[] Ix0;
 			delete[] Iy0;
 			delete[] msg;
-
 		}
 
-		/*TODO add bias*/
-		/*TODO backtrack*/
+		/* add bias */
+		double rootbias = model->biases[rootpart->biasid[0]].w;
+		double* rscore = new double[Ny*Nx];
+		int* rIk = new int[Ny*Nx];
+		vector<int> slct; slct.reserve(10000);
+		for(int i=0;i<Ny*Nx;i++){
+			double tmp_max=-EH_INF;
+			int tmp_argmax=-1;
+			for (int j=0;j<rootpart->num;j++) {
+				rootpart_data->score[j*Ny*Nx+i] += rootbias;
+				if(rootpart_data->score[j*Ny*Nx+i]>tmp_max) {
+					tmp_max = rootpart_data->score[j*Ny*Nx+i];
+					tmp_argmax = j;
+				}
+			}
+			rscore[i] = tmp_max;
+			rIk[i] = tmp_argmax;
+			if(tmp_max>=thrs)
+				slct.push_back(i);
+		}
+
+		/* backtrack */
+		if(!slct.empty()) {
+			/* root */
+			int k0=boxes.size();
+			int newboxes_len = slct.size();
+			boxes.resize(k0+newboxes_len);
+			int* ptr = new int[numparts*newboxes_len];/*XXX*/
+			int padx = max(model->maxsize[1]-2,0);
+			int pady = max(model->maxsize[0]-2,0);
+			double scale;
+			for(int i=0;i<newboxes_len;i++){
+				//ptr[i]=slct[i];
+				scale = pyra->scale[rootpart_data->level];
+				int y = slct[i]%Ny;
+				int x = (slct[i]-y)/Ny;
+				int mix = rIk[slct[i]];
+				ptr[i] = mix*Ny*Nx+slct[i];
+				fbox_t tmpbox = {
+					(x-padx)*scale,
+					(y-pady)*scale,
+					(x-padx+rootpart->sizx[mix])*scale-1,
+					(y-pady+rootpart->sizy[mix])*scale-1
+				};
+				boxes[k0+i].boxes.push_back(tmpbox);
+				boxes[k0+i].component = 1; /* only 1 component for pose model */
+				boxes[k0+i].score = rscore[slct[i]];
+			}
+			/*remaining parts*/
+			for(int k=1;k<numparts;k++){
+				const posepart_t* tmppart = &(model->parts[k]);
+				posepart_data* tmppart_data = &(parts_data[k]);
+				int par = tmppart->parent;
+				scale = pyra->scale[tmppart_data->level];
+				int x,y,mix;
+				for(int i=0;i<newboxes_len;i++){
+					x = tmppart_data->Ix[ptr[par*newboxes_len+i]];
+					y = tmppart_data->Iy[ptr[par*newboxes_len+i]];
+					mix = tmppart_data->Ik[ptr[par*newboxes_len+i]];
+					ptr[k*newboxes_len+i] = mix*Ny*Nx+x*Ny+y;
+					fbox_t tmpbox = {
+						(x-padx)*scale,
+						(y-pady)*scale,
+						(x-padx+tmppart->sizx[mix])*scale-1,
+						(y-pady+tmppart->sizy[mix])*scale-1
+					};
+					boxes[k0+i].boxes.push_back(tmpbox);
+				}
+			}
+
+			delete[] ptr;
+		}
+
+		/* TODO code here */
+
 		/* clean Ix Iy Iz */
 		for(int p=numparts-1;p>0;p--) {
 			posepart_data* child = &(parts_data[p]);
 			delete[] child->Ik;
 			delete[] child->Iy;
 			delete[] child->Ix;
+			delete[] child->score;
 		}
+		delete[] parts_data[0].score;
+		delete[] rscore;
+		delete[] rIk;
 
 	}
 	
@@ -388,6 +464,28 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 	for(unsigned i=0; i<boxes.size(); i++)
 		bbox_clipboxes(boxes[i], imsize);
 	bboxv_nms(boxes,0.1,1000);
+
+	/*testing code: display outer bbox*/
+	using namespace cv;
+	Mat M(img->sizy,img->sizx,CV_8UC3);
+	for(unsigned y=0;y<img->sizy;y++) {
+		for(unsigned x=0;x<img->sizx;x++) {
+			M.at<Vec3b>(y,x)[0]=img->ch[0][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[2]=img->ch[2][y+x*img->sizy];
+		}
+	}
+	for(unsigned i=0;i<boxes.size();i++){
+		int x1 = (int)boxes[i].outer.x1;
+		int y1 = (int)boxes[i].outer.y1;
+		int w = (int)boxes[i].outer.x2 - x1;
+		int h = (int)boxes[i].outer.y2 - y1;
+		rectangle(M, Rect(x1,y1,w,h),Scalar(0,255,0));
+	}
+	namedWindow("test", CV_WINDOW_AUTOSIZE);
+	imshow("test",M);
+	waitKey();
+
 	return boxes;
 }
 vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img) {

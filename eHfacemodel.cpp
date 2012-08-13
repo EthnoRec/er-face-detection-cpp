@@ -410,8 +410,8 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 					slct.push_back(i);
 			}
 			
-			if(!slct.empty()) {
 			/* backtrack */
+			if(!slct.empty()) {
 				/* root */
 				int k0=boxes.size();
 				int newboxes_len = slct.size();
@@ -471,6 +471,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 				delete[] child->Iy;
 				delete[] child->score;
 			}
+			delete[] parts_data.at(0).score;
 
 		}
 	}
