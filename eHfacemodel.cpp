@@ -319,7 +319,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 	timeval start_pyra, end_pyra, interval_pyra;
 	gettimeofday(&start_pyra,NULL);
 #endif
-	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize);
+	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize,true);
 #ifdef EH_TEST_TIMER
 	gettimeofday(&end_pyra,NULL);
 	timersub(&end_pyra,&start_pyra,&interval_pyra);

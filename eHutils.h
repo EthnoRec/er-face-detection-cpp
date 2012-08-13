@@ -16,7 +16,7 @@
  * 	(2)siz==-1 indicates size is not known, will be decided automatically
  * 	(3)if siz is wrong, behavior is undefined
  */
-int* parseCSVstr2int(const char* csvstr, int* siz);
+int* parseCSVstr2int(const char* csvstr, int* siz, int offset = 0);
 
 /*
  * parse given string(e.g. "1.2, 3.4\0") to double precision array

@@ -54,7 +54,7 @@ featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const in
 					break;
 			} else {
 				pyra->feat[j] = eHhog(scaled, sbin);
-				pyra->scale[j] = 0.5*pyra->scale[j];
+				pyra->scale[j] = 0.5*pyra->scale[j-interval];
 				if(j+interval>=pyra->len)
 					break;
 			}

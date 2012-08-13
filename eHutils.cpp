@@ -8,7 +8,7 @@
 #include "string.h"
 #include "stdlib.h"
 
-int* parseCSVstr2int(const char* csvstr, int* siz) {
+int* parseCSVstr2int(const char* csvstr, int* siz, int offset) {
 	/* if size is not given, first find it out*/
 	char delimiter = ',';
 	const char* ptr;
@@ -25,9 +25,9 @@ int* parseCSVstr2int(const char* csvstr, int* siz) {
 	int* arr = new int[*siz];
 
 	char* endptr;
-	arr[0] = strtol(csvstr, &endptr, 10);
+	arr[0] = strtol(csvstr, &endptr, 10) + offset;
 	for(int i=1;i<*siz;i++) {
-		arr[i] = strtol(endptr+1, &endptr, 10);
+		arr[i] = strtol(endptr+1, &endptr, 10) + offset;
 	}
 	return arr;
 }

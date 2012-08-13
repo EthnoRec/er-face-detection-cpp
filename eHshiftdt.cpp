@@ -78,14 +78,12 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 
 	/* 1-d distance transforms on columns */
 	for(int x=0; x<sizx; x++) {
-		dt1d(vals+x*sizy, tmpM+x*leny, tmpIy+x*leny, 1, sizy, 
-				ay, by, offy, dstep, leny);
+		dt1d(vals+x*sizy, tmpM+x*leny, tmpIy+x*leny, 1, sizy, ay, by, offy, dstep, leny);
 	}
 
 	/* 1-d distance transforms on rows */
 	for(int y=0; y<leny; y++) {
-		dt1d(tmpM+y, M+y, Ix+y, leny, sizx, 
-				ax, bx, offx, dstep, lenx);
+		dt1d(tmpM+y, M+y, Ix+y, leny, sizx, ax, bx, offx, dstep, lenx);
 	}
 
 	/* get argmins */
@@ -165,7 +163,8 @@ void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen,
 		delete[] z;
 	}
 #else
-	delete[] v;
+	//delete[] v;
 	delete[] z;
+	delete[] v;
 #endif
 }

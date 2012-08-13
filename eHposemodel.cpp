@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
+#include <sys/time.h>
 
 using std::ifstream;
 using std::ios;
@@ -176,7 +177,7 @@ posemodel_t* posemodel_parseXml(char* xmlstr) {
 	tmp_posepart.biasid[0] = strtol(part->first_attribute("biasid")->value(),NULL,10)-1;
 	tmp_posepart.defid = NULL; /*root has no defid*/
 	field_width = -1;
-	tmp_posepart.filterid = parseCSVstr2int(part->first_attribute("filterid")->value(),&field_width);
+	tmp_posepart.filterid = parseCSVstr2int(part->first_attribute("filterid")->value(),&field_width,-1);
 	assert(tmp_posepart.num == field_width);
 	model->parts.push_back(tmp_posepart);
 		/*other parts*/
@@ -186,13 +187,13 @@ posemodel_t* posemodel_parseXml(char* xmlstr) {
 		tmp_posepart.numpar = strtol(part->first_attribute("numpar")->value(),NULL,10);
 		tmp_posepart.parent = strtol(part->first_attribute("parent")->value(),NULL,10)-1;
 		field_width = -1;
-		tmp_posepart.biasid = parseCSVstr2int(part->first_attribute("biasid")->value(),&field_width);
+		tmp_posepart.biasid = parseCSVstr2int(part->first_attribute("biasid")->value(),&field_width,-1);
 		assert(tmp_posepart.num*tmp_posepart.numpar == field_width);
 		field_width = -1;
-		tmp_posepart.defid = parseCSVstr2int(part->first_attribute("defid")->value(),&field_width);
+		tmp_posepart.defid = parseCSVstr2int(part->first_attribute("defid")->value(),&field_width,-1);
 		assert(tmp_posepart.num == field_width);
 		field_width = -1;
-		tmp_posepart.filterid = parseCSVstr2int(part->first_attribute("filterid")->value(),&field_width);
+		tmp_posepart.filterid = parseCSVstr2int(part->first_attribute("filterid")->value(),&field_width,-1);
 		assert(tmp_posepart.num == field_width);
 		model->parts.push_back(tmp_posepart);
 	}
@@ -224,11 +225,18 @@ posemodel_t* posemodel_parseXml(char* xmlstr) {
 	 * sizy, sizx, starty, startx, scale, step
 	 * an assumption seems hold: all ds are the same, so only 1 scale and step 
 	 * stored for each part*/
-	model->parts[0].sizy=model->parts[0].sizx=NULL;
-	model->parts[0].starty=model->parts[0].startx=NULL;
-	model->parts[0].scale=0;model->parts[0].step=1; /*XXX useful?*/
-	posepart_t* part_ptr;
 	int num, par, ds, step, virtpady, virtpadx;
+	posepart_t* part_ptr;
+	part_ptr = &(model->parts[0]);
+	part_ptr->startx = part_ptr->starty = NULL;
+	part_ptr->scale = 0; part_ptr->step = 1;
+	num = part_ptr->num;
+	part_ptr->sizy = new int[num];
+	part_ptr->sizx = new int[num];
+	for (int j=0;j<num;j++) {
+		part_ptr->sizy[j] = model->filters[part_ptr->filterid[j]].w.sizy;
+		part_ptr->sizx[j] = model->filters[part_ptr->filterid[j]].w.sizx;
+	}
 	for (unsigned i=1;i<model->parts.size();i++){
 		part_ptr = &(model->parts[i]);
 		par = part_ptr->parent;
@@ -282,8 +290,9 @@ struct posepart_data {
 
 vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, double thrs){
 	vector<bbox_t> boxes;
+
 	int imsize[] = {img->sizy, img->sizx};
-	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize, false);
+	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize,false);
 	mat3d_ptr* resp = new mat3d_ptr[pyra->len];
 	memset(resp, 0, pyra->len*sizeof(mat3d_ptr));
 	
@@ -392,7 +401,7 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 			int k0=boxes.size();
 			int newboxes_len = slct.size();
 			boxes.resize(k0+newboxes_len);
-			int* ptr = new int[numparts*newboxes_len];/*XXX*/
+			int* ptr = new int[numparts*newboxes_len];
 			int padx = max(model->maxsize[1]-2,0);
 			int pady = max(model->maxsize[0]-2,0);
 			double scale;
@@ -410,7 +419,7 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 					(y-pady+rootpart->sizy[mix])*scale-1
 				};
 				boxes[k0+i].boxes.push_back(tmpbox);
-				boxes[k0+i].component = 1; /* only 1 component for pose model */
+				boxes[k0+i].component = 0; /* only 1 component for pose model */
 				boxes[k0+i].score = rscore[slct[i]];
 			}
 			/*remaining parts*/
@@ -438,7 +447,6 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 			delete[] ptr;
 		}
 
-		/* TODO code here */
 
 		/* clean Ix Iy Iz */
 		for(int p=numparts-1;p>0;p--) {
@@ -475,11 +483,13 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 			M.at<Vec3b>(y,x)[2]=img->ch[2][y+x*img->sizy];
 		}
 	}
+
 	for(unsigned i=0;i<boxes.size();i++){
 		int x1 = (int)boxes[i].outer.x1;
 		int y1 = (int)boxes[i].outer.y1;
 		int w = (int)boxes[i].outer.x2 - x1;
 		int h = (int)boxes[i].outer.y2 - y1;
+		std::cout<<i<<std::endl;
 		rectangle(M, Rect(x1,y1,w,h),Scalar(0,255,0));
 	}
 	namedWindow("test", CV_WINDOW_AUTOSIZE);
@@ -504,6 +514,8 @@ void posemodel_delete(posemodel_t* model) {
 	 */
 	delete model->parts[0].biasid;
 	delete[] model->parts[0].filterid;
+	delete[] model->parts[0].sizy;
+	delete[] model->parts[0].sizx;
 	for(unsigned i=1;i<model->parts.size();i++) {
 		delete[] model->parts[i].biasid;
 		delete[] model->parts[i].defid;
