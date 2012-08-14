@@ -5,6 +5,7 @@
  * 2012-08 @ eH
  */
 #include "eHfacemodel.h"
+#include "eHposemodel.h"
 #include "eHfeatpyramid.h"
 #include "eHmatrix.h"
 #include "eHshiftdt.h"
@@ -16,6 +17,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 #include <string.h>
 #include <stdlib.h>
@@ -24,6 +26,8 @@
 #include <sys/time.h>
 
 #define EH_MAX_LEN 800
+#define EH_IMG_DEFAULT_SZ 320
+#define EH_BODY_CAND_USED 3
 
 using std::ifstream;
 using std::ios;
@@ -483,7 +487,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 
 	for (unsigned i=0; i<boxes.size(); i++)
 		bbox_clipboxes(boxes[i],imsize);
-	bboxv_nms(boxes, 0.3);
+	bbox_v_nms(boxes, 0.3);
 
 #ifdef EH_TEST_TIMER
 	gettimeofday(&end_detect,NULL);
@@ -492,6 +496,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 #endif
 
 	/*testing code: display outer bbox*/
+	/*
 	using namespace cv;
 	Mat M(img->sizy,img->sizx,CV_8UC3);
 	for(unsigned y=0;y<img->sizy;y++) {
@@ -511,8 +516,58 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 	namedWindow("test", CV_WINDOW_AUTOSIZE);
 	imshow("test",M);
 	waitKey();
-
+*/
 	return boxes;
+}
+
+vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t* posemodel, const image_ptr img) {
+	return facemodel_detect(facemodel, posemodel, img, facemodel->thresh, posemodel->thresh);
+}
+
+vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t* posemodel, const image_ptr img, double thrs_face, double thrs_pose) {
+	double scale1 = EH_IMG_DEFAULT_SZ / (double) min(img->sizx,img->sizy);
+	image_ptr img1 = image_resize(img, scale1);
+	/* 1st step, detect face in scaled image */
+	vector<bbox_t> faces = facemodel_detect(facemodel, img1, facemodel->thresh);
+	/* only ask for help of body detection if no faces are detected */
+	if(faces.empty()) {
+		/* 2nd step, detect body */
+		vector<bbox_t> poses = posemodel_detect(posemodel, img1, posemodel->thresh);
+		image_delete(img1);
+		/* if no body detected, give up */
+		if(poses.empty())
+			return faces;
+		if(poses.size()>EH_BODY_CAND_USED)
+			poses.resize(EH_BODY_CAND_USED);
+		int idxs_head[] = {0, 1};
+		int idxslen_head = 2;
+		double padding[] = {0.25, 0.25, 0.25, 0};
+		for(unsigned i=0;i<poses.size();i++) {
+			bbox_t pose = poses[i];
+			fbox_t head = fbox_merge(pose.boxes, idxs_head, 
+					idxslen_head, padding);
+			fbox_resize(&head, 1/scale1);
+			int offset[2];
+			image_ptr patch = image_crop(img, head, (int*)&offset);
+			double scale2 = EH_IMG_DEFAULT_SZ / min(head.x2-head.x1, head.y2-head.y1);
+			image_ptr patch2 = image_resize(patch, scale2); 
+			vector<bbox_t> facesfp = facemodel_detect(facemodel, patch2, facemodel->thresh);
+			if(!facesfp.empty()) {
+				bbox_v_resize(facesfp, 1/scale2);
+				bbox_v_move(facesfp, offset);
+			}
+			faces.resize(faces.size()+facesfp.size());
+			std::copy(facesfp.begin(),facesfp.end(),faces.end()-facesfp.size());
+			image_delete(patch2);
+		}
+		bbox_v_nms(faces,0.5);
+	} else {
+		bbox_v_resize(faces,1/scale1);
+		image_delete(img1);
+	}
+	for(unsigned i=0;i<faces.size();i++)
+		bbox_calcOut(&faces[i]);
+	return faces;
 }
 
 void facemodel_delete(facemodel_t* model) {

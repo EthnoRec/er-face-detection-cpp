@@ -471,10 +471,10 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 	/* clip boxes within image and do non-maximum suppression */
 	for(unsigned i=0; i<boxes.size(); i++)
 		bbox_clipboxes(boxes[i], imsize);
-	bboxv_nms(boxes,0.1,1000);
+	bbox_v_nms(boxes,0.1,1000);
 
 	/*testing code: display outer bbox*/
-	using namespace cv;
+/*	using namespace cv;
 	Mat M(img->sizy,img->sizx,CV_8UC3);
 	for(unsigned y=0;y<img->sizy;y++) {
 		for(unsigned x=0;x<img->sizx;x++) {
@@ -489,13 +489,12 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, d
 		int y1 = (int)boxes[i].outer.y1;
 		int w = (int)boxes[i].outer.x2 - x1;
 		int h = (int)boxes[i].outer.y2 - y1;
-		std::cout<<i<<std::endl;
 		rectangle(M, Rect(x1,y1,w,h),Scalar(0,255,0));
 	}
 	namedWindow("test", CV_WINDOW_AUTOSIZE);
 	imshow("test",M);
 	waitKey();
-
+*/
 	return boxes;
 }
 vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img) {

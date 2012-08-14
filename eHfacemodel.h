@@ -1,11 +1,10 @@
-/*
- * eHfacemodel.h
+/** @file eHfacemodel.h
+ *  @brief face detection model and operations
  *
- * Data structures used to describe and 
- * store model information
+ *  @sa Xiangzin Zhu, Deva Ramanan, "Face Detection, Pose Estimation, and landmark Localization in the Wild". In  CVPR 2012.
  *
- * Hang Su
- * 2012-08 @ eH
+ * @author Hang Su
+ * @date 2012-08-13
  */
 #ifndef EHFACEMODEL_H
 #define EHFACEMODEL_H
@@ -14,6 +13,7 @@
 #include "eHimage.h"
 #include "eHfilter.h"
 #include "eHbbox.h"
+#include "eHposemodel.h"
 
 #define EH_TEST_TIMER
 
@@ -38,44 +38,75 @@ typedef struct part_face {
 	int step;
 } facepart_t;
 
-/* XXX assume all filters are of the same size
- * (e.g. face_p146.xml), otherwise code need further 
- * modification
+/** @struct eHfacemodel
+ *  @brief Face detection model
  */
-typedef struct eHfacemodel {
-	vector<filter_t> filters;
-	vector<facedef_t> defs;
-	vector<vector<facepart_t> > components;
-	int maxsize[2];
-	int len;
-	int interval;
-	int sbin;
-	double delta;
-	double thresh;
-	double obj;
-} facemodel_t;
+struct eHfacemodel {
+	vector<filter_t> filters; 		/**< @brief part filters 
+						  @note All part filters should be 
+						  of the same size*/
+	vector<facedef_t> defs; 		/**< @brief deformation params */
+	vector<vector<facepart_t> > components; /**< @brief part infos */
+	int maxsize[2]; 			/**< @brief XXX */
+	int len; 				/**< @brief not used */
+	int interval; 				/**< @brief interval of pyramid */
+	int sbin; 				/**< @brief bin for building hog feature */
+	double delta; 				/**< @brief not used */
+	double thresh; 				/**< @brief threshold for detection score */
+	double obj; 				/**< @brief not used */
+};
 
-/*
- * Parse face model from xml style string
- * NOTE: xmlstr is modified during parsing, this can be avoided by 
- * using Non-Destrutive Mode of rapidxml
+/** @typedef facemodel_t
+ *  @brief Face detection model
+ */
+typedef struct eHfacemodel facemodel_t;
+
+/** @brief Parse face model from xml style string
+ *  @note xmlstr is modified during parsing, this can be avoided by 
+ *  using Non-Destrutive Mode of rapidxml
  */
 facemodel_t* facemodel_parseXml(char* xmlstr);
 
-/*
- * Read face model from file
+/** @brief Read face model from file
+ *  @sa facemodel_parseXml()
  */
 facemodel_t* facemodel_readFromFile(const char* filepath);
 
-/*
- * Detection
- * First one take thrs as an input, second use the value in model
+/** @brief Perform face detection
+ *  @param model face detection model
+ *  @param img where to find faces from
+ *  @param thrs threshold used for pruning results
+ *  @return array of detected faces (together with part locations)
  */
 vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, double thrs);
+
+/** @brief Perform face detection using threshold inside model
+ *  @param model face detection model
+ *  @param img where to find faces from
+ *  @return array of detected faces (together with part locations)
+ */
 vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img);
 
-/*
- * Delete a face model, release related memory
+/** @brief Perform face detection with help of body detection
+ *  @param facemodel face detection model
+ *  @param posemodel body pose detection model
+ *  @param img where to find faces from
+ *  @param thrs_face threshold used for pruning face detections
+ *  @param thrs_pose threshold used for pruning pose detections
+ *  @return array of detected faces (together with part locations)
+ */
+vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t* posemodel, const image_ptr img, double thrs_face, double thrs_pose);
+
+/** @brief Perform face detection with help of body detection using 
+ *  thresholds inside models
+ *  @param facemodel face detection model
+ *  @param posemodel body pose detection model
+ *  @param img where to find faces from
+ *  @return array of detected faces (together with part locations)
+ */
+vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t* posemodel, const image_ptr img);
+
+/** @brief Delete a face model, release related memory
  */
 void facemodel_delete(facemodel_t* model);
 

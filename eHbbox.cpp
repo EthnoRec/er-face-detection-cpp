@@ -42,9 +42,24 @@ void bbox_clipboxes(bbox_t& bbox, const int* imsize) {
 	}
 }
 
+void bbox_v_resize(vector<bbox_t>& bboxes, double scale) {
+	for(unsigned i=0;i<bboxes.size();i++) {
+		for(unsigned j=0;j<bboxes[i].boxes.size();j++) {
+			fbox_resize(&(bboxes[i].boxes[j]),scale);
+		}
+	}
+}
+
+void bbox_v_move(vector<bbox_t>& bboxes, const int* offset) {
+	for(unsigned i=0;i<bboxes.size();i++) {
+		for(unsigned j=0;j<bboxes[i].boxes.size();j++) {
+			fbox_move(&(bboxes[i].boxes[j]),offset);
+		}
+	}
+}
 bool compare_score(bbox_t a, bbox_t b) {return (a.score>b.score);}
 
-void bboxv_nms(vector<bbox_t>& bboxes, double overlap, unsigned prune) {
+void bbox_v_nms(vector<bbox_t>& bboxes, double overlap, unsigned prune) {
 	if (bboxes.empty())
 		return ;
 	/* sort bboxes according to score */
@@ -84,6 +99,4 @@ void bboxv_nms(vector<bbox_t>& bboxes, double overlap, unsigned prune) {
 	bboxes.resize(lsbboxes.size());
 	copy(lsbboxes.begin(),lsbboxes.end(),bboxes.begin());
 }
-	
-
 

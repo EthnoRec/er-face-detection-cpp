@@ -23,11 +23,15 @@ image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch){
 	for(unsigned i=0;i<nch;i++) {
 		img->ch[i] = img->data + i*sizy*sizx;
 	}
+	img->is_shared = false;
+	img->stepy = img->sizy;
+	img->stepyx = img->sizy*img->sizx;
 	return img;
 }
 
 void image_delete(image_ptr img){
-	delete[] img->data;
+	if(!img->is_shared)
+		delete[] img->data;
 	delete img;
 }
 
@@ -71,9 +75,9 @@ image_ptr image_readJPG(const char* filename) {
 	image_ptr im = image_alloc(img.size().height, img.size().width);
 	for(unsigned y=0;y<im->sizy;y++) {
 		for(unsigned x=0;x<im->sizx;x++) {
-			im->ch[0][y+x*im->sizy]=img.at<Vec3b>(y,x).val[2];
-			im->ch[1][y+x*im->sizy]=img.at<Vec3b>(y,x).val[1];
-			im->ch[2][y+x*im->sizy]=img.at<Vec3b>(y,x).val[0];
+			im->ch[0][y+x*im->stepy]=img.at<Vec3b>(y,x).val[2];
+			im->ch[1][y+x*im->stepy]=img.at<Vec3b>(y,x).val[1];
+			im->ch[2][y+x*im->stepy]=img.at<Vec3b>(y,x).val[0];
 		}
 	}
 
@@ -85,9 +89,9 @@ void image_display(const image_ptr img, const std::string& winname) {
 	Mat M(img->sizy,img->sizx,CV_8UC3);
 	for(unsigned int y=0;y<img->sizy;y++) {
 		for(unsigned int x=0;x<img->sizx;x++) {
-			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->sizy];
-			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
-			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->sizy];
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->stepy];
 		}
 	}
 	namedWindow(winname, CV_WINDOW_AUTOSIZE);
@@ -154,23 +158,21 @@ void resize1dtran(image_ptr src, size_t sheight,
 	for (int nch = 0; nch<3; nch++) {
 		memset(dst->ch[nch], 0, width*dheight*sizeof(double));
 		for (unsigned x = 0; x<width; x++) {
-			double *s = src->ch[nch] + x*sheight;
+			double *s = src->ch[nch] + x*src->stepy;
 			double *d = dst->ch[nch] + x;
 			alphacopy(s,d,ofs,k);
 		}
 	}
 }
 
-/*
- * Fast image subsampling
- * Important: src image is not destroyed
- * This is used to construct the feature pyramid
+/** @brief Fast image subsampling
+ *  @note src image is not destroyed
  */
 image_ptr image_resize(const image_ptr img, double scale) {
 	size_t dst_sizy = (unsigned int)round2int(img->sizy*scale);
 	size_t dst_sizx = (unsigned int)round2int(img->sizx*scale);
-	image_ptr scaled = image_alloc(dst_sizy, dst_sizx);
-	image_ptr tmp = image_alloc(img->sizx,dst_sizy);
+	image_ptr scaled = image_alloc(dst_sizy, dst_sizx, img->nchannel);
+	image_ptr tmp = image_alloc(img->sizx,dst_sizy, img->nchannel);
 
 	/* scale in columns, and transposed */
 	resize1dtran(img,img->sizy,tmp,dst_sizy, img->sizx);
@@ -189,7 +191,7 @@ void reduce1dtran(image_ptr src, size_t sheight,
 	for (int nch = 0; nch<3; nch++) {
 		memset(dst->ch[nch], 0, width*dheight*sizeof(double));
 		for (unsigned x = 0; x<width; x++) {
-			s = src->ch[nch] + x*sheight;
+			s = src->ch[nch] + x*src->stepy;
 			d = dst->ch[nch] + x;
 
 			/* First row */
@@ -227,8 +229,8 @@ void reduce1dtran(image_ptr src, size_t sheight,
 image_ptr image_reduce(const image_ptr img) {
 	size_t dst_sizy = (unsigned int)round2int(img->sizy*.5);
 	size_t dst_sizx = (unsigned int)round2int(img->sizx*.5);
-	image_ptr scaled = image_alloc(dst_sizy, dst_sizx);
-	image_ptr tmp = image_alloc(img->sizx,dst_sizy);
+	image_ptr scaled = image_alloc(dst_sizy, dst_sizx, img->nchannel);
+	image_ptr tmp = image_alloc(img->sizx,dst_sizy, img->nchannel);
 
 	/* scale in columns, and transposed */
 	reduce1dtran(img,img->sizy,tmp,dst_sizy,img->sizx);
@@ -238,3 +240,59 @@ image_ptr image_reduce(const image_ptr img) {
 	image_delete(tmp);
 	return scaled;
 }
+
+image_ptr image_crop(const image_ptr img, fbox_t crop, int* offset, bool shared) {
+	image_ptr result;
+	ibox_t intcrop = fbox_getibox(&crop);
+	if(shared) {
+		result = new image_t;
+		result->sizx = intcrop.x2-intcrop.x1+1;
+		result->sizy = intcrop.y2-intcrop.y1+1;
+		result->stepy = img->stepy;
+		result->stepyx = img->stepyx;
+		result->is_shared = true;
+		result->nchannel = img->nchannel;
+		result->data = img->data + (intcrop.x1*img->stepy + intcrop.y1);
+		for(unsigned i=0;i<result->nchannel;i++)
+			result->ch[i] = result->data + img->stepyx*i;
+	} else {
+		result = image_alloc(intcrop.y2-intcrop.y1+1,intcrop.x2-intcrop.x1+1,img->nchannel);
+		for(unsigned c=0;c<result->nchannel;c++){
+			for(unsigned y=0;y<result->sizy;y++) {
+				for(unsigned x=0;x<result->sizx;x++) {
+					result->data[c*result->stepyx+x*result->stepy+y] = 
+						img->data[c*img->stepyx+(x+intcrop.x1)*result->sizy+(y+intcrop.y1)];
+				}
+			}
+		}
+	}
+	if(offset!=NULL) {
+		offset[0] = intcrop.y1;
+		offset[1] = intcrop.x1;
+	}
+	return result;
+}
+
+void image_showDetection(const image_ptr img, const vector<bbox_t> boxes, const std::string& winname) {
+	using namespace cv;
+	Mat M(img->sizy,img->sizx,CV_8UC3);
+	for(unsigned y=0;y<img->sizy;y++) {
+		for(unsigned x=0;x<img->sizx;x++) {
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->stepy];
+		}
+	}
+
+	for(unsigned i=0;i<boxes.size();i++){
+		int x1 = (int)boxes[i].outer.x1;
+		int y1 = (int)boxes[i].outer.y1;
+		int w = (int)boxes[i].outer.x2 - x1;
+		int h = (int)boxes[i].outer.y2 - y1;
+		rectangle(M, Rect(x1,y1,w,h),Scalar(0,255,0));
+	}
+	namedWindow(winname, CV_WINDOW_AUTOSIZE);
+	imshow(winname,M);
+	//waitKey();
+}
+
