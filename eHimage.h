@@ -26,6 +26,7 @@ struct eHimage {
 	size_t sizy; 		/**< @brief image height */
 	size_t sizx; 		/**< @brief image width */
 	size_t nchannel; 	/**< @brief number of channels */
+	int imsize[3]; 		/**< @brief [sizy sizx nchanel] */
 	bool is_shared; 	/**< @brief whether share data with a parent image */
 	size_t stepy; 		/**< @brief step between columns */
 	size_t stepyx; 		/**< @brief step between channels */
@@ -42,15 +43,27 @@ typedef struct eHimage image_t;
 typedef image_t* image_ptr;
 
 /** @brief Allocate a new image of size [sizy, sizx, nch]
- *  @note Returned image is not initiated
+ *  @note Returned image is not initialized
  */
 image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch = 3);
+
+/** @brief Allocate a new image of size [sizy, sizx, nch], and initialize 
+ *  all pixel values to fill
+ */
+image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch, const double* fillval);
 
 /** @brief Delete image and associated memory
  *  @note If it's a shared image(the "child"), no data is destroyed; if the image 
  *  that owns the data is deleted, all descendants are not accessible anymore
  */
-void image_delete(image_ptr);
+void image_delete(image_ptr img);
+
+/** @brief Fill all pixels with same values
+ *  @param img target
+ *  @param val value to be filled to each pixel, it should be at least 
+ *  the same length as img->nchannel
+ */
+void image_fill(image_ptr img, const double* val);
 
 /** @brief Read Jpeg image file
  *  @note Requires opencv library: libopencv_core, libopencv_highgui

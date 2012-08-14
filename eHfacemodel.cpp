@@ -527,6 +527,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t*
 vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t* posemodel, const image_ptr img, double thrs_face, double thrs_pose) {
 	double scale1 = EH_IMG_DEFAULT_SZ / (double) min(img->sizx,img->sizy);
 	image_ptr img1 = image_resize(img, scale1);
+	image_display(img1, "tmp");
 	/* 1st step, detect face in scaled image */
 	vector<bbox_t> faces = facemodel_detect(facemodel, img1, facemodel->thresh);
 	/* only ask for help of body detection if no faces are detected */
@@ -547,10 +548,12 @@ vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t*
 			fbox_t head = fbox_merge(pose.boxes, idxs_head, 
 					idxslen_head, padding);
 			fbox_resize(&head, 1/scale1);
+			fbox_clip(head,img->imsize);
 			int offset[2];
 			image_ptr patch = image_crop(img, head, (int*)&offset);
-			double scale2 = EH_IMG_DEFAULT_SZ / min(head.x2-head.x1, head.y2-head.y1);
+			double scale2 = EH_IMG_DEFAULT_SZ / (double) min(head.x2-head.x1, head.y2-head.y1);
 			image_ptr patch2 = image_resize(patch, scale2); 
+			image_display(patch2,"test");
 			vector<bbox_t> facesfp = facemodel_detect(facemodel, patch2, facemodel->thresh);
 			if(!facesfp.empty()) {
 				bbox_v_resize(facesfp, 1/scale2);

@@ -19,9 +19,32 @@ image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch){
 	img->sizy = sizy;
 	img->sizx = sizx;
 	img->nchannel = nch;
+	img->imsize[0] = sizy;
+	img->imsize[1] = sizx;
+	img->imsize[2] = nch;
 	img->data = new double[sizy*sizx*nch];
 	for(unsigned i=0;i<nch;i++) {
 		img->ch[i] = img->data + i*sizy*sizx;
+	}
+	img->is_shared = false;
+	img->stepy = img->sizy;
+	img->stepyx = img->sizy*img->sizx;
+	return img;
+}
+
+image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch, const double* fillval) {
+	image_ptr img = new struct eHimage;
+	img->sizy = sizy;
+	img->sizx = sizx;
+	img->nchannel = nch;
+	img->imsize[0] = sizy;
+	img->imsize[1] = sizx;
+	img->imsize[2] = nch;
+	img->data = new double[sizy*sizx*nch];
+	for(unsigned i=0;i<nch;i++) {
+		img->ch[i] = img->data + i*sizy*sizx;
+		for(unsigned xy=0; xy<sizy*sizx; xy++)
+			img->ch[i][xy] = fillval[i];
 	}
 	img->is_shared = false;
 	img->stepy = img->sizy;
@@ -33,6 +56,15 @@ void image_delete(image_ptr img){
 	if(!img->is_shared)
 		delete[] img->data;
 	delete img;
+}
+
+void image_zero(image_ptr img, const double* val) {
+	if(img==NULL || img->data==NULL) return;
+	unsigned ch, y, x;
+	for(ch=0; ch<img->nchannel; ch++)
+		for(y=0; y<img->sizy; y++)
+			for(x=0;x<img->sizx; x++)
+				img->ch[ch][x*img->stepy+y]=val[ch];
 }
 
 /*
@@ -155,8 +187,9 @@ void resize1dtran(image_ptr src, size_t sheight,
 			ofs[k++].alpha = (fsy2-sy2)*scale;
 		}
 	}
+	//memset(dst->data, 0, dst->nchannel*width*dheight*sizeof(double));
 	for (int nch = 0; nch<3; nch++) {
-		memset(dst->ch[nch], 0, width*dheight*sizeof(double));
+		//memset(dst->ch[nch], 0, width*dheight*sizeof(double));
 		for (unsigned x = 0; x<width; x++) {
 			double *s = src->ch[nch] + x*src->stepy;
 			double *d = dst->ch[nch] + x;
@@ -171,9 +204,10 @@ void resize1dtran(image_ptr src, size_t sheight,
 image_ptr image_resize(const image_ptr img, double scale) {
 	size_t dst_sizy = (unsigned int)round2int(img->sizy*scale);
 	size_t dst_sizx = (unsigned int)round2int(img->sizx*scale);
-	image_ptr scaled = image_alloc(dst_sizy, dst_sizx, img->nchannel);
-	image_ptr tmp = image_alloc(img->sizx,dst_sizy, img->nchannel);
-
+	double initialval[] = {0, 0, 0};
+	image_ptr scaled = image_alloc(dst_sizy, dst_sizx, img->nchannel, initialval);
+	image_ptr tmp = image_alloc(img->sizx,dst_sizy, img->nchannel, initialval);
+	
 	/* scale in columns, and transposed */
 	resize1dtran(img,img->sizy,tmp,dst_sizy, img->sizx);
 	/* scale in (old)rows, and transposed back */
@@ -188,8 +222,9 @@ image_ptr image_resize(const image_ptr img, double scale) {
 void reduce1dtran(image_ptr src, size_t sheight, 
 		image_ptr dst, size_t dheight, size_t width) {
 	double *s, *d;
+	//memset(dst->data, 0, dst->nchannel*width*dheight*sizeof(double));
 	for (int nch = 0; nch<3; nch++) {
-		memset(dst->ch[nch], 0, width*dheight*sizeof(double));
+		//memset(dst->ch[nch], 0, width*dheight*sizeof(double));
 		for (unsigned x = 0; x<width; x++) {
 			s = src->ch[nch] + x*src->stepy;
 			d = dst->ch[nch] + x;
@@ -243,15 +278,19 @@ image_ptr image_reduce(const image_ptr img) {
 
 image_ptr image_crop(const image_ptr img, fbox_t crop, int* offset, bool shared) {
 	image_ptr result;
+	fbox_clip(crop, img->imsize);
 	ibox_t intcrop = fbox_getibox(&crop);
 	if(shared) {
 		result = new image_t;
 		result->sizx = intcrop.x2-intcrop.x1+1;
 		result->sizy = intcrop.y2-intcrop.y1+1;
+		result->imsize[0] = result->sizy;
+		result->imsize[1] = result->sizx;
 		result->stepy = img->stepy;
 		result->stepyx = img->stepyx;
 		result->is_shared = true;
 		result->nchannel = img->nchannel;
+		result->imsize[2] = result->nchannel;
 		result->data = img->data + (intcrop.x1*img->stepy + intcrop.y1);
 		for(unsigned i=0;i<result->nchannel;i++)
 			result->ch[i] = result->data + img->stepyx*i;
@@ -293,6 +332,6 @@ void image_showDetection(const image_ptr img, const vector<bbox_t> boxes, const 
 	}
 	namedWindow(winname, CV_WINDOW_AUTOSIZE);
 	imshow(winname,M);
-	//waitKey();
+	waitKey();
 }
 

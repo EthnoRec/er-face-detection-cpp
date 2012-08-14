@@ -25,12 +25,13 @@ extern struct timeval time_spent_detect;
 #endif
 
 int main(int argc, char** argv){
+	
 	struct timeval time_spent_total, total_start, total_end;
 	struct timeval time_spent_local, local_start, local_end;
 	gettimeofday(&total_start, NULL);
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
 	posemodel_t* posemodel = posemodel_readFromFile("pose_BUFFY.xml");
-
+/*
 	char path[200];
 	if(argc<2)
 		strcpy(path,"/home/hang/ppoc10k/photo_female_5k/");
@@ -66,13 +67,14 @@ int main(int argc, char** argv){
 	cout<<cnt<<" photo processed"<<endl;
 	cout<<"time_spent_avg: "<<millisecs(time_spent_total)/(double)cnt<<" ms"<<endl;
 	
-	/*
+*/	
 	image_t* img = NULL;
 	if(argc<2)
-		img = image_readJPG("image/10156670_4.jpg");
+		//img = image_readJPG("image/10156670_4.jpg");
+		img = image_readJPG("hard/hard_face.jpg");
 	else
 		img = image_readJPG(argv[1]);
-	//image_display(img,"test");
+	image_display(img,"test");
 	vector<bbox_t> faces = facemodel_detect(model,posemodel,img);
 	image_showDetection(img, faces, "results");
 	
@@ -85,7 +87,7 @@ int main(int argc, char** argv){
 		<<" - time_spent_conv: "<<millisecs(time_spent_conv)<<" ms"<<endl
 		<<" - time_spent_dp: "<<millisecs(time_spent_dp)<<" ms"<<endl;
 #endif
-*/
+
 	facemodel_delete(model);
 	posemodel_delete(posemodel);
 	return 0;
