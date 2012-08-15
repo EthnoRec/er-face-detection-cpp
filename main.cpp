@@ -56,7 +56,8 @@ int main(int argc, char** argv){
 				image_t* img = image_readJPG(name);
 				gettimeofday(&local_start,NULL);
 				//Step 4: detect faces
-				vector<bbox_t> faces = facemodel_detect(model, posemodel, img);
+				//vector<bbox_t> faces = facemodel_detect(model, posemodel, img);
+				vector<bbox_t> faces = facemodel_detect(model, img);
 				gettimeofday(&local_end,NULL);
 				timersub(&local_end,&local_start,&time_spent_local);
 				timeradd(&time_spent_local,&time_spent_total,&time_spent_total);

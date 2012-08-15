@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 
-<title>Main Page</title>
+<title>Face detection &amp; body detection</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 
@@ -47,8 +47,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div>
-<div class="contents">
+<div class="header">
+  <div class="headertitle">
+<div class="title">Face detection &amp; body detection </div>  </div>
 </div>
+<div class="contents">
+<div class="textblock"><p>This project provides a C++ implementation of human face and body detection from photos. Below is a short introductin, detailed documentation is generated using doxygen. </p>
+<div class="image">
+<img src="images/Mainpage_faces.png" alt="Mainpage_faces.png"/>
+</div>
+<h2>Image data structure and operation</h2>
+<p>A structure type <em>image_t</em> is defined to present images. Some usesful operations are also provided, e.g. to load a jpeg image from file, use </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">image_ptr image_readJPG <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span>filename<span style="color: #008000;">)</span></div><p> To delete an image, use </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> image_delete <span style="color: #008000;">(</span>image_ptr img<span style="color: #008000;">)</span></div><h2>Face detection</h2>
+<p>Face detection is based on algorithm described in [1]. Pre-trained models are provided in XML format. <br/>
+ To load a face model, use </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">facemodel_t <span style="color: #000040;">*</span> &#160; facemodel_readFromFile <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span>filepath<span style="color: #008000;">)</span></div><p> To detect faces, use </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">vector<span style="color: #000080;">&lt;</span> bbox_t <span style="color: #000080;">&gt;</span> &#160; &#160;facemodel_detect <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> facemodel_t <span style="color: #000040;">*</span>model, <span style="color: #0000ff;">const</span> image_ptr img<span style="color: #008000;">)</span></div><p> A body detection model can also be combined to help improve detection performace </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">vector<span style="color: #000080;">&lt;</span> bbox_t <span style="color: #000080;">&gt;</span> &#160; &#160;facemodel_detect <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> facemodel_t <span style="color: #000040;">*</span>facemodel, <span style="color: #0000ff;">const</span> posemodel_t <span style="color: #000040;">*</span>posemodel, <span style="color: #0000ff;">const</span> image_ptr img<span style="color: #008000;">)</span></div><p> Results can be visualized using </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> &#160; &#160;image_showDetection <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> image_ptr img, <span style="color: #0000ff;">const</span> vector<span style="color: #000080;">&lt;</span> bbox_t <span style="color: #000080;">&gt;</span> boxes, <span style="color: #0000ff;">const</span> std<span style="color: #008080;">::</span><span style="color: #007788;">string</span> <span style="color: #000040;">&amp;</span>winname<span style="color: #008000;">)</span></div><p> or </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> &#160; &#160;image_showFaces <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> image_ptr img, <span style="color: #0000ff;">const</span> vector<span style="color: #000080;">&lt;</span> bbox_t <span style="color: #000080;">&gt;</span> boxes, <span style="color: #0000ff;">const</span> std<span style="color: #008080;">::</span><span style="color: #007788;">string</span> <span style="color: #000040;">&amp;</span>winname<span style="color: #008000;">)</span></div><p> Finally, a face model can be deleted using <br/>
+ </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> &#160; &#160;facemodel_delete <span style="color: #008000;">(</span>facemodel_t <span style="color: #000040;">*</span>model<span style="color: #008000;">)</span></div><h2>Body/pose detection</h2>
+<p>Human body detection is based on algorithm described in [2]. Pre-trained models are provided in XML format. <br/>
+ To load a pose model, use </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">posemodel_t<span style="color: #000040;">*</span> posemodel_readFromFile<span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span><span style="color: #000040;">*</span> filepath<span style="color: #008000;">)</span></div><p> To detect poses, use </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">vector<span style="color: #000080;">&lt;</span>bbox_t<span style="color: #000080;">&gt;</span> posemodel_detect<span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> posemodel_t<span style="color: #000040;">*</span> model, <span style="color: #0000ff;">const</span> image_ptr img<span style="color: #008000;">)</span></div><p> Results can be visualized using </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> &#160; &#160;image_showDetection <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> image_ptr img, <span style="color: #0000ff;">const</span> vector<span style="color: #000080;">&lt;</span> bbox_t <span style="color: #000080;">&gt;</span> boxes, <span style="color: #0000ff;">const</span> std<span style="color: #008080;">::</span><span style="color: #007788;">string</span> <span style="color: #000040;">&amp;</span>winname<span style="color: #008000;">)</span></div><p> Finally, the model can be deleted using </p>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> posemodel_delete<span style="color: #008000;">(</span>posemodel_t<span style="color: #000040;">*</span> model<span style="color: #008000;">)</span></div><p>[1] X. Zhu, D. Ramanan. "Face detection, pose estimation and landmark localization in the wild" Computer Vision and Pattern Recognition (CVPR) Providence, Rhode Island, June 2012. <br/>
+ [2] Y. Yang, D. Ramanan. "Articulated Pose Estimation using Flexible Mixtures of Parts" Computer Vision and Pattern Recognition (CVPR) Colorado Springs, Colorado, June 2011.  </p>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -66,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 14 2012 22:06:54 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 15 2012 01:56:37 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5
 </small></address>
