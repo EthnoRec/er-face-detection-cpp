@@ -11,20 +11,12 @@
  */
 #define EH_INF 1E20
 #define EH_MAX_LEN 800
+
 #include <math.h>
 #include "eHmatrix.h"
 #include "eHshiftdt.h"
 
-//#define EH_USE_CACHE
-
 static inline int square(int x) {return x*x;}
-
-#ifdef EH_USE_CACHE
-static int v_pre[EH_MAX_LEN];
-static double z_pre[EH_MAX_LEN];
-static double tmpM_pre[EH_MAX_LEN*EH_MAX_LEN];
-static int tmpIy_pre[EH_MAX_LEN*EH_MAX_LEN];
-#endif
 
 /* 
  * 1-d distance transform with quadratic distance: ax^2+bx
@@ -63,18 +55,8 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 	double ay = -w[2];
 	double by = -w[3];
 
-#ifdef EH_USE_CACHE
-	if(leny*sizx<=EH_MAX_LEN){
-		tmpM = tmpM_pre;
-		tmpIy = tmpIy_pre;
-	} else {
-		tmpM = new double[leny*sizx];
-		tmpIy = new int[leny*sizx];
-	}
-#else
 	tmpM = new double[leny*sizx];
 	tmpIy = new int[leny*sizx];
-#endif
 
 	/* 1-d distance transforms on columns */
 	for(int x=0; x<sizx; x++) {
@@ -92,33 +74,14 @@ void eHshiftdt(double* M, int* Ix, int* Iy,
 		Iy[p] = tmpIy[Ix[p]*leny+y];
 	}
 
-#ifdef EH_USE_CACHE
-	if(leny*sizx>EH_MAX_LEN) {
-		delete[] tmpM;
-		delete[] tmpIy;
-	}
-#else
 	delete[] tmpM;
 	delete[] tmpIy;
-#endif
 }
 
 void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen, 
 		double a, double b, int dshift, double dstep, int dlen) {
-#ifdef EH_USE_CACHE
-	int* v;
-	double* z;
-	if (slen<=EH_MAX_LEN) {
-		v = v_pre;
-		z = z_pre;
-	} else {
-		v = new int[slen];
-		z = new double[slen+1];
-	}
-#else
 	int* v = new int[slen];
 	double* z = new double[slen+1];
-#endif
 
 	/*
 	 * k - index of rightmost parabola
@@ -157,14 +120,6 @@ void dt1d(const double* src, double* dst, int* ptr, int sstep, int slen,
 		q += dstep;
 	}
 
-#ifdef EH_USE_CACHE
-	if (slen>EH_MAX_LEN) {
-		delete[] v;
-		delete[] z;
-	}
-#else
-	//delete[] v;
 	delete[] z;
 	delete[] v;
-#endif
 }

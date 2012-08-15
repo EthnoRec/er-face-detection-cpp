@@ -125,7 +125,13 @@ image_ptr image_crop(const image_ptr img, fbox_t crop, int* offset=NULL, bool sh
  *  @param img detection target
  *  @param boxes detection results
  *  @param winname display window name, also serves as an identifier
+ *  @sa image_showFaces()
  */
 void image_showDetection(const image_ptr img, const vector<bbox_t> boxes, const std::string& winname);
 
+/** @brief Show face detection results: face region, eyes, nose, mouth
+ *  @sa image_showDetection()
+ */
+void image_showFaces(const image_ptr img, const vector<bbox_t> boxes, const std::string& winname);
+ 
 #endif

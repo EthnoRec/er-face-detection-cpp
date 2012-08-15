@@ -8,6 +8,7 @@
 #include "dirent.h"
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <sys/time.h>
 
@@ -25,14 +26,15 @@ extern struct timeval time_spent_detect;
 #endif
 
 int main(int argc, char** argv){
-	struct timeval time_spent_total, total_start, total_end;
-	struct timeval time_spent_local, local_start, local_end;
-	gettimeofday(&total_start, NULL);
 	//Step 1: load face model
 	facemodel_t* model = facemodel_readFromFile("face_p146.xml");
 	//Step 2: load body model
 	posemodel_t* posemodel = posemodel_readFromFile("pose_BUFFY.xml");
-	
+
+	struct timeval time_spent_total;
+	struct timeval time_spent_local, local_start, local_end;
+	time_spent_total.tv_sec = time_spent_total.tv_usec = 0;
+
 	char path[200];
 	if(argc<2)
 		strcpy(path,"/home/hang/ppoc10k/photo_female_5k/");
@@ -49,7 +51,7 @@ int main(int argc, char** argv){
 				cnt++;
 				strcpy(name, path);
 				strcat(name, ent->d_name);
-				cout<<name<<" ...";
+				cout<<std::setw(20)<<name<<" ...";
 				//Step 3: read image
 				image_t* img = image_readJPG(name);
 				gettimeofday(&local_start,NULL);
@@ -57,8 +59,9 @@ int main(int argc, char** argv){
 				vector<bbox_t> faces = facemodel_detect(model, posemodel, img);
 				gettimeofday(&local_end,NULL);
 				timersub(&local_end,&local_start,&time_spent_local);
-				timersub(&local_end,&total_start,&time_spent_total);
-				cout<<millisecs(time_spent_local)<<" ms, avg="<<millisecs(time_spent_total)/(double)cnt<<" ms"<<endl;
+				timeradd(&time_spent_local,&time_spent_total,&time_spent_total);
+				cout<<std::setw(8)<<millisecs(time_spent_local)<<" ms, avg="<<std::setw(8)
+					<<millisecs(time_spent_total)/(double)cnt<<" ms"<<endl;
 				//Step 5: show results
 				image_showDetection(img, faces, "result");
 				//Step 6a: delete image
@@ -67,8 +70,6 @@ int main(int argc, char** argv){
 			}
 		}
 	}
-	gettimeofday(&total_end, NULL);
-	timersub(&total_end, &total_start, &time_spent_total);
 	cout<<cnt<<" photo processed"<<endl;
 	cout<<"time_spent_avg: "<<millisecs(time_spent_total)/(double)cnt<<" ms"<<endl;
 
@@ -79,11 +80,8 @@ int main(int argc, char** argv){
 	else
 		img = image_readJPG(argv[1]);
 	vector<bbox_t> faces = facemodel_detect(model,posemodel,img);
-	image_showDetection(img, faces, "results");
-	
-	//vector<bbox_t> poses = posemodel_detect(posemodel,img);
-	//if(!poses.empty()) poses.resize(1);
-	//image_showDetection(img,poses,"results");
+	image_showDetection(img, faces, "result");
+	image_showFaces(img, faces, "result");
 	
 	image_delete(img);
 #ifdef EH_TEST_TIMER
