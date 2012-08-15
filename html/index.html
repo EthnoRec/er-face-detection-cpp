@@ -52,11 +52,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Face detection &amp; body detection </div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><p>This project provides a C++ implementation of human face and body detection from photos. Below is a short introductin, detailed documentation is generated using doxygen. </p>
+<div class="textblock"><p>This project provides a C++ implementation of human face and body detection from photos. Below is a short usage help, detailed documentation is generated using doxygen. <br/>
+ <b>Checkout latest code</b>: <code>svn checkout <a href="http://eharmony-photofeature.googlecode.com/svn/trunk/">http://eharmony-photofeature.googlecode.com/svn/trunk/</a> eharmony-photofeature-read-only</code> </p>
 <div class="image">
 <img src="images/Mainpage_faces.png" alt="Mainpage_faces.png"/>
 </div>
-<h2>Image data structure and operation</h2>
+<h2>Usage</h2>
+<div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><ol>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #339900;">#include "<a class="el" href="eHimage_8h.html" title="Basic image type and operations.">eHimage.h</a>"</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #339900;">#include "<a class="el" href="eHfacemodel_8h.html" title="face detection model and operations">eHfacemodel.h</a>"</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #339900;">#include "<a class="el" href="eHposemodel_8h_source.html">eHposemodel.h</a>"</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #339900;">#include "<a class="el" href="eHbbox_8h.html" title="Multi-box bounding box type and operations.">eHbbox.h</a>"</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #339900;">#include &lt;vector&gt;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160;</div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #0000ff;">int</span> main<span style="color: #008000;">(</span><span style="color: #0000ff;">int</span> argc, <span style="color: #0000ff;">char</span><span style="color: #000040;">**</span> argv<span style="color: #008000;">)</span><span style="color: #008000;">{</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; <span style="color: #666666;">//load face model &amp; body model</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; facemodel_t<span style="color: #000040;">*</span> facemodel <span style="color: #000080;">=</span> facemodel_readFromFile<span style="color: #008000;">(</span><span style="color: #FF0000;">"face_p146.xml"</span><span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; posemodel_t<span style="color: #000040;">*</span> posemodel <span style="color: #000080;">=</span> posemodel_readFromFile<span style="color: #008000;">(</span><span style="color: #FF0000;">"pose_BUFFY.xml"</span><span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160;</div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; <span style="color: #666666;">//load an jpeg image</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; image_t<span style="color: #000040;">*</span> img <span style="color: #000080;">=</span> image_readJPG<span style="color: #008000;">(</span>argv<span style="color: #008000;">[</span><span style="color: #0000dd;">1</span><span style="color: #008000;">]</span><span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; </div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; <span style="color: #666666;">//detect faces and show results</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; std<span style="color: #008080;">::</span><span style="color: #007788;">vector</span><span style="color: #000080;">&lt;</span>bbox_t<span style="color: #000080;">&gt;</span> faces <span style="color: #000080;">=</span> facemodel_detect<span style="color: #008000;">(</span>facemodel,posemodel,img<span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; image_showDetection<span style="color: #008000;">(</span>img, faces, <span style="color: #FF0000;">"Face Detection Results"</span><span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; </div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; <span style="color: #666666;">//destruct image and models</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; image_delete<span style="color: #008000;">(</span>img<span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; facemodel_delete<span style="color: #008000;">(</span>facemodel<span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; posemodel_delete<span style="color: #008000;">(</span>posemodel<span style="color: #008000;">)</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160;</div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;">&#160; &#160; <span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span></div> </li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
+<div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #008000;">}</span></div> </li>
+</ol>
+</div><h2>Image data structure and operation</h2>
 <p>A structure type <em>image_t</em> is defined to present images. Some usesful operations are also provided, e.g. to load a jpeg image from file, use </p>
 <div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">image_ptr image_readJPG <span style="color: #008000;">(</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">char</span> <span style="color: #000040;">*</span>filename<span style="color: #008000;">)</span></div><p> To delete an image, use </p>
 <div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #0000ff;">void</span> image_delete <span style="color: #008000;">(</span>image_ptr img<span style="color: #008000;">)</span></div><h2>Face detection</h2>
@@ -94,7 +148,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 15 2012 01:56:37 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 15 2012 10:42:07 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5
 </small></address>
