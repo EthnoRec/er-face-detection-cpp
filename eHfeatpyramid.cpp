@@ -5,13 +5,12 @@
  * 2012-08 @ eH
  */
 #include "eHfeatpyramid.h"
-#include "eHmatrix.h"
 #include "eHimageFeature.h"
+
 #include <math.h>
 
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
-static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
 
 featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const int* maxsize, bool hallucinate) {
 	featpyra_t* pyra = new featpyra_t;
@@ -31,7 +30,7 @@ featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const in
 	pyra->scale = new double[pyra->len];
 	for(int i=0;i<interval;i++) {
 		/* first 2 octave */
-		scaled = image_resize(im,(1.0/pow(sc,i)));
+		scaled = image_subsample(im,(1.0/pow(sc,i)));
 		if(hallucinate) {
 			pyra->feat[i]=eHhog(scaled, sbin/2);
 			pyra->scale[i]=2.0/pow(sc,i);
@@ -93,6 +92,7 @@ featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const in
 }
 
 void featpyra_delete(featpyra_t* pyra) {
+	if(pyra==NULL) return;
 	for (int i=0;i<pyra->len;i++) {
 		mat3d_delete(pyra->feat[i]);
 	}

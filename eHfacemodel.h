@@ -15,7 +15,7 @@
 #include "eHbbox.h"
 #include "eHposemodel.h"
 
-#define EH_TEST_TIMER
+//#define EH_TEST_TIMER
 
 using std::vector;
 

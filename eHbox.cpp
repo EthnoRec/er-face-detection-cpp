@@ -1,11 +1,17 @@
 #include "eHbox.h"
+#include "eHutils.h"
+
 #include "stdlib.h"
+
 #include <math.h>
+
 #define EH_INF 1E20
 
 static inline double min(double x, double y) {return (x <= y ? x : y); }
+
 static inline double max(double x, double y) {return (x <= y ? y : x); }
-static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+
+static inline int round2int(double x) { return (int)(x+0.5); }
 
 void fbox_set(fbox_t* box, double x1, double y1, double x2, double y2) {
 	box->x1 = x1;

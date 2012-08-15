@@ -9,7 +9,7 @@
 #include <list>
 #include <algorithm>
 
-#define IMG_BOUND 10000
+#define EH_INF 1E20
 
 using std::vector;
 using std::list;
@@ -24,7 +24,7 @@ static inline double max(double x, double y) {return (x <= y ? y : x); }
  */
 void bbox_calcOut(bbox_t* bbox){
 	vector<fbox_t>::iterator iter;
-	fbox_set(&(bbox->outer),IMG_BOUND,IMG_BOUND,-IMG_BOUND,-IMG_BOUND);
+	fbox_set(&(bbox->outer),EH_INF,EH_INF,-EH_INF,-EH_INF);
 	for(iter=bbox->boxes.begin();iter!=bbox->boxes.end();iter++)
 		fbox_set(&(bbox->outer),
 				min(bbox->outer.x1,iter->x1),

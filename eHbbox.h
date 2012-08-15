@@ -13,7 +13,6 @@
 #include "eHbox.h"
 
 #include <vector>
-#include <string>
 
 /** @def EH_BBOXS_PRUNE
  *  @brief Default pruning parameter for bbox_v_nms()
@@ -21,13 +20,11 @@
  */
 #define EH_BBOXS_PRUNE 30000
 
-using std::vector;
-
 /** @struct eHbbox
  *  @brief Multi-box "bounding box", used for detection result
  */
 struct eHbbox {
-	vector<fbox_t> boxes; /**< @brief part locations */
+	std::vector<fbox_t> boxes; /**< @brief part locations */
 	double score; /**< @brief detection score @warning not calibrated */
 	int component; /**< @brief component number for certain models */
 	fbox_t outer; /**< @brief outer "real" bounding box of the detection */
@@ -53,12 +50,12 @@ void bbox_clipboxes(bbox_t& bbox, const int* imsize);
 /** @brief Resize the input bboxs (in-place)
  *  @sa fbox_resize()
  */
-void bbox_v_resize(vector<bbox_t>& bboxes, double scale);
+void bbox_v_resize(std::vector<bbox_t>& bboxes, double scale);
 
 /** @brief Move the input bboxs (in-place)
  *  @sa fbox_move()
  */
-void bbox_v_move(vector<bbox_t>& bboxes, const int* offset);
+void bbox_v_move(std::vector<bbox_t>& bboxes, const int* offset);
 
 /** @brief Non-maximum suppression
  *
@@ -69,6 +66,6 @@ void bbox_v_move(vector<bbox_t>& bboxes, const int* offset);
  *  @param overlap two results are not both kept if their overlap ratio exceed this value
  *  @param prune initial bboxes are pruned for higher speed
  */
-void bbox_v_nms(vector<bbox_t>& bboxes, double overlap, unsigned prune = EH_BBOXS_PRUNE);
+void bbox_v_nms(std::vector<bbox_t>& bboxes, double overlap, unsigned prune = EH_BBOXS_PRUNE);
 
 #endif

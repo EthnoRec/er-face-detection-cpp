@@ -495,28 +495,6 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 	timeradd(&interval_detect, &time_spent_detect, &time_spent_detect);
 #endif
 
-	/*testing code: display outer bbox*/
-	/*
-	using namespace cv;
-	Mat M(img->sizy,img->sizx,CV_8UC3);
-	for(unsigned y=0;y<img->sizy;y++) {
-		for(unsigned x=0;x<img->sizx;x++) {
-			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->sizy];
-			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->sizy];
-			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->sizy];
-		}
-	}
-	for(unsigned i=0;i<boxes.size();i++){
-		int x1 = (int)boxes[i].outer.x1;
-		int y1 = (int)boxes[i].outer.y1;
-		int w = (int)boxes[i].outer.x2 - x1;
-		int h = (int)boxes[i].outer.y2 - y1;
-		rectangle(M, Rect(x1,y1,w,h),Scalar(0,255,0));
-	}
-	namedWindow("test", CV_WINDOW_AUTOSIZE);
-	imshow("test",M);
-	waitKey();
-*/
 	return boxes;
 }
 
@@ -526,8 +504,11 @@ vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t*
 
 vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t* posemodel, const image_ptr img, double thrs_face, double thrs_pose) {
 	double scale1 = EH_IMG_DEFAULT_SZ / (double) min(img->sizx,img->sizy);
-	image_ptr img1 = image_resize(img, scale1);
-	image_display(img1, "tmp");
+	image_ptr img1;
+	//if(scale1<1)
+	//	img1 = image_subsample(img, scale1);
+	//else
+		img1 = image_resize(img, scale1);
 	/* 1st step, detect face in scaled image */
 	vector<bbox_t> faces = facemodel_detect(facemodel, img1, facemodel->thresh);
 	/* only ask for help of body detection if no faces are detected */
@@ -553,7 +534,6 @@ vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t*
 			image_ptr patch = image_crop(img, head, (int*)&offset);
 			double scale2 = EH_IMG_DEFAULT_SZ / (double) min(head.x2-head.x1, head.y2-head.y1);
 			image_ptr patch2 = image_resize(patch, scale2); 
-			image_display(patch2,"test");
 			vector<bbox_t> facesfp = facemodel_detect(facemodel, patch2, facemodel->thresh);
 			if(!facesfp.empty()) {
 				bbox_v_resize(facesfp, 1/scale2);

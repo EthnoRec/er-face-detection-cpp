@@ -5,14 +5,17 @@
  * 2012-07 @ eH
  */
 #include "eHimage.h"
+#include "eHbox.h"
+
 #include <assert.h>
 #include <string.h>
 
-//#include "CImg-1.5.0/CImg.h"
+#include <iostream>
+
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
-static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+static inline int round2int(double x) { return (int)(x+0.5);}
 
 image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch){
 	image_ptr img = new struct eHimage;
@@ -41,6 +44,7 @@ image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch, const double* fillva
 	img->imsize[1] = sizx;
 	img->imsize[2] = nch;
 	img->data = new double[sizy*sizx*nch];
+
 	for(unsigned i=0;i<nch;i++) {
 		img->ch[i] = img->data + i*sizy*sizx;
 		for(unsigned xy=0; xy<sizy*sizx; xy++)
@@ -53,13 +57,17 @@ image_ptr image_alloc(size_t sizy, size_t sizx, size_t nch, const double* fillva
 }
 
 void image_delete(image_ptr img){
-	if(!img->is_shared)
-		delete[] img->data;
+	if(NULL==img)
+		return;
+	if(!img->is_shared) {
+		if(img->data!=NULL)
+			delete[] img->data;
+	}
 	delete img;
 }
 
 void image_zero(image_ptr img, const double* val) {
-	if(img==NULL || img->data==NULL) return;
+	if(img==NULL || img->data==NULL || val==NULL) return;
 	unsigned ch, y, x;
 	for(ch=0; ch<img->nchannel; ch++)
 		for(y=0; y<img->sizy; y++)
@@ -102,6 +110,7 @@ image_ptr image_readJPG(const char* filename) {
 	using namespace cv;
 	Mat img = imread(filename, 1);
 	if(!img.data) {
+		std::cout<<"Error: can not open "<<filename<<std::endl;
 		return NULL;
 	}
 	image_ptr im = image_alloc(img.size().height, img.size().width);
@@ -112,7 +121,6 @@ image_ptr image_readJPG(const char* filename) {
 			im->ch[2][y+x*im->stepy]=img.at<Vec3b>(y,x).val[0];
 		}
 	}
-
 	return im;
 }
 
@@ -132,14 +140,14 @@ void image_display(const image_ptr img, const std::string& winname) {
 }
 
 /* struct used for caching interpolation values */
-/* used by image_resize() */
+/* used by image_subsample() */
 struct alphainfo {
 	int si, di;
 	double alpha;
 };
 
 /* copy src into dst using pre-computed interpolation values */
-/* used by image_resize() */
+/* used by image_subsample() */
 void alphacopy(double* src, double*dst, struct alphainfo *ofs, int n) {
 	struct alphainfo *end = ofs+n;
 	while(ofs != end) {
@@ -149,16 +157,16 @@ void alphacopy(double* src, double*dst, struct alphainfo *ofs, int n) {
 }
 
 /* resize along each column (result is transposed) */
-/* used by image_resize() */
-void resize1dtran(image_ptr src, size_t sheight, 
-		image_ptr dst, size_t dheight, size_t width) {
+/* used by image_subsample() */
+void subsample1dtran(image_ptr src, size_t sheight, 
+		image_ptr dst, size_t dheight, size_t width) throw(std::bad_alloc){
 	double scale = (double)dheight/(double)sheight;
 	double invscale = (double)sheight/(double)dheight;
 
 	/* cache interpolation values since they can be shared 
 	 * among different columns*/
 	int len = (int)ceil(dheight*invscale) + 2*dheight;
-	alphainfo ofs[len];
+	alphainfo* ofs=new alphainfo[len];
 	int k = 0;
 	for (unsigned dy=0;dy<dheight;dy++) {
 		double fsy1 = dy * invscale;
@@ -187,32 +195,72 @@ void resize1dtran(image_ptr src, size_t sheight,
 			ofs[k++].alpha = (fsy2-sy2)*scale;
 		}
 	}
-	//memset(dst->data, 0, dst->nchannel*width*dheight*sizeof(double));
 	for (int nch = 0; nch<3; nch++) {
-		//memset(dst->ch[nch], 0, width*dheight*sizeof(double));
 		for (unsigned x = 0; x<width; x++) {
 			double *s = src->ch[nch] + x*src->stepy;
 			double *d = dst->ch[nch] + x;
 			alphacopy(s,d,ofs,k);
 		}
 	}
+	delete[] ofs;
 }
 
 /** @brief Fast image subsampling
  *  @note src image is not destroyed
  */
-image_ptr image_resize(const image_ptr img, double scale) {
+image_ptr image_subsample(const image_ptr img, double scale) {
+	if(scale>1 || scale <=0 || img==NULL || img->data==NULL)
+		return NULL;
 	size_t dst_sizy = (unsigned int)round2int(img->sizy*scale);
 	size_t dst_sizx = (unsigned int)round2int(img->sizx*scale);
 	double initialval[] = {0, 0, 0};
 	image_ptr scaled = image_alloc(dst_sizy, dst_sizx, img->nchannel, initialval);
 	image_ptr tmp = image_alloc(img->sizx,dst_sizy, img->nchannel, initialval);
-	
 	/* scale in columns, and transposed */
-	resize1dtran(img,img->sizy,tmp,dst_sizy, img->sizx);
+	subsample1dtran(img,img->sizy,tmp,dst_sizy, img->sizx);
 	/* scale in (old)rows, and transposed back */
-	resize1dtran(tmp,img->sizx,scaled,dst_sizx,dst_sizy);
+	subsample1dtran(tmp,img->sizx,scaled,dst_sizx,dst_sizy);
+	image_delete(tmp);
+	return scaled;
+}
 
+void resize1dtran(image_ptr src, image_ptr dst) throw(std::bad_alloc){
+	double scale = (dst->sizx-1.0) / (src->sizy-1.0);
+	double invscale = 1/scale;
+	int* pre = new int[dst->sizx];
+	double* alpha = new double[dst->sizx];
+	pre[0] = 0; alpha[0] = 1.0;
+	pre[dst->sizx-1] = src->sizy-2;  alpha[dst->sizx-1] = 0;
+	for(unsigned i=1;i<dst->sizx-1;i++) {
+		pre[i]=(int)floor(invscale*i);
+		alpha[i]=invscale*i-floor(invscale*i);
+	}
+	unsigned ch, y, x;
+	for(ch=0;ch<dst->nchannel;ch++) {
+		for(y=0;y<dst->sizy;y++) {
+			for(x=0;x<dst->sizx;x++) {
+				dst->ch[ch][x*dst->stepy+y] = 
+					src->ch[ch][y*src->stepy+pre[x]]*alpha[x] 
+					+ src->ch[ch][y*src->stepy+pre[x]+1]*(1-alpha[x]);
+			}
+		}
+	}
+	delete[] pre;
+	delete[] alpha;
+}
+
+image_ptr image_resize(const image_ptr img, double scale) {
+	if(scale<=0 || img==NULL || img->data==NULL)
+		return NULL;
+	size_t dst_sizy = (unsigned)round2int(img->sizy*scale);
+	size_t dst_sizx = (unsigned)round2int(img->sizx*scale);
+	image_ptr scaled = image_alloc(dst_sizy, dst_sizx, img->nchannel);
+	image_ptr tmp = image_alloc(img->sizx, dst_sizy, img->nchannel);
+	
+	/* scale in colums, and transposed */
+	resize1dtran(img,tmp);
+	/* scale in (old)rows, and transposed */
+	resize1dtran(tmp,scaled);
 	image_delete(tmp);
 	return scaled;
 }
@@ -222,9 +270,7 @@ image_ptr image_resize(const image_ptr img, double scale) {
 void reduce1dtran(image_ptr src, size_t sheight, 
 		image_ptr dst, size_t dheight, size_t width) {
 	double *s, *d;
-	//memset(dst->data, 0, dst->nchannel*width*dheight*sizeof(double));
 	for (int nch = 0; nch<3; nch++) {
-		//memset(dst->ch[nch], 0, width*dheight*sizeof(double));
 		for (unsigned x = 0; x<width; x++) {
 			s = src->ch[nch] + x*src->stepy;
 			d = dst->ch[nch] + x;
@@ -324,11 +370,51 @@ void image_showDetection(const image_ptr img, const vector<bbox_t> boxes, const 
 	}
 
 	for(unsigned i=0;i<boxes.size();i++){
+		for(unsigned j=0;j<boxes[i].boxes.size();j++) {
+			int x1 = (int)boxes[i].boxes[j].x1;
+			int y1 = (int)boxes[i].boxes[j].y1;
+			int w = (int)boxes[i].boxes[j].x2-x1;
+			int h = (int)boxes[i].boxes[j].y2-y1;
+			rectangle(M, Rect(x1, y1, w, h), Scalar(255,0,0));
+			circle(M, Point(x1+0.5*w,y1+0.5*h), 2, Scalar(0,0,255), 2);
+		}
+	}
+	namedWindow(winname, CV_WINDOW_AUTOSIZE);
+	imshow(winname,M);
+	waitKey();
+}
+
+void image_showFaces(const image_ptr img, const vector<bbox_t> boxes, const std::string& winname) {
+	using namespace cv;
+	Mat M(img->sizy,img->sizx,CV_8UC3);
+	for(unsigned y=0;y<img->sizy;y++) {
+		for(unsigned x=0;x<img->sizx;x++) {
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->stepy];
+		}
+	}
+
+	for(unsigned i=0;i<boxes.size();i++){
 		int x1 = (int)boxes[i].outer.x1;
 		int y1 = (int)boxes[i].outer.y1;
 		int w = (int)boxes[i].outer.x2 - x1;
 		int h = (int)boxes[i].outer.y2 - y1;
-		rectangle(M, Rect(x1,y1,w,h),Scalar(0,255,0));
+		rectangle(M, Rect(x1,y1,w,h),Scalar(0,0,0));
+		if(boxes[i].boxes.size()!=68) continue;
+		int idxs_nose[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+		int idxs_leye[] = {9, 10, 11, 12, 13, 14};
+		int idxs_reye[] = {20, 21, 22, 23, 24, 25};
+		int idxs_mout[] = {31, 32, 33, 34, 35, 36, 37, 38, 39, 
+			40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50};
+		fbox_t nose = fbox_merge(boxes[i].boxes, idxs_nose, 9); 
+		fbox_t leye = fbox_merge(boxes[i].boxes, idxs_leye, 6);
+		fbox_t reye = fbox_merge(boxes[i].boxes, idxs_reye, 6);
+		fbox_t mout = fbox_merge(boxes[i].boxes, idxs_mout, 20);
+		rectangle(M, Rect(nose.x1,nose.y1,nose.x2-nose.x1,nose.y2-nose.y1),Scalar(0,255,0));
+		rectangle(M, Rect(leye.x1,leye.y1,leye.x2-leye.x1,leye.y2-leye.y1),Scalar(255,0,0));
+		rectangle(M, Rect(reye.x1,reye.y1,reye.x2-reye.x1,reye.y2-reye.y1),Scalar(255,0,0));
+		rectangle(M, Rect(mout.x1,mout.y1,mout.x2-mout.x1,mout.y2-mout.y1),Scalar(255,255,0));
 	}
 	namedWindow(winname, CV_WINDOW_AUTOSIZE);
 	imshow(winname,M);

@@ -1,9 +1,8 @@
-/*
- * eHmatrix.h
- * Basic matrix types and operations
+/** @file eHmatrix.h
+ *  @brief Basic matrix types and operations
  *
- * Hang Su
- * 2012-07 @ eH
+ *  @author Hang Su
+ *  @date 2012-07
  */
 #ifndef EHMATRIX_H
 #define EHMATRIX_H

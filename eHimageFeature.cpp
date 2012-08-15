@@ -11,8 +11,6 @@
 /* small value, used to avoid division by zero */
 #define eps 0.0001
 
-//#define round2int(x) ((x-floor(x))>0.5 ? ceil(x) : floor(x))
-
 /* unit vectors used to compute gradient orientation */
 double uu[9] = {1.0000, 
 		0.9397, 
@@ -39,7 +37,8 @@ static inline double max(double x, double y) { return (x <= y ? y : x); }
 static inline int min(int x, int y) { return (x <= y ? x : y); }
 static inline int max(int x, int y) { return (x <= y ? y : x); }
 
-static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+//static inline int round2int(double x) { return ((x-floor(x))>0.5 ? (int)ceil(x) : (int)floor(x));}
+static inline int round2int(double x) { return (int)(x+0.5);}
 
 /* 
  * entry point, 
