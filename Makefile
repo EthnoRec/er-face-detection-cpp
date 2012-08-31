@@ -1,13 +1,12 @@
 CC=g++
 CFLAGS=-O3 -Wall -pedantic
-#CFLAGS =-O0 -Wall -pedantic -g
-LDFLAGS_BLAS=-L /usr/lib64/atlas-sse3/ -lptcblas
-#LDFLAGS_BLAS=-lblas
+#LDFLAGS_BLAS=-L /usr/lib64/atlas-sse3/ -lptcblas
+LDFLAGS_BLAS=-lblas
 LDFLAGS=-lpthread -lopencv_core -lopencv_highgui
 SOURCES=main.cpp eHbbox.cpp eHfeatpyramid.cpp eHimageFeature.cpp eHutils.cpp eHbox.cpp eHfilter.cpp eHmatrix.cpp eHfacemodel.cpp eHimage.cpp eHshiftdt.cpp eHposemodel.cpp
 HEADERS=eHbbox.h eHfeatpyramid.h eHimageFeature.h eHutils.h eHbox.h eHfilter.h eHmatrix.h eHfacemodel.h eHimage.h eHshiftdt.h eHposemodel.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=test.64
+EXECUTABLE=test
 
 all: $(SOURCES) $(EXECUTABLE)
 

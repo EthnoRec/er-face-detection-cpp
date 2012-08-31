@@ -1,30 +1,25 @@
-/*
- * eHutils.h
- * Some useful stuff (string parsing etc. )
+/** @file eHutils.h
+ *  @brief Some useful stuff (string parsing etc. )
  *
- * Hang Su
- * 2012-08 @ eH
+ *  @author Hang Su
+ *  @date 2012-08
  */
 #ifndef EHUTILS_H
 #define EHUTILS_H
 
-/*
- * parse given string(e.g. "10, 5\0") to integer array
- *
- * NOTE: 
- * 	(1)integer array is allocated inside
- * 	(2)siz==-1 indicates size is not known, will be decided automatically
- * 	(3)if siz is wrong, behavior is undefined
+/** @brief Parse given string(e.g. "10, 5\0") to integer array
+ *  @param csvstr null-terminated c string
+ *  @param siz number of integers inside the string; if -1 is passed, actural 
+ *  size will be calculated and stored in siz
+ *  @return array of integers, memory is allocated for it
  */
 int* parseCSVstr2int(const char* csvstr, int* siz, int offset = 0);
 
-/*
- * parse given string(e.g. "1.2, 3.4\0") to double precision array
- *
- * NOTE: 
- * 	(1)integer array is allocated inside
- * 	(2)siz==-1 indicates size is not known, will be decided automatically
- * 	(3)if siz is wrong, behavior is undefined
+/** @brief Parse given string(e.g. "1.2, 3.4\0") to double precision array
+ *  @param csvstr null-terminated c string
+ *  @param siz amount of numbers inside the string; if -1 is passed, actural 
+ *  size will be calculated and stored in siz
+ *  @return array of numbers, memory is allocated for it
  */
 double* parseCSVstr2double(const char* csvstr, int* siz);
 

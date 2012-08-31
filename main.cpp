@@ -9,7 +9,7 @@ int main(int argc, char** argv){
 	facemodel_t* facemodel = facemodel_readFromFile("face_p146.xml");
 	posemodel_t* posemodel = posemodel_readFromFile("pose_BUFFY.xml");
 
-	//load an jpeg image
+	//load a jpeg image
 	image_t* img = image_readJPG(argv[1]);
 	
 	//detect faces and show results

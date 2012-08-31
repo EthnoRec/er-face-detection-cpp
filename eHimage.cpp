@@ -400,7 +400,7 @@ void image_showFaces(const image_ptr img, const vector<bbox_t> boxes, const std:
 		int y1 = (int)boxes[i].outer.y1;
 		int w = (int)boxes[i].outer.x2 - x1;
 		int h = (int)boxes[i].outer.y2 - y1;
-		rectangle(M, Rect(x1,y1,w,h),Scalar(0,0,0));
+		rectangle(M, Rect(x1,y1,w,h),Scalar(0,0,255),2);
 		if(boxes[i].boxes.size()!=68) continue;
 		int idxs_nose[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 		int idxs_leye[] = {9, 10, 11, 12, 13, 14};
@@ -411,10 +411,10 @@ void image_showFaces(const image_ptr img, const vector<bbox_t> boxes, const std:
 		fbox_t leye = fbox_merge(boxes[i].boxes, idxs_leye, 6);
 		fbox_t reye = fbox_merge(boxes[i].boxes, idxs_reye, 6);
 		fbox_t mout = fbox_merge(boxes[i].boxes, idxs_mout, 20);
-		rectangle(M, Rect(nose.x1,nose.y1,nose.x2-nose.x1,nose.y2-nose.y1),Scalar(0,255,0));
-		rectangle(M, Rect(leye.x1,leye.y1,leye.x2-leye.x1,leye.y2-leye.y1),Scalar(255,0,0));
-		rectangle(M, Rect(reye.x1,reye.y1,reye.x2-reye.x1,reye.y2-reye.y1),Scalar(255,0,0));
-		rectangle(M, Rect(mout.x1,mout.y1,mout.x2-mout.x1,mout.y2-mout.y1),Scalar(255,255,0));
+		rectangle(M, Rect(nose.x1,nose.y1,nose.x2-nose.x1,nose.y2-nose.y1),Scalar(0,255,0),2);
+		rectangle(M, Rect(leye.x1,leye.y1,leye.x2-leye.x1,leye.y2-leye.y1),Scalar(255,0,0),2);
+		rectangle(M, Rect(reye.x1,reye.y1,reye.x2-reye.x1,reye.y2-reye.y1),Scalar(255,0,0),2);
+		rectangle(M, Rect(mout.x1,mout.y1,mout.x2-mout.x1,mout.y2-mout.y1),Scalar(0,255,255),2);
 	}
 	namedWindow(winname, CV_WINDOW_AUTOSIZE);
 	imshow(winname,M);

@@ -1,19 +1,18 @@
-/*
- * eHshiftdt.h
+/** @file eHshiftdt.h
  *
- * Generalized Distance Transform
- * see: "Distance Transforms of Sampled Functions" 
- * (P. F. Felzenszwalb and D. P. Huttenlocher, 2004)
- * This applies computes a min convolution of a quadratic function ax^2+bx
+ *  @brief Generalized Distance Transform
  *
- * Hang Su
- * 2012-07 @ eH
+ *  @sa P. F. Felzenszwalb and D. P. Huttenlocher, "Distance Transforms of Sampled Functions". 2004.
+ *  @author Hang Su
+ *  @date 2012-07
  */
 
-/*
- * NOTE: M, Ix, Iy should already be allocated before passed in, 
- * they are then modified as output results
- * M, Ix, Iy, vals - column first order
+/** @brief Perform generalized distance transform
+ *  
+ *  This applies computes a min convolution of a quadratic function ax^2+bx
+ *  This outputs results on a shifted(offy, offx), subsampled(dstep) grid
+ *  @note M, Ix, Iy should be properly allocated before passed in, 
+ *  they are then modified as output results
  */
 void eHshiftdt(double* M, int* Ix, int* Iy, 
 		int lenx, int leny, int offx, int offy, int dstep, 
