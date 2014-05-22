@@ -26,7 +26,11 @@
 struct eHbbox {
 	std::vector<fbox_t> boxes; /**< @brief part locations */
 	double score; /**< @brief detection score @warning not calibrated */
-	int component; /**< @brief component number for certain models */
+	/** @brief component id for certain models 
+	 * 
+	 *  Face model has 13 components (id 0~12) for viewpoints ranging from 90 degree (profile facing right) to -90 degree (profile facing left). 
+	 */
+	int component; 
 	fbox_t outer; /**< @brief outer "real" bounding box of the detection */
 	double area; /**< @brief area of outer */
 };

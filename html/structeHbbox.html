@@ -102,9 +102,8 @@ std::vector&lt; <a class="el" href="eHbox_8h.html#a5a56d87a649d81945e96505ec76d6
 <tr class="memitem:a90d1b31a19d0facdeb4caaaba11af54d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeHbbox.html#a90d1b31a19d0facdeb4caaaba11af54d">score</a></td></tr>
 <tr class="memdesc:a90d1b31a19d0facdeb4caaaba11af54d"><td class="mdescLeft">&#160;</td><td class="mdescRight">detection score  <a href="#a90d1b31a19d0facdeb4caaaba11af54d">More...</a><br/></td></tr>
 <tr class="separator:a90d1b31a19d0facdeb4caaaba11af54d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c6a5e808464ba2420a4b43461a5153e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c6a5e808464ba2420a4b43461a5153e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeHbbox.html#a7c6a5e808464ba2420a4b43461a5153e">component</a></td></tr>
-<tr class="memdesc:a7c6a5e808464ba2420a4b43461a5153e"><td class="mdescLeft">&#160;</td><td class="mdescRight">component number for certain models <br/></td></tr>
+<tr class="memitem:a7c6a5e808464ba2420a4b43461a5153e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeHbbox.html#a7c6a5e808464ba2420a4b43461a5153e">component</a></td></tr>
+<tr class="memdesc:a7c6a5e808464ba2420a4b43461a5153e"><td class="mdescLeft">&#160;</td><td class="mdescRight">component id for certain models  <a href="#a7c6a5e808464ba2420a4b43461a5153e">More...</a><br/></td></tr>
 <tr class="separator:a7c6a5e808464ba2420a4b43461a5153e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecbaeae671315bf36d947c7fd22ed633"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecbaeae671315bf36d947c7fd22ed633"></a>
 <a class="el" href="eHbox_8h.html#a5a56d87a649d81945e96505ec76d6c54">fbox_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeHbbox.html#aecbaeae671315bf36d947c7fd22ed633">outer</a></td></tr>
@@ -118,6 +117,21 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Multi-box "bounding box", used for detection result. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a7c6a5e808464ba2420a4b43461a5153e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int eHbbox::component</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>component id for certain models </p>
+<p>Face model has 13 components (id 0~12) for viewpoints ranging from 90 degree (profile facing right) to -90 degree (profile facing left). </p>
+
+</div>
+</div>
 <a class="anchor" id="a90d1b31a19d0facdeb4caaaba11af54d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -139,7 +153,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="st
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 22 2014 13:57:42 for Face Detection with Alignment by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 22 2014 17:35:03 for Face Detection with Alignment by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
