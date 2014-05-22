@@ -6,7 +6,7 @@
 <div class="image">
 <img src="images/Mainpage_faces.png" alt="Mainpage_faces.png"/>
 </div>
-<h1>Get started</h1>
+<h1>Installation</h1>
 <h3>Checkout latest code</h3>
 <div class="bash" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #c20cb9; font-weight: bold;">svn</span> checkout http:<span style="color: #000000; font-weight: bold;">//</span>eharmony-photofeature.googlecode.com<span style="color: #000000; font-weight: bold;">/</span>svn<span style="color: #000000; font-weight: bold;">/</span>trunk<span style="color: #000000; font-weight: bold;">/</span> eharmony-photofeature-read-only</div> <h3>Dependencies</h3>
 <p>The code depends on <a href="http://opencv.willowgarage.com/">OpenCV</a> to load/dispaly image. To install OpenCV on Ubuntu/Debian: </p>
@@ -15,7 +15,12 @@
  Ubuntu/Debian </p>
 
 <div class="bash" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #c20cb9; font-weight: bold;">sudo</span> <span style="color: #c20cb9; font-weight: bold;">apt-get</span> <span style="color: #c20cb9; font-weight: bold;">install</span> libblas-dev</div><p> Fedora </p>
-<div class="bash" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #c20cb9; font-weight: bold;">sudo</span> yum <span style="color: #c20cb9; font-weight: bold;">install</span> atlas-sse3-devel.x86_64</div><h1>Usage example</h1>
+<div class="bash" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #c20cb9; font-weight: bold;">sudo</span> yum <span style="color: #c20cb9; font-weight: bold;">install</span> atlas-sse3-devel.x86_64</div>
+
+<h3>Compilation</h3>
+<div class="bash" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #c20cb9; font-weight: bold;">make</span> all</div>
+
+<h1>Usage example</h1>
 <div class="cpp" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><ol>
 <li style="font-weight: normal; vertical-align:top;font: normal normal 130% &apos;Courier New&apos;, Courier, monospace; color: #003030;">
 <div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;color: #000020;"><span style="color: #339900;">#include "eHimage.h"</span></div> </li>
