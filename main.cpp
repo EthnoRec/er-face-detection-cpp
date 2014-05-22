@@ -13,7 +13,8 @@ int main(int argc, char** argv){
 	image_t* img = image_readJPG(argv[1]);
 	
 	//detect faces and show results
-	std::vector<bbox_t> faces = facemodel_detect(facemodel,posemodel,img);
+	//std::vector<bbox_t> faces = facemodel_detect(facemodel,posemodel,img);
+	std::vector<bbox_t> faces = facemodel_detect(facemodel,img);
 	image_showDetection(img, faces, "Face Detection Results");
 	
 	//destruct image and models
