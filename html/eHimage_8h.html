@@ -131,6 +131,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a9b760506fbf5548dd4e3715b5083e863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a9b760506fbf5548dd4e3715b5083e863">image_readJPG</a> (const char *filename)</td></tr>
 <tr class="memdesc:a9b760506fbf5548dd4e3715b5083e863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read Jpeg image file.  <a href="#a9b760506fbf5548dd4e3715b5083e863">More...</a><br/></td></tr>
 <tr class="separator:a9b760506fbf5548dd4e3715b5083e863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a014be865a1868dec62c6a796ef71810e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a014be865a1868dec62c6a796ef71810e">image_writeJPG</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const char *filename)</td></tr>
+<tr class="memdesc:a014be865a1868dec62c6a796ef71810e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write Jpeg image file.  <a href="#a014be865a1868dec62c6a796ef71810e">More...</a><br/></td></tr>
+<tr class="separator:a014be865a1868dec62c6a796ef71810e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77cd33d6390bf822b058eb7f25e43d6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a77cd33d6390bf822b058eb7f25e43d6c">image_display</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const std::string &amp;winname)</td></tr>
 <tr class="memdesc:a77cd33d6390bf822b058eb7f25e43d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display an image.  <a href="#a77cd33d6390bf822b058eb7f25e43d6c">More...</a><br/></td></tr>
 <tr class="separator:a77cd33d6390bf822b058eb7f25e43d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,6 +149,9 @@ Functions</h2></td></tr>
 <tr class="memitem:afaa0749505500e27056ecd3e9dd1ae1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#afaa0749505500e27056ecd3e9dd1ae1d">image_crop</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, <a class="el" href="eHbox_8h.html#a5a56d87a649d81945e96505ec76d6c54">fbox_t</a> crop, int *offset=NULL, bool shared=true)</td></tr>
 <tr class="memdesc:afaa0749505500e27056ecd3e9dd1ae1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crop image This function can be used in two ways, either get shared data from original image, or allocate a new image, which is more expensive.  <a href="#afaa0749505500e27056ecd3e9dd1ae1d">More...</a><br/></td></tr>
 <tr class="separator:afaa0749505500e27056ecd3e9dd1ae1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a441847bbac7e29a5ffff546fa1450b6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a441847bbac7e29a5ffff546fa1450b6e">image_writeDetectionJPG</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt; boxes, const char *filename)</td></tr>
+<tr class="memdesc:a441847bbac7e29a5ffff546fa1450b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write Jpg image with detected faces.  <a href="#a441847bbac7e29a5ffff546fa1450b6e">More...</a><br/></td></tr>
+<tr class="separator:a441847bbac7e29a5ffff546fa1450b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f26b43f04d0c7b86902114f0b6b3c6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a0f26b43f04d0c7b86902114f0b6b3c6c">image_showDetection</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt; boxes, const std::string &amp;winname)</td></tr>
 <tr class="memdesc:a0f26b43f04d0c7b86902114f0b6b3c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show detection results on image and wait.  <a href="#a0f26b43f04d0c7b86902114f0b6b3c6c">More...</a><br/></td></tr>
 <tr class="separator:a0f26b43f04d0c7b86902114f0b6b3c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -583,10 +589,82 @@ src image is not destroyed </dd></dl>
 
 </div>
 </div>
+<a class="anchor" id="a441847bbac7e29a5ffff546fa1450b6e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void image_writeDetectionJPG </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a>&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>boxes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write Jpg image with detected faces. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td>detection target </td></tr>
+    <tr><td class="paramname">boxes</td><td>detection results </td></tr>
+    <tr><td class="paramname">filename</td><td>saving path </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="eHimage_8h.html#a0f26b43f04d0c7b86902114f0b6b3c6c" title="Show detection results on image and wait. ">image_showDetection()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a014be865a1868dec62c6a796ef71810e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void image_writeJPG </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a>&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write Jpeg image file. </p>
+<dl class="section note"><dt>Note</dt><dd>Requires opencv library: libopencv_core, libopencv_highgui </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 22 2014 17:35:03 for Face Detection with Alignment by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 22 2014 22:07:03 for Face Detection with Alignment by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

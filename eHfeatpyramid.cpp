@@ -17,8 +17,8 @@ featpyra_t* featpyra_create(const image_ptr im, int interval, int sbin, const in
 
 	/* select padding, allowing for one cell in model to be visible
 	 * Even padding allows for consistent spatial relations across 2X scales */
-	int pady = max(maxsize[0]-1-1,0);
-	int padx = max(maxsize[1]-1-1,0);
+	size_t pady = max(maxsize[0]-1-1,0);
+	size_t padx = max(maxsize[1]-1-1,0);
 	double sc = pow(2.0, 1.0/(double)interval);
 
 	int min_level = floor(log((double)min(im->sizy,im->sizx)/(5.0*sbin))/log(sc));

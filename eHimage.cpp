@@ -12,6 +12,7 @@
 
 #include <iostream>
 
+#include "rapidxml-1.13/rapidxml.hpp"
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
@@ -109,10 +110,8 @@ cimg_library::CImgDisplay* image_display(const image_ptr img, const char* winnam
 image_ptr image_readJPG(const char* filename) {
 	using namespace cv;
 	Mat img = imread(filename, 1);
-	if(!img.data) {
-		std::cout<<"Error: can not open "<<filename<<std::endl;
-		return NULL;
-	}
+	if(!img.data) return NULL;
+
 	image_ptr im = image_alloc(img.size().height, img.size().width);
 	for(unsigned y=0;y<im->sizy;y++) {
 		for(unsigned x=0;x<im->sizx;x++) {
@@ -122,6 +121,19 @@ image_ptr image_readJPG(const char* filename) {
 		}
 	}
 	return im;
+}
+
+void image_writeJPG(const image_ptr img, const char* filename) {
+	using namespace cv;
+	Mat M(img->sizy,img->sizx,CV_8UC3);
+	for(unsigned int y=0;y<img->sizy;y++) {
+		for(unsigned int x=0;x<img->sizx;x++) {
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->stepy];
+		}
+	}
+	imwrite(filename,M);
 }
 
 void image_display(const image_ptr img, const std::string& winname) {
@@ -356,6 +368,34 @@ image_ptr image_crop(const image_ptr img, fbox_t crop, int* offset, bool shared)
 		offset[1] = intcrop.x1;
 	}
 	return result;
+}
+
+void image_writeDetectionJpg(const image_ptr img, const vector<bbox_t> boxes, const char* filename) {
+	using namespace cv;
+	Mat M(img->sizy,img->sizx,CV_8UC3);
+	for(unsigned y=0;y<img->sizy;y++) {
+		for(unsigned x=0;x<img->sizx;x++) {
+			M.at<Vec3b>(y,x)[2]=img->ch[0][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[1]=img->ch[1][y+x*img->stepy];
+			M.at<Vec3b>(y,x)[0]=img->ch[2][y+x*img->stepy];
+		}
+	}
+
+	for(unsigned i=0;i<boxes.size();i++){
+		for(unsigned j=0;j<boxes[i].boxes.size();j++) {
+			int x1 = (int)boxes[i].boxes[j].x1;
+			int y1 = (int)boxes[i].boxes[j].y1;
+			int w = (int)boxes[i].boxes[j].x2-x1;
+			int h = (int)boxes[i].boxes[j].y2-y1;
+			rectangle(M, Rect(x1, y1, w, h), Scalar(255,0,0));
+			circle(M, Point(x1+0.5*w,y1+0.5*h), 2, Scalar(0,0,255), 2);
+		}
+	}
+	imwrite(filename,M);
+}
+
+void image_writeDetectionXml(const vector<bbox_t> boxes, const char* filename) {
+	
 }
 
 void image_showDetection(const image_ptr img, const vector<bbox_t> boxes, const std::string& winname) {

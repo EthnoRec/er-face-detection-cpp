@@ -291,7 +291,7 @@ struct posepart_data {
 vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img, double thrs){
 	vector<bbox_t> boxes;
 
-	int imsize[] = {img->sizy, img->sizx};
+	int imsize[] = {(int)(img->sizy), (int)(img->sizx)};
 	featpyra_t* pyra = featpyra_create(img, model->interval, model->sbin, model->maxsize,false);
 	mat3d_ptr* resp = new mat3d_ptr[pyra->len];
 	memset(resp, 0, pyra->len*sizeof(mat3d_ptr));
@@ -502,6 +502,7 @@ vector<bbox_t> posemodel_detect(const posemodel_t* model, const image_ptr img) {
 }
 
 void posemodel_delete(posemodel_t* model) {
+	if(NULL==model) return;
 	/*
 	 * filters[i].w.vals was allocated inside parseCSV2double
 	 */

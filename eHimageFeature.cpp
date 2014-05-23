@@ -47,7 +47,7 @@ static inline int round2int(double x) { return (int)(x+0.5);}
 mat3d_ptr eHhog(const image_ptr img, int sbin) {
 
   /* memory for caching orientation histograms & their norms */
-  int dims[2] = {img->sizy, img->sizx};
+  size_t dims[2] = {img->sizy, img->sizx};
   int blocks[2];
   blocks[0] = (int)round2int((double)dims[0]/(double)sbin);
   blocks[1] = (int)round2int((double)dims[1]/(double)sbin);

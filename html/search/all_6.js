@@ -16,6 +16,8 @@ var searchData=
   ['image_5fshowfaces',['image_showFaces',['../eHimage_8h.html#a92eebfec853379102723c265a4d18970',1,'eHimage.cpp']]],
   ['image_5fsubsample',['image_subsample',['../eHimage_8h.html#af0063d4ff4f21fd884270787bb469ecf',1,'eHimage.cpp']]],
   ['image_5ft',['image_t',['../eHimage_8h.html#a6f19c025a891f54181de2a73fe16f42a',1,'eHimage.h']]],
+  ['image_5fwritedetectionjpg',['image_writeDetectionJPG',['../eHimage_8h.html#a441847bbac7e29a5ffff546fa1450b6e',1,'eHimage.cpp']]],
+  ['image_5fwritejpg',['image_writeJPG',['../eHimage_8h.html#a014be865a1868dec62c6a796ef71810e',1,'eHimage.cpp']]],
   ['imsize',['imsize',['../structeHimage.html#a6a36ac9a6a707ca8494875ba6cc5e5f3',1,'eHimage']]],
   ['imx',['imx',['../structeHfeatpyramid.html#abbdd67ef8d05ec9276b8b129c6e0c6a9',1,'eHfeatpyramid']]],
   ['imy',['imy',['../structeHfeatpyramid.html#af7f6662affda72ae365a893b4470c42c',1,'eHfeatpyramid']]],

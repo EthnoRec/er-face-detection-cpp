@@ -313,7 +313,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* model, const image_ptr img, d
 #endif
 
 	/* build feature pyramid */
-	int imsize[] = {img->sizy, img->sizx};
+	int imsize[] = {(int)(img->sizy), (int)(img->sizx)};
 
 #ifdef EH_TEST_TIMER
 	timeval start_pyra, end_pyra, interval_pyra;
@@ -539,6 +539,7 @@ vector<bbox_t> facemodel_detect(const facemodel_t* facemodel, const posemodel_t*
 }
 
 void facemodel_delete(facemodel_t* model) {
+	if(NULL==model) return;
 	/* because filters[i].w.vals was allocated inside parseCSV2double, 
 	 * it should be released manually */
 	for(unsigned i=0;i<model->filters.size();i++)

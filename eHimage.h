@@ -73,6 +73,11 @@ void image_fill(image_ptr img, const double* val);
  */
 image_ptr image_readJPG(const char* filename);
 
+/** @brief Write Jpeg image file
+ *  @note Requires opencv library: libopencv_core, libopencv_highgui
+ */
+void image_writeJPG(const image_ptr img, const char* filename);
+
 /** @brief Display an image
  *  @param img the image to be displayed
  *  @param winname window name, also serves as the identifier of the window
@@ -120,6 +125,21 @@ image_ptr image_resize(const image_ptr img, double scale);
  *  @return cropped image patch, NULL if allocation failed
  */
 image_ptr image_crop(const image_ptr img, fbox_t crop, int* offset=NULL, bool shared=true);
+
+/** @brief Write Jpg image with detected faces
+ *  @param img detection target
+ *  @param boxes detection results
+ *  @param filename saving path 
+ *  @sa image_writeDetectionXml()
+ */
+void image_writeDetectionJpg(const image_ptr img, const vector<bbox_t> boxes, const char* filename);
+
+/** @brief Save detected faces in XML format
+ *  @param boxes detection results
+ *  @param filename saving path 
+ *  @sa image_writeDetectionJpg()
+ */
+void image_writeDetectionXml(const vector<bbox_t> boxes, const char* filename);
 
 /** @brief Show detection results on image and wait
  *  @param img detection target

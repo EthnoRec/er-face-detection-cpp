@@ -37,6 +37,8 @@ void \hyperlink{eHimage_8h_a9d97a70868e2ba2958b23143e64f9201}{image\-\_\-fill} (
 \begin{DoxyCompactList}\small\item\em Fill all pixels with same values. \end{DoxyCompactList}\item 
 \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} \hyperlink{eHimage_8h_a9b760506fbf5548dd4e3715b5083e863}{image\-\_\-read\-J\-P\-G} (const char $\ast$filename)
 \begin{DoxyCompactList}\small\item\em Read Jpeg image file. \end{DoxyCompactList}\item 
+void \hyperlink{eHimage_8h_a014be865a1868dec62c6a796ef71810e}{image\-\_\-write\-J\-P\-G} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Write Jpeg image file. \end{DoxyCompactList}\item 
 void \hyperlink{eHimage_8h_a77cd33d6390bf822b058eb7f25e43d6c}{image\-\_\-display} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, const std\-::string \&winname)
 \begin{DoxyCompactList}\small\item\em Display an image. \end{DoxyCompactList}\item 
 \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} \hyperlink{eHimage_8h_af0063d4ff4f21fd884270787bb469ecf}{image\-\_\-subsample} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, double scale)
@@ -47,6 +49,8 @@ void \hyperlink{eHimage_8h_a77cd33d6390bf822b058eb7f25e43d6c}{image\-\_\-display
 \begin{DoxyCompactList}\small\item\em Resize an image using bilateral interpolation. \end{DoxyCompactList}\item 
 \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} \hyperlink{eHimage_8h_afaa0749505500e27056ecd3e9dd1ae1d}{image\-\_\-crop} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, \hyperlink{eHbox_8h_a5a56d87a649d81945e96505ec76d6c54}{fbox\-\_\-t} crop, int $\ast$offset=N\-U\-L\-L, bool shared=true)
 \begin{DoxyCompactList}\small\item\em Crop image This function can be used in two ways, either get shared data from original image, or allocate a new image, which is more expensive. \end{DoxyCompactList}\item 
+void \hyperlink{eHimage_8h_a441847bbac7e29a5ffff546fa1450b6e}{image\-\_\-write\-Detection\-J\-P\-G} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, const vector$<$ \hyperlink{eHbbox_8h_abf0e2add76a0dd37cdac1cabc51c4812}{bbox\-\_\-t} $>$ boxes, const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Write Jpg image with detected faces. \end{DoxyCompactList}\item 
 void \hyperlink{eHimage_8h_a0f26b43f04d0c7b86902114f0b6b3c6c}{image\-\_\-show\-Detection} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, const vector$<$ \hyperlink{eHbbox_8h_abf0e2add76a0dd37cdac1cabc51c4812}{bbox\-\_\-t} $>$ boxes, const std\-::string \&winname)
 \begin{DoxyCompactList}\small\item\em Show detection results on image and wait. \end{DoxyCompactList}\item 
 void \hyperlink{eHimage_8h_a92eebfec853379102723c265a4d18970}{image\-\_\-show\-Faces} (const \hyperlink{eHimage_8h_ae304fd15a69606760d7025f41427e3d8}{image\-\_\-ptr} img, const vector$<$ \hyperlink{eHbbox_8h_abf0e2add76a0dd37cdac1cabc51c4812}{bbox\-\_\-t} $>$ boxes, const std\-::string \&winname)
@@ -326,4 +330,44 @@ subsampleded image, or N\-U\-L\-L if scale$>$1
 input image remains alive and unchanged
 
 src image is not destroyed 
+\end{DoxyNote}
+\hypertarget{eHimage_8h_a441847bbac7e29a5ffff546fa1450b6e}{\index{e\-Himage.\-h@{e\-Himage.\-h}!image\-\_\-write\-Detection\-J\-P\-G@{image\-\_\-write\-Detection\-J\-P\-G}}
+\index{image\-\_\-write\-Detection\-J\-P\-G@{image\-\_\-write\-Detection\-J\-P\-G}!eHimage.h@{e\-Himage.\-h}}
+\subsubsection[{image\-\_\-write\-Detection\-J\-P\-G}]{\setlength{\rightskip}{0pt plus 5cm}void image\-\_\-write\-Detection\-J\-P\-G (
+\begin{DoxyParamCaption}
+\item[{const {\bf image\-\_\-ptr}}]{img, }
+\item[{const vector$<$ {\bf bbox\-\_\-t} $>$}]{boxes, }
+\item[{const char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{eHimage_8h_a441847bbac7e29a5ffff546fa1450b6e}
+
+
+Write Jpg image with detected faces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & detection target \\
+\hline
+{\em boxes} & detection results \\
+\hline
+{\em filename} & saving path \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{eHimage_8h_a0f26b43f04d0c7b86902114f0b6b3c6c}{image\-\_\-show\-Detection()} 
+\end{DoxySeeAlso}
+\hypertarget{eHimage_8h_a014be865a1868dec62c6a796ef71810e}{\index{e\-Himage.\-h@{e\-Himage.\-h}!image\-\_\-write\-J\-P\-G@{image\-\_\-write\-J\-P\-G}}
+\index{image\-\_\-write\-J\-P\-G@{image\-\_\-write\-J\-P\-G}!eHimage.h@{e\-Himage.\-h}}
+\subsubsection[{image\-\_\-write\-J\-P\-G}]{\setlength{\rightskip}{0pt plus 5cm}void image\-\_\-write\-J\-P\-G (
+\begin{DoxyParamCaption}
+\item[{const {\bf image\-\_\-ptr}}]{img, }
+\item[{const char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{eHimage_8h_a014be865a1868dec62c6a796ef71810e}
+
+
+Write Jpeg image file. 
+
+\begin{DoxyNote}{Note}
+Requires opencv library\-: libopencv\-\_\-core, libopencv\-\_\-highgui 
 \end{DoxyNote}

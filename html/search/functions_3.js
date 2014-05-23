@@ -11,5 +11,7 @@ var searchData=
   ['image_5fresize',['image_resize',['../eHimage_8h.html#ae90c0aef6060a854178bd302a950cd87',1,'eHimage.cpp']]],
   ['image_5fshowdetection',['image_showDetection',['../eHimage_8h.html#a0f26b43f04d0c7b86902114f0b6b3c6c',1,'eHimage.cpp']]],
   ['image_5fshowfaces',['image_showFaces',['../eHimage_8h.html#a92eebfec853379102723c265a4d18970',1,'eHimage.cpp']]],
-  ['image_5fsubsample',['image_subsample',['../eHimage_8h.html#af0063d4ff4f21fd884270787bb469ecf',1,'eHimage.cpp']]]
+  ['image_5fsubsample',['image_subsample',['../eHimage_8h.html#af0063d4ff4f21fd884270787bb469ecf',1,'eHimage.cpp']]],
+  ['image_5fwritedetectionjpg',['image_writeDetectionJPG',['../eHimage_8h.html#a441847bbac7e29a5ffff546fa1450b6e',1,'eHimage.cpp']]],
+  ['image_5fwritejpg',['image_writeJPG',['../eHimage_8h.html#a014be865a1868dec62c6a796ef71810e',1,'eHimage.cpp']]]
 ];
