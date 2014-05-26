@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-O3 -Wall -pedantic `pkg-config --cflags opencv`
+CFLAGS= -std=c++11 -O3 -Wall -pedantic `pkg-config --cflags opencv`
 LDFLAGS_BLAS=-lblas
 LDFLAGS=-lpthread `pkg-config --libs opencv`
 SOURCES=main.cpp eHbbox.cpp eHfeatpyramid.cpp eHimageFeature.cpp eHutils.cpp eHbox.cpp eHfilter.cpp eHmatrix.cpp eHfacemodel.cpp eHimage.cpp eHshiftdt.cpp eHposemodel.cpp

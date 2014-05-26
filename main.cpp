@@ -6,64 +6,61 @@
 #include <vector>
 #include <iostream>
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
 
-	if(argc==2) {
-		//load face model & body model
-		facemodel_t* facemodel = facemodel_readFromFile("face_p146.xml");
-		posemodel_t* posemodel = posemodel_readFromFile("pose_BUFFY.xml");
+    const char *imgPath, *facemodelPath, *posemodelPath, *jpgSavePath, *xmlSavePath;
+    switch(argc) {
+    case 2:
+        imgPath = argv[1];
+        facemodelPath = "face_p146.xml";
+        posemodelPath = "pose_BUFFY.xml";
+        jpgSavePath = "-";
+        xmlSavePath = "-";
+        break;
+    case 6:
+        imgPath = argv[1];
+        facemodelPath = argv[2];
+        posemodelPath = argv[3];
+        jpgSavePath = argv[4];
+        xmlSavePath = argv[5];
+        break;
+    default:
+        std::cout<<"Usage 1: facefinder <image>"<<std::endl
+                 <<"Usage 2: facefinder <image> <faceModel> <poseModel> <jpgSaveDir> <xmlSaveDir>"<<std::endl
+                 <<" (use '-' for any unwanted parameters)"<<std::endl;
+        return 0;
+    }
 
-		//load a jpeg image
-		image_t* img = image_readJPG(argv[1]);
-		if(NULL==img) {
-			std::cout<<"Error: cannot open "<<argv[1]<<std::endl;
-			facemodel_delete(facemodel);
-			posemodel_delete(posemodel);
-			return 0;
-		}
-	
-		//detect faces and show results
-		std::vector<bbox_t> faces = facemodel_detect(facemodel,posemodel,img);
-		image_showDetection(img, faces, "Face Detection Results");
-	
-		//destruct image and models
-		image_delete(img);
-		facemodel_delete(facemodel);
-		posemodel_delete(posemodel);
-	} else if (argc==6) {
-		//load face model & body model
-		facemodel_t* facemodel = facemodel_readFromFile(argv[2]);
-		posemodel_t* posemodel = posemodel_readFromFile(argv[3]);
+    //load face model & body model
+    facemodel_t* facemodel = facemodel_readFromFile(facemodelPath);
+    posemodel_t* posemodel = posemodel_readFromFile(posemodelPath);
 
-		//load a jpeg image
-		image_t* img = image_readJPG(argv[1]);
-		if(NULL==img) {
-			std::cout<<"Error: cannot open "<<argv[1]<<std::endl;
-			facemodel_delete(facemodel);
-			posemodel_delete(posemodel);
-			return 0;
-		}
+    //load a jpeg image
+    image_t* img = image_readJPG(imgPath);
+    if(NULL==img) {
+        std::cout<<"Error: cannot open "<<imgPath<<std::endl;
+        facemodel_delete(facemodel);
+        posemodel_delete(posemodel);
+        return 0;
+    }
 
-		//detect faces and show results
-		std::vector<bbox_t> faces;
-		if(NULL==posemodel)
-			faces = facemodel_detect(facemodel,img);
-		else
-			faces = facemodel_detect(facemodel,posemodel,img);
-		if(0!=strcmp(argv[4],"-")) 
-			image_writeDetectionJpg(img, faces, argv[4]);
-		if(0!=strcmp(argv[5],"-"))
-			image_writeDetectionXml(faces, argv[5]);
-	
-		//destruct image and models
-		image_delete(img);
-		facemodel_delete(facemodel);
-		posemodel_delete(posemodel);
-	} else {
-		std::cout<<"Usage 1: facefinder <image>"<<std::endl
-		<<"Usage 2: facefinder <image> <faceModel> <poseModel> <jpgSaveDir> <xmlSaveDir>"<<std::endl
-		<<" (use '-' for any unwanted parameters)"<<std::endl;
-	}
+    //detect faces and show results
+    std::vector<bbox_t> faces;
+    if(NULL==posemodel)
+        faces = facemodel_detect(facemodel,img);
+    else
+        faces = facemodel_detect(facemodel,posemodel,img);
+    if(0!=strcmp(jpgSavePath,"-"))
+        image_writeDetectionJpg(img, faces, jpgSavePath);
+    if(0!=strcmp(xmlSavePath,"-"))
+        image_writeDetectionXml(faces, xmlSavePath);
+    if(0==strcmp(jpgSavePath,"-") && 0==strcmp(xmlSavePath,"-"))
+        image_showDetection(img,faces,"Face Detection Results");
 
-	return 0;
+    //destruct image and models
+    image_delete(img);
+    facemodel_delete(facemodel);
+    posemodel_delete(posemodel);
+
+    return 0;
 }
