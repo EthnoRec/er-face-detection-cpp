@@ -9,9 +9,10 @@
 
 #include <assert.h>
 #include <string.h>
-
 #include <iostream>
 #include <fstream>
+
+#include <cstring>
 
 #include "rapidxml-1.13/rapidxml.hpp"
 #include "rapidxml-1.13/rapidxml_print.hpp"
@@ -400,15 +401,18 @@ void image_writeDetectionXml(const vector<bbox_t> boxes, const char* filename) {
 	using namespace rapidxml;
 	xml_document<> doc;
 	xml_node<>* root = doc.allocate_node(node_element,"detected_faces");
-	xml_attribute<>* attr_numFace = doc.allocate_attribute("num",std::to_string(boxes.size()).c_str());
+	char* str_numFace = doc.allocate_string(std::to_string(boxes.size()).c_str());
+	xml_attribute<>* attr_numFace = doc.allocate_attribute("num",str_numFace);
 	doc.append_node(root);
 	root->append_attribute(attr_numFace);
 	xml_node<>* face;
 	xml_attribute<>* attr_score;
+	char* str_score;
 	for(unsigned i=0;i<boxes.size();i++) {
 		face = doc.allocate_node(node_element,"face");
 		root->append_node(face);
-		attr_score = doc.allocate_attribute("score",std::to_string(boxes[i].score).c_str());
+		str_score = doc.allocate_string(std::to_string(boxes[i].score).c_str());
+		attr_score = doc.allocate_attribute("score",str_score);
 		face->append_attribute(attr_score);
 	}
 	
