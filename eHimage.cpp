@@ -399,21 +399,59 @@ void image_writeDetectionJpg(const image_ptr img, const vector<bbox_t> boxes, co
 
 void image_writeDetectionXml(const vector<bbox_t> boxes, const char* filename) {
 	using namespace rapidxml;
+
+	/* root */
 	xml_document<> doc;
-	xml_node<>* root = doc.allocate_node(node_element,"detected_faces");
-	char* str_numFace = doc.allocate_string(std::to_string(boxes.size()).c_str());
-	xml_attribute<>* attr_numFace = doc.allocate_attribute("num",str_numFace);
+	xml_node<> *root = doc.allocate_node(node_element,"detected_faces");
+	char *str_numFace = doc.allocate_string(std::to_string(boxes.size()).c_str());
+	xml_attribute<> *attr_numFace = doc.allocate_attribute("total",str_numFace);
 	doc.append_node(root);
 	root->append_attribute(attr_numFace);
-	xml_node<>* face;
-	xml_attribute<>* attr_score;
-	char* str_score;
+
+	/* faces */
+	xml_node<> *face, *landmarks, *part;
+	xml_attribute<> *attr_score, *attr_view, *attr_numLandmark, *attr_id;
+	char *str_score, *str_view, *str_numLandmark, *str_id;
 	for(unsigned i=0;i<boxes.size();i++) {
 		face = doc.allocate_node(node_element,"face");
 		root->append_node(face);
+		str_id = doc.allocate_string(std::to_string(i+1).c_str());
+		attr_id = doc.allocate_attribute("id",str_id);
+		face->append_attribute(attr_id);
 		str_score = doc.allocate_string(std::to_string(boxes[i].score).c_str());
 		attr_score = doc.allocate_attribute("score",str_score);
 		face->append_attribute(attr_score);
+		str_view = doc.allocate_string(std::to_string(90-15*boxes[i].component).c_str());
+		attr_view = doc.allocate_attribute("view",str_view);
+		face->append_attribute(attr_view);
+		
+		/* landmarks */
+		landmarks = doc.allocate_node(node_element,"landmarks");
+		face->append_node(landmarks);
+		str_numLandmark = doc.allocate_string(std::to_string(boxes[i].boxes.size()).c_str());
+		attr_numLandmark = doc.allocate_attribute("total",str_numLandmark);
+		landmarks->append_attribute(attr_numLandmark);
+		xml_attribute<> *attr_x1, *attr_x2, *attr_y1, *attr_y2;
+		char *str_x1, *str_x2, *str_y1, *str_y2;
+		for (unsigned j=0;j<boxes[i].boxes.size();j++) {
+			part = doc.allocate_node(node_element,"part");
+			landmarks->append_node(part);
+			str_id = doc.allocate_string(std::to_string(j+1).c_str());
+			attr_id = doc.allocate_attribute("id",str_id);
+			part->append_attribute(attr_id);
+			str_x1 = doc.allocate_string(std::to_string(boxes[i].boxes[j].x1).c_str());
+			str_x2 = doc.allocate_string(std::to_string(boxes[i].boxes[j].x2).c_str());
+			str_y1 = doc.allocate_string(std::to_string(boxes[i].boxes[j].y1).c_str());
+			str_y2 = doc.allocate_string(std::to_string(boxes[i].boxes[j].y2).c_str());
+			attr_x1	 = doc.allocate_attribute("x1",str_x1);
+			attr_x2	 = doc.allocate_attribute("x2",str_x2);
+			attr_y1	 = doc.allocate_attribute("y1",str_y1);
+			attr_y2	 = doc.allocate_attribute("y2",str_y2);
+			part->append_attribute(attr_x1);
+			part->append_attribute(attr_x2);
+			part->append_attribute(attr_y1);
+			part->append_attribute(attr_y2);
+		}
 	}
 	
 	std::ofstream xmlout(filename);

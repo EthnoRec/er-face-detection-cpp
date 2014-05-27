@@ -149,9 +149,12 @@ Functions</h2></td></tr>
 <tr class="memitem:afaa0749505500e27056ecd3e9dd1ae1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#afaa0749505500e27056ecd3e9dd1ae1d">image_crop</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, <a class="el" href="eHbox_8h.html#a5a56d87a649d81945e96505ec76d6c54">fbox_t</a> crop, int *offset=NULL, bool shared=true)</td></tr>
 <tr class="memdesc:afaa0749505500e27056ecd3e9dd1ae1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crop image This function can be used in two ways, either get shared data from original image, or allocate a new image, which is more expensive.  <a href="#afaa0749505500e27056ecd3e9dd1ae1d">More...</a><br/></td></tr>
 <tr class="separator:afaa0749505500e27056ecd3e9dd1ae1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a441847bbac7e29a5ffff546fa1450b6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a441847bbac7e29a5ffff546fa1450b6e">image_writeDetectionJPG</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt; boxes, const char *filename)</td></tr>
-<tr class="memdesc:a441847bbac7e29a5ffff546fa1450b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write Jpg image with detected faces.  <a href="#a441847bbac7e29a5ffff546fa1450b6e">More...</a><br/></td></tr>
-<tr class="separator:a441847bbac7e29a5ffff546fa1450b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0520a24e737cc7208edbe533951b5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a8b0520a24e737cc7208edbe533951b5c">image_writeDetectionJpg</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt; boxes, const char *filename)</td></tr>
+<tr class="memdesc:a8b0520a24e737cc7208edbe533951b5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write Jpg image with detected faces.  <a href="#a8b0520a24e737cc7208edbe533951b5c">More...</a><br/></td></tr>
+<tr class="separator:a8b0520a24e737cc7208edbe533951b5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a833d312fe8e414bbe2c79a02de548d68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a833d312fe8e414bbe2c79a02de548d68">image_writeDetectionXml</a> (const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt; boxes, const char *filename)</td></tr>
+<tr class="memdesc:a833d312fe8e414bbe2c79a02de548d68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save detected faces in XML format.  <a href="#a833d312fe8e414bbe2c79a02de548d68">More...</a><br/></td></tr>
+<tr class="separator:a833d312fe8e414bbe2c79a02de548d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f26b43f04d0c7b86902114f0b6b3c6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eHimage_8h.html#a0f26b43f04d0c7b86902114f0b6b3c6c">image_showDetection</a> (const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a> img, const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt; boxes, const std::string &amp;winname)</td></tr>
 <tr class="memdesc:a0f26b43f04d0c7b86902114f0b6b3c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show detection results on image and wait.  <a href="#a0f26b43f04d0c7b86902114f0b6b3c6c">More...</a><br/></td></tr>
 <tr class="separator:a0f26b43f04d0c7b86902114f0b6b3c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -589,12 +592,12 @@ src image is not destroyed </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a441847bbac7e29a5ffff546fa1450b6e"></a>
+<a class="anchor" id="a8b0520a24e737cc7208edbe533951b5c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void image_writeDetectionJPG </td>
+          <td class="memname">void image_writeDetectionJpg </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="eHimage_8h.html#ae304fd15a69606760d7025f41427e3d8">image_ptr</a>&#160;</td>
           <td class="paramname"><em>img</em>, </td>
@@ -628,7 +631,43 @@ src image is not destroyed </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="eHimage_8h.html#a0f26b43f04d0c7b86902114f0b6b3c6c" title="Show detection results on image and wait. ">image_showDetection()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="eHimage_8h.html#a833d312fe8e414bbe2c79a02de548d68" title="Save detected faces in XML format. ">image_writeDetectionXml()</a> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a833d312fe8e414bbe2c79a02de548d68"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void image_writeDetectionXml </td>
+          <td>(</td>
+          <td class="paramtype">const vector&lt; <a class="el" href="eHbbox_8h.html#abf0e2add76a0dd37cdac1cabc51c4812">bbox_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>boxes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save detected faces in XML format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">boxes</td><td>detection results </td></tr>
+    <tr><td class="paramname">filename</td><td>saving path </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="eHimage_8h.html#a8b0520a24e737cc7208edbe533951b5c" title="Write Jpg image with detected faces. ">image_writeDetectionJpg()</a> </dd></dl>
 
 </div>
 </div>
@@ -664,7 +703,7 @@ src image is not destroyed </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 22 2014 22:07:03 for Face Detection with Alignment by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 26 2014 22:18:57 for Face Detection with Alignment by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
