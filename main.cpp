@@ -2,9 +2,11 @@
 #include "eHfacemodel.h"
 #include "eHposemodel.h"
 #include "eHbbox.h"
+#include "FaceDetection.hpp"
 #include <cstring>
 #include <vector>
 #include <iostream>
+#include <chrono>
 
 int main(int argc, char** argv) {
 
@@ -35,6 +37,7 @@ int main(int argc, char** argv) {
     facemodel_t* facemodel = facemodel_readFromFile(facemodelPath);
     posemodel_t* posemodel = posemodel_readFromFile(posemodelPath);
 
+     auto start = std::chrono::steady_clock::now();
     //load a jpeg image
     image_t* img = image_readJPG(imgPath);
     if(NULL==img) {
@@ -46,7 +49,7 @@ int main(int argc, char** argv) {
 
     //detect faces and show results
     std::vector<bbox_t> faces;
-    if(NULL==posemodel)
+    if(true || NULL==posemodel)
         faces = facemodel_detect(facemodel,img);
     else
         faces = facemodel_detect(facemodel,posemodel,img);
@@ -54,11 +57,26 @@ int main(int argc, char** argv) {
         image_writeDetectionJpg(img, faces, jpgSavePath);
     if(0!=strcmp(xmlSavePath,"-"))
         image_writeDetectionXml(faces, xmlSavePath);
-    if(0==strcmp(jpgSavePath,"-") && 0==strcmp(xmlSavePath,"-"))
-        image_showDetection(img,faces,"Face Detection Results");
+    auto end = std::chrono::steady_clock::now();
+
+
+    for(bbox_t face : faces) {
+        std::cout << "Score: " << face.score << " | Component: " << face.component << " | Outer area: " << face.area << "\n";
+        FaceDetection fd(face);
+
+        std::cout << fd << std::endl;
+    }
+
+    if(0==strcmp(jpgSavePath,"-") && 0==strcmp(xmlSavePath,"-")) {
+        //image_showDetection(img,faces,"Face Detection Results");
+        image_showFaces(img,faces,"Face Detection Results");
+    }
 
     //destruct image and models
     image_delete(img);
+
+    std::cout << std::chrono::duration <double, std::milli> (end-start).count()/1000.0 << " s" << std::endl;
+
     facemodel_delete(facemodel);
     posemodel_delete(posemodel);
 
