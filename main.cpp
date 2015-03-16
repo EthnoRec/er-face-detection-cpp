@@ -7,6 +7,8 @@
 #include <vector>
 #include <iostream>
 #include <chrono>
+#include <pqxx/pqxx>
+
 
 int main(int argc, char** argv) {
 
@@ -60,11 +62,17 @@ int main(int argc, char** argv) {
     auto end = std::chrono::steady_clock::now();
 
 
+
+
+
+                
+    pqxx::connection c("host=127.0.0.1 dbname=tinder user=tinder password=tinder_pw");
+
     for(bbox_t face : faces) {
-        std::cout << "Score: " << face.score << " | Component: " << face.component << " | Outer area: " << face.area << "\n";
         FaceDetection fd(face);
 
         std::cout << fd << std::endl;
+        fd.insert(c,std::string("test"));
     }
 
     if(0==strcmp(jpgSavePath,"-") && 0==strcmp(xmlSavePath,"-")) {
