@@ -69,6 +69,7 @@ void FaceDetection::insert(pqxx::connection_base &c, const std::string image_id)
 
     pqxx::result boxes_r = txn.exec(boxes_insert_ss);
 
+    txn.commit();
 }
 
 

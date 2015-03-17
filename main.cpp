@@ -1,92 +1,86 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <pqxx/pqxx>
 #include "eHimage.h"
 #include "eHfacemodel.h"
 #include "eHposemodel.h"
 #include "eHbbox.h"
 #include "FaceDetection.hpp"
-#include <cstring>
-#include <vector>
-#include <iostream>
-#include <chrono>
-#include <pqxx/pqxx>
 
 
-int main(int argc, char** argv) {
+class FaceDetector {
+    public:
+        FaceDetector(std::istream &is,
+                std::string images_path, 
+                pqxx::connection& con,
+                std::string facemodel_path = "face_p146.xml") : 
+            con(con), is(is), images_path(images_path) {
+                facemodel = facemodel_readFromFile(facemodel_path.c_str());
+            }
 
-    const char *imgPath, *facemodelPath, *posemodelPath, *jpgSavePath, *xmlSavePath;
-    switch(argc) {
-    case 2:
-        imgPath = argv[1];
-        facemodelPath = "face_p146.xml";
-        posemodelPath = "pose_BUFFY.xml";
-        jpgSavePath = "-";
-        xmlSavePath = "-";
-        break;
-    case 6:
-        imgPath = argv[1];
-        facemodelPath = argv[2];
-        posemodelPath = argv[3];
-        jpgSavePath = argv[4];
-        xmlSavePath = argv[5];
-        break;
-    default:
-        std::cout<<"Usage 1: facefinder <image>"<<std::endl
-                 <<"Usage 2: facefinder <image> <faceModel> <poseModel> <jpgSaveDir> <xmlSaveDir>"<<std::endl
-                 <<" (use '-' for any unwanted parameters)"<<std::endl;
-        return 0;
-    }
+        void start() {
+            for (std::string line; std::getline(is,line);) {
 
-    //load face model & body model
-    facemodel_t* facemodel = facemodel_readFromFile(facemodelPath);
-    posemodel_t* posemodel = posemodel_readFromFile(posemodelPath);
+                std::size_t dotIndex = line.find(".");
 
-     auto start = std::chrono::steady_clock::now();
-    //load a jpeg image
-    image_t* img = image_readJPG(imgPath);
-    if(NULL==img) {
-        std::cout<<"Error: cannot open "<<imgPath<<std::endl;
-        facemodel_delete(facemodel);
-        posemodel_delete(posemodel);
-        return 0;
-    }
+                std::string path(images_path+"/"+line);
 
-    //detect faces and show results
-    std::vector<bbox_t> faces;
-    if(true || NULL==posemodel)
-        faces = facemodel_detect(facemodel,img);
-    else
-        faces = facemodel_detect(facemodel,posemodel,img);
-    if(0!=strcmp(jpgSavePath,"-"))
-        image_writeDetectionJpg(img, faces, jpgSavePath);
-    if(0!=strcmp(xmlSavePath,"-"))
-        image_writeDetectionXml(faces, xmlSavePath);
-    auto end = std::chrono::steady_clock::now();
+                if (dotIndex == std::string::npos || !fileExists(path)) {
+                    continue;
+                }                
 
+                std::string id = line.substr(0,dotIndex);
 
+                // WORK
+                image_t* img = image_readJPG(path.c_str());
+                std::vector<bbox_t> faces;
+                faces = facemodel_detect(facemodel,img);
+                // END WORK
 
+                for(bbox_t face : faces) {
+                    FaceDetection fd(face);
 
+                    std::cout << fd << std::endl;
+                    fd.insert(con,id);
+                }
+                std::cout << "_id:\t" << id << std::endl;
+                std::cout << "faces:\t" << faces.size() << std::endl;
+                std::cout << std::endl;
+            }
+        }
 
-                
-    pqxx::connection c("host=127.0.0.1 dbname=tinder user=tinder password=tinder_pw");
+        ~FaceDetector() {
+            facemodel_delete(facemodel);
+        }
 
-    for(bbox_t face : faces) {
-        FaceDetection fd(face);
+    private:
+        // eH
+        facemodel_t *facemodel;
 
-        std::cout << fd << std::endl;
-        fd.insert(c,std::string("test"));
-    }
+        pqxx::connection& con;
+        std::istream &is;
+        std::string images_path;
 
-    if(0==strcmp(jpgSavePath,"-") && 0==strcmp(xmlSavePath,"-")) {
-        //image_showDetection(img,faces,"Face Detection Results");
-        image_showFaces(img,faces,"Face Detection Results");
-    }
+        static bool fileExists(std::string p) {
+            std::ifstream f(p);
+            bool exists = f.good();
+            f.close();
+            return exists;
+        }
+};
 
-    //destruct image and models
-    image_delete(img);
-
-    std::cout << std::chrono::duration <double, std::milli> (end-start).count()/1000.0 << " s" << std::endl;
-
-    facemodel_delete(facemodel);
-    posemodel_delete(posemodel);
-
+// 1. read \n-separated list of <image_id>.<ext>s from stdin
+// 2. locate the images in <image_dir> - first and only argument
+// 3. for each path to image
+//      insert <faces_detected> records into FaceDetections
+//          for each FaceDetectiion
+//              insert <parts_n> records into Boxes
+//              insert 1 outer box record into Boxes
+int main(int argc, const char *argv[])
+{
+    pqxx::connection con("host=127.0.0.1 dbname=tinder_development user=tinder password=tinder_pw");
+    FaceDetector fd(std::cin,argv[1],con);
+    fd.start();
     return 0;
 }
