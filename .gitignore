@@ -1,1 +1,2 @@
-./facefinder
+facefinder
+*.o

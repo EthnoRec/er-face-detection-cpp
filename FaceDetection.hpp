@@ -44,6 +44,7 @@ class Box {
 class FaceDetection {
     public:
         FaceDetection(bbox_t bb);
+        static FaceDetection& none();
         double score;
         double area;
         int component;
@@ -55,7 +56,7 @@ class FaceDetection {
         friend std::ostream& operator<<(std::ostream& stream, const FaceDetection& fd);
 
         void insert(pqxx::connection_base &c, std::string image_id);
-        
+        static void insert_none(pqxx::connection_base &c, std::string image_id);
 };
 
 #endif /* end of include guard: FACEDETECTION_H */

@@ -31,6 +31,22 @@ FaceDetection::FaceDetection(bbox_t bb) :
 
 }
 
+void FaceDetection::insert_none(pqxx::connection_base &c, const std::string image_id) {
+    pqxx::work txn(c);
+    
+    std::time_t result = std::time(nullptr);
+    std::stringstream dates_ss;
+    dates_ss << "to_timestamp(" << result << "),to_timestamp(" << result << ")";
+    std::string dates = dates_ss.str();
+
+    std::stringstream fd_insert_ss;
+    fd_insert_ss << "INSERT INTO \"FaceDetections\" (score,component,image_id,\"createdAt\",\"updatedAt\") VALUES ";
+    fd_insert_ss << "(NULL,NULL," << txn.quote(image_id) << ","
+                 << dates << ");";
+
+    pqxx::result fd_r = txn.exec(fd_insert_ss.str());
+    txn.commit();
+}
 
 void FaceDetection::insert(pqxx::connection_base &c, const std::string image_id) {
     pqxx::work txn(c);
