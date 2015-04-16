@@ -83,7 +83,7 @@ class ConfigParser {
             const YAML::Node db = config["database"];
             images = config["images"].as<std::string>();
 
-            std::vector<std::string> db_props({"host","dbname","user","password"});
+            std::vector<std::string> db_props({"host","dbname","user","password","port"});
             std::string con_str("");
             for (std::size_t i = 0; i < db_props.size(); i++) {
                 const std::string key = db_props[i];

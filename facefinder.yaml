@@ -3,5 +3,6 @@ database:
     dbname:     tinder_development
     user:       tinder
     password:   tinder_pw
+    port:       55432
 
 images: ./gather-images
