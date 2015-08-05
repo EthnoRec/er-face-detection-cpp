@@ -4,7 +4,7 @@
 
 
 template<typename T>
-Box<T>::Box(T o, T e) : origin(o), extent(e) {}
+Box<T>::Box(Point<T,2> o, Point<T,2> e) : origin(o), extent(e) {}
 
 template<typename T>
 Box<T>::Box(fbox_t b) : 
@@ -15,6 +15,21 @@ Box<T>::Box(fbox_t b) :
 template<typename T>
 T Box<T>::area() const {
    return std::abs((origin.x  - extent.x)*(origin.y - extent.y)); 
+}
+template<typename T>
+Box<T> Box<T>::merge(typename std::vector<Box<T>>::const_iterator start, typename std::vector<Box<T>>::const_iterator end) {
+    Point<T,2> origin(std::numeric_limits<T>::max(),std::numeric_limits<T>::max());
+    Point<T,2> extent(std::numeric_limits<T>::min(),std::numeric_limits<T>::min());
+
+    for (auto it = start; it != end; it++) {
+        auto box = *it;
+        origin.x = std::min(origin.x, box.origin.x);
+        origin.y = std::min(origin.y, box.origin.y);
+
+        extent.x = std::max(extent.x, box.extent.x);
+        extent.y = std::max(extent.y, box.extent.y);
+    }
+    return Box<T>(origin, extent);
 }
 
 FaceDetection::FaceDetection(bbox_t bb) : 
@@ -88,6 +103,13 @@ void FaceDetection::insert(pqxx::connection_base &c, const std::string image_id)
     txn.commit();
 }
 
+Box<int> FaceDetection::left_eye() const {
+    return Box<int>::merge(this->parts.begin()+9, this->parts.begin()+14);
+}
+
+Box<int> FaceDetection::right_eye() const {
+    return Box<int>::merge(this->parts.begin()+20, this->parts.begin()+25);
+}
 
 std::ostream& operator<<(std::ostream& stream, 
         const FaceDetection& fd) {
@@ -105,6 +127,26 @@ std::ostream& operator<<(std::ostream& stream,
     return stream;
 }
 
+YAML::Emitter& operator<<(YAML::Emitter& stream, 
+        FaceDetection const& fd) {
+    stream 
+        << YAML::Key << "score"
+        << YAML::Value << fd.score
+
+        << YAML::Key << "component"
+        << YAML::Value << fd.component
+
+        << YAML::Key << "outer"
+        << YAML::Value << fd.outer
+
+        << YAML::Key << "left_eye"
+        << YAML::Value << fd.left_eye()
+
+        << YAML::Key << "right_eye"
+        << YAML::Value << fd.right_eye();
+    return stream;
+}
+
 template<typename T>
 std::ostream& operator<<(std::ostream& stream, 
         const Box<T>& b) {
@@ -114,9 +156,31 @@ std::ostream& operator<<(std::ostream& stream,
     return stream;
 }
 
+YAML::Emitter& operator<<(YAML::Emitter& stream, 
+        Boxi const& b) {
+    stream 
+        << YAML::BeginMap
+        << YAML::Key << "origin"
+        << YAML::Value << b.origin
+        << YAML::Key << "extent"
+        << YAML::Value << b.extent
+        << YAML::EndMap;
+    return stream;
+}
+
 template<typename T>
 std::ostream& operator<<(std::ostream& stream, 
         const Point<T,2>& p) {
     stream << "(" << p.x << "," << p.y << ")";
+    return stream;
+}
+
+YAML::Emitter& operator<<(YAML::Emitter& stream, 
+        Point2i const& p) {
+    stream 
+        << YAML::BeginSeq 
+        << p.x
+        << p.y
+        << YAML::EndSeq;
     return stream;
 }
